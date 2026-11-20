@@ -28,9 +28,8 @@ export default function MyBookingsPage() {
   const fetchBookings = async () => {
     try {
       const res = await api.get('/bookings/my-bookings');
-      if (res.data) {
-        setBookings(res.data);
-      }
+      const list = res?.bookings || res?.data || [];
+      setBookings(list);
     } catch (err: any) {
       toast.error('Failed to load your bookings: ' + err.message);
     } finally {

@@ -71,9 +71,10 @@ function ServiceDetailsContent() {
     const fetchService = async () => {
       try {
         const res = await api.get(`/services/${serviceId}`);
-        if (res.data) {
-          setService(res.data);
-          setSelectedImage(res.data.images?.[0] || '');
+        const serviceData = res?.service || res?.data;
+        if (serviceData) {
+          setService(serviceData);
+          setSelectedImage(serviceData.images?.[0] || '');
         } else {
           setError('Wedding service not found.');
         }

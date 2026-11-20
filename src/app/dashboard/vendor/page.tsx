@@ -35,8 +35,10 @@ export default function VendorOverviewPage() {
           api.get('/bookings/vendor-requests'),
         ]);
 
-        if (servicesRes.data) setServices(servicesRes.data);
-        if (bookingsRes.data) setBookings(bookingsRes.data);
+        const servicesList = servicesRes?.services || servicesRes?.data || [];
+        const bookingsList = bookingsRes?.bookings || bookingsRes?.data || [];
+        setServices(servicesList);
+        setBookings(bookingsList);
       } catch (err) {
         console.error('Failed to load vendor data:', err);
       } finally {

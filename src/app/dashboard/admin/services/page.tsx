@@ -38,9 +38,8 @@ export default function ManageServicesPage() {
           status: statusFilter !== 'all' ? statusFilter : undefined,
         },
       });
-      if (res.data) {
-        setServices(res.data);
-      }
+      const list = res?.services || res?.data || [];
+      setServices(list);
     } catch (err: any) {
       toast.error('Failed to load services: ' + err.message);
     } finally {

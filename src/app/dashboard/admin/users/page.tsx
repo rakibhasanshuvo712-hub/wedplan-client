@@ -29,9 +29,8 @@ export default function ManageUsersPage() {
           role: roleFilter !== 'all' ? roleFilter : undefined,
         },
       });
-      if (res.data) {
-        setUsers(res.data);
-      }
+      const list = res?.users || res?.data || [];
+      setUsers(list);
     } catch (err: any) {
       toast.error('Failed to load users: ' + err.message);
     } finally {

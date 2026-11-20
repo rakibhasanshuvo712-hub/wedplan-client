@@ -16,9 +16,8 @@ export default function PlatformTransactionsPage() {
     const fetchTransactions = async () => {
       try {
         const res = await api.get('/admin/transactions');
-        if (res.data) {
-          setTransactions(res.data);
-        }
+        const list = res?.transactions || res?.data || [];
+        setTransactions(list);
       } catch (err) {
         console.error('Failed to load transactions:', err);
       } finally {

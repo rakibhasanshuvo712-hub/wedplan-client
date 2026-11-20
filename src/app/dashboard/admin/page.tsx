@@ -27,8 +27,9 @@ export default function AdminOverviewPage() {
     const fetchAdminOverview = async () => {
       try {
         const res = await api.get('/admin/overview');
-        if (res.data) {
-          setData(res.data);
+        const adminData = res?.data || res;
+        if (adminData) {
+          setData(adminData);
         }
       } catch (err) {
         console.error('Failed to load admin stats:', err);

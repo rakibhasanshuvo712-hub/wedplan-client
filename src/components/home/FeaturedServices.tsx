@@ -19,9 +19,8 @@ export function FeaturedServices() {
     const fetchFeatured = async () => {
       try {
         const res = await api.get('/services/featured');
-        if (res.data) {
-          setServices(res.data);
-        }
+        const list = res?.services || res?.data || [];
+        setServices(list);
       } catch (err) {
         console.error('Failed to load featured services:', err);
       } finally {

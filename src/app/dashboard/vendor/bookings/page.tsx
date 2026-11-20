@@ -27,9 +27,8 @@ export default function VendorBookingRequestsPage() {
   const fetchRequests = async () => {
     try {
       const res = await api.get('/bookings/vendor-requests');
-      if (res.data) {
-        setBookings(res.data);
-      }
+      const list = res?.bookings || res?.data || [];
+      setBookings(list);
     } catch (err: any) {
       toast.error('Failed to load booking requests: ' + err.message);
     } finally {

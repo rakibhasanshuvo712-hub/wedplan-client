@@ -21,9 +21,8 @@ export default function CustomerOverviewPage() {
     const fetchCustomerBookings = async () => {
       try {
         const res = await api.get('/bookings/my-bookings');
-        if (res.data) {
-          setBookings(res.data);
-        }
+        const list = res?.bookings || res?.data || [];
+        setBookings(list);
       } catch (err) {
         console.error('Failed to load bookings:', err);
       } finally {

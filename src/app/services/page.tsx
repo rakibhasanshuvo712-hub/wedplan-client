@@ -74,17 +74,14 @@ function BrowseServicesContent() {
           location: locationTerm || undefined,
           sortBy,
           page,
-          limit: 9,
+          limit: 12,
         },
       });
 
-      if (res?.data) {
-        setServices(res.data);
-        if (res.pagination) {
-          setTotalPages(res.pagination.totalPages);
-          setTotalCount(res.pagination.total);
-        }
-      }
+      const list = res?.services || res?.data || [];
+      setServices(list);
+      setTotalPages(res?.totalPages || res?.pagination?.totalPages || 1);
+      setTotalCount(res?.total || res?.pagination?.total || list.length);
     } catch (err) {
       console.error('Failed to fetch services:', err);
     } finally {
