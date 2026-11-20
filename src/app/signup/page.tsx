@@ -8,7 +8,7 @@ import { UserRole } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { Heart, Lock, Mail, User, Building2, ArrowRight, Check } from 'lucide-react';
+import { Heart, Lock, Mail, User, Building2, ArrowRight, Check, Sparkles } from 'lucide-react';
 
 export default function SignUpPage() {
   return (
@@ -37,6 +37,15 @@ function SignUpContent() {
   const [businessName, setBusinessName] = useState('');
   const [image, setImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  React.useEffect(() => {
+    const roleParam = searchParams.get('role');
+    if (roleParam === 'vendor') {
+      setRole('vendor');
+    } else if (roleParam === 'customer') {
+      setRole('customer');
+    }
+  }, [searchParams]);
 
   // Password rules validation
   const hasMinLen = password.length >= 6;
@@ -129,6 +138,18 @@ function SignUpContent() {
               </button>
             </div>
           </div>
+
+          {role === 'vendor' && (
+            <div className="mb-5 p-3.5 bg-amber-50/90 rounded-2xl border border-amber-200/90 text-amber-900 text-xs animate-in fade-in duration-200">
+              <div className="font-semibold flex items-center gap-1.5 text-amber-900 mb-1">
+                <Sparkles className="w-4 h-4 text-amber-600 fill-amber-300" />
+                Wedding Vendor Account
+              </div>
+              <p className="text-[11px] text-amber-800 leading-relaxed">
+                Publish wedding services, accept inquiries & bookings from couples across the country, and upgrade to Premium anytime!
+              </p>
+            </div>
+          )}
 
           <form onSubmit={handleSignUp} className="space-y-4">
             <Input

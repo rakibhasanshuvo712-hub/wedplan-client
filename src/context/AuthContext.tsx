@@ -28,6 +28,12 @@ interface AuthContextType {
   }) => Promise<User>;
   logout: () => void;
   updateUserProfile: (data: Partial<User>) => Promise<User>;
+  becomeVendor: (payload: {
+    businessName: string;
+    bio?: string;
+    phone?: string;
+    address?: string;
+  }) => Promise<User>;
   refreshUser: () => Promise<void>;
 }
 
@@ -132,6 +138,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return updatedUser;
   };
 
+  const becomeVendor = async (payload: {
+    businessName: string;
+    bio?: string;
+    phone?: string;
+    address?: string;
+  }): Promise<User> => {
+    const res = await api.post('/auth/become-vendor', payload);
+    const { token: receivedToken, user: receivedUser } = res.data;
+    saveAuthSession(receivedToken, receivedUser);
+    return receivedUser;
+  };
+
   const refreshUser = async () => {
     try {
       const res = await api.get('/auth/me');
@@ -156,6 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         googleLogin,
         logout,
         updateUserProfile,
+        becomeVendor,
         refreshUser,
       }}
     >

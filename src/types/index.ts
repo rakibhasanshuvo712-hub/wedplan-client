@@ -12,6 +12,9 @@ export interface User {
   role: UserRole;
   isBlocked: boolean;
   businessName?: string;
+  phone?: string;
+  bio?: string;
+  address?: string;
   subscriptionPlan: SubscriptionPlan;
   subscriptionExpiresAt?: string | null;
   createdAt: string;
@@ -23,6 +26,9 @@ export interface ServiceVendor {
   name: string;
   email: string;
   businessName?: string;
+  phone?: string;
+  bio?: string;
+  address?: string;
   image?: string;
   subscriptionPlan?: SubscriptionPlan;
   isBlocked?: boolean;
