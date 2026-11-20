@@ -1,0 +1,171 @@
+'use client';
+
+import React, { useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { RoleGuard } from '@/components/common/RoleGuard';
+import { api } from '@/lib/api';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { toast } from 'sonner';
+import { Sparkles, Check, ShieldCheck, Zap, ArrowRight } from 'lucide-react';
+
+export default function VendorSubscriptionPage() {
+  const { user } = useAuth();
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const isPremium = user?.subscriptionPlan === 'premium';
+
+  const handleUpgrade = async () => {
+    setIsRedirecting(true);
+    try {
+      const res = await api.post('/payments/create-checkout-session');
+      if (res?.data?.url) {
+        // Redirect directly to Stripe Checkout hosted page
+        window.location.href = res.data.url;
+      } else {
+        toast.error('Failed to initiate checkout session.');
+        setIsRedirecting(false);
+      }
+    } catch (err: any) {
+      toast.error(err.message || 'Payment initiation failed.');
+      setIsRedirecting(false);
+    }
+  };
+
+  return (
+    <RoleGuard allowedRoles={['vendor']}>
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="text-center max-w-2xl mx-auto">
+          <span className="text-xs font-semibold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200/50">
+            Vendor Growth Plans
+          </span>
+          <h1 className="text-3xl font-serif font-bold text-gray-950 mt-3">
+            Choose Your WedPlan Plan
+          </h1>
+          <p className="text-xs sm:text-sm text-gray-500 mt-2">
+            Unlock unlimited wedding service listings, priority placement in search, and verified vendor badge.
+          </p>
+        </div>
+
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          {/* Free Tier */}
+          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                  Free Starter
+                </span>
+                {!isPremium && (
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    Current Plan
+                  </span>
+                )}
+              </div>
+
+              <div className="mb-6">
+                <span className="text-4xl font-serif font-bold text-gray-900">$0</span>
+                <span className="text-xs text-gray-500 ml-1">/ month</span>
+              </div>
+
+              <ul className="space-y-3.5 text-xs text-gray-600">
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Maximum <strong>3 Active Services</strong></span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Standard Vendor Dashboard</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Customer Booking Request Management</span>
+                </li>
+                <li className="flex items-center gap-2.5 text-gray-400">
+                  <span className="w-4 h-4 text-center">—</span>
+                  <span>No Verified Premium Badge</span>
+                </li>
+                <li className="flex items-center gap-2.5 text-gray-400">
+                  <span className="w-4 h-4 text-center">—</span>
+                  <span>Standard Directory Ranking</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-gray-100">
+              <Button variant="outline" className="w-full" disabled={!isPremium}>
+                {!isPremium ? 'Active Plan' : 'Free Tier'}
+              </Button>
+            </div>
+          </div>
+
+          {/* Premium Tier */}
+          <div className="relative bg-gradient-to-b from-rose-950 via-gray-950 to-black text-white rounded-3xl p-8 shadow-2xl border-2 border-rose-500/40 flex flex-col justify-between overflow-hidden">
+            <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950 text-[10px] font-extrabold uppercase px-4 py-1 rounded-bl-xl shadow-md">
+              Most Popular
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-rose-300 bg-rose-900/60 px-3 py-1 rounded-full border border-rose-700/60">
+                  Premium Vendor
+                </span>
+                {isPremium && (
+                  <span className="text-xs font-bold text-amber-400 bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-400/40">
+                    Active Subscription
+                  </span>
+                )}
+              </div>
+
+              <div className="mb-6">
+                <span className="text-4xl font-serif font-bold text-white">$49</span>
+                <span className="text-xs text-rose-200 ml-1">/ year (one-time test checkout)</span>
+              </div>
+
+              <ul className="space-y-3.5 text-xs text-gray-200">
+                <li className="flex items-center gap-2.5 font-semibold text-white">
+                  <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span><strong>Unlimited Active Wedding Services</strong></span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Gold <strong>Verified Premium Badge</strong></span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Priority Placement on Homepage & Browse Directory</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Advanced Analytics & Booking Inquiries</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Verified Stripe Checkout & Webhook Security</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-gray-800">
+              {isPremium ? (
+                <div className="p-3 bg-white/10 rounded-xl text-center text-xs font-semibold text-amber-300 flex items-center justify-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4" /> You are an active Premium Vendor!
+                </div>
+              ) : (
+                <Button
+                  onClick={handleUpgrade}
+                  isLoading={isRedirecting}
+                  className="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-700 hover:to-amber-600 text-white font-bold py-3 text-sm shadow-xl shadow-rose-600/30 cursor-pointer"
+                >
+                  <Zap className="w-4 h-4 mr-1.5" />
+                  Upgrade to Premium via Stripe
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </RoleGuard>
+  );
+}
