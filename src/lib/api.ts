@@ -1,5 +1,23 @@
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const getApiBaseUrl = (): string => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  // If a live remote API URL is specified (e.g. https://api.wedplan.com/api)
+  if (envUrl && !envUrl.includes('localhost')) {
+    return envUrl.replace(/\/$/, '');
+  }
+
+  // Client-side in browser
+  if (typeof window !== 'undefined') {
+    // If deployed on Vercel or any non-localhost host, use same-origin relative /api
+    if (!window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
+      return '/api';
+    }
+    return (envUrl || '/api').replace(/\/$/, '');
+  }
+
+  // Server-side default
+  return (envUrl || 'http://localhost:5000/api').replace(/\/$/, '');
+};
 
 interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean | undefined>;
@@ -19,8 +37,18 @@ class ApiError extends Error {
 
 async function request<T = any>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { params, headers, ...customConfig } = options;
+  const baseUrl = getApiBaseUrl();
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
 
-  let url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  // Avoid duplicate /api/api
+  let url = '';
+  if (baseUrl === '/api') {
+    url = cleanEndpoint.startsWith('/api') ? cleanEndpoint : `/api${cleanEndpoint}`;
+  } else if (baseUrl.endsWith('/api') && cleanEndpoint.startsWith('/api')) {
+    url = `${baseUrl.slice(0, -4)}${cleanEndpoint}`;
+  } else {
+    url = `${baseUrl}${cleanEndpoint}`;
+  }
 
   if (params) {
     const searchParams = new URLSearchParams();
@@ -66,7 +94,6 @@ async function request<T = any>(endpoint: string, options: RequestOptions = {}):
 
     // If unauthorized or account blocked, handle appropriately
     if (response.status === 401 && typeof window !== 'undefined') {
-      // Token expired or invalid
       localStorage.removeItem('wedplan_token');
       localStorage.removeItem('wedplan_user');
     }
@@ -89,6 +116,12 @@ export const api = {
   put: <T = any>(endpoint: string, body?: any, options?: RequestOptions) =>
     request<T>(endpoint, {
       method: 'PUT',
+      body: body ? JSON.stringify(body) : undefined,
+      ...options,
+    }),
+  patch: <T = any>(endpoint: string, body?: any, options?: RequestOptions) =>
+    request<T>(endpoint, {
+      method: 'PATCH',
       body: body ? JSON.stringify(body) : undefined,
       ...options,
     }),
