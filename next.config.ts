@@ -20,6 +20,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/payment/success',
+        destination: '/dashboard/payment-success',
+        permanent: false,
+      },
+      {
+        source: '/payment/cancel',
+        destination: '/dashboard/payment-cancel',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
