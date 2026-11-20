@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WedPlan — Wedding Planning Platform (Frontend Client)
 
-## Getting Started
+A modern, role-based wedding planning platform and vendor marketplace built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**, seamlessly connected with an Express.js & MongoDB backend, Stripe Checkout, and JWT authentication.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🔗 Repository & Deployment Links
+
+- **Live Website**: [https://wedplan-platform.vercel.app](https://wedplan-platform.vercel.app)
+- **Client GitHub Repository**: [https://github.com/rakib/wedplan-client](https://github.com/rakib/wedplan-client)
+- **Server GitHub Repository**: [https://github.com/rakib/wedplan-server](https://github.com/rakib/wedplan-server)
+
+---
+
+## 🌟 Important Features
+
+### 1. Customer Experience
+- **Public & Authenticated Browsing**: Discover approved wedding services across 6 curated categories: *Wedding Venues*, *Photography & Videography*, *Decoration & Florist*, *Catering Services*, *Makeup & Styling*, and *Wedding Fashion*.
+- **Real-Time Search & Multi-Filter**: Filter by category, location, and sort by price (Low to High, High to Low) or newest.
+- **Service Details & Anti-Double-Booking**: Dynamic gallery with multiple images, detailed inclusions, and date conflict protection.
+- **Customer Dashboard**: Overview metrics, booking requests tracking, and the ability to cancel pending inquiries.
+
+### 2. Vendor Studio
+- **Listing Portfolio Management**: Create and update services with high-resolution imagery.
+- **Tiered Publishing Limits**: Free vendors can publish up to 3 active services; Premium vendors enjoy unlimited listings.
+- **Booking Request Review**: Accept or reject incoming event inquiries with real-time status transitions.
+- **Stripe Premium Upgrade**: One-click Stripe Checkout test payment for $49/yr to unlock unlimited listings and verified badges.
+
+### 3. Administrator Governance
+- **Platform Analytics**: Total users, vendors, couples, active services, pending reviews, total transactions, and revenue.
+- **User Moderation**: Instant block/unblock control to protect platform security.
+- **Service Audit Workflow**: Approve or reject vendor submissions before publication.
+- **Financial Audit Ledger**: Read-only Stripe transaction records verified via webhooks.
+
+---
+
+## 🛠 Technology Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/)
+- **Celebration Effects**: [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
+- **Backend API**: Express.js, MongoDB Atlas, Mongoose, Stripe SDK
+
+---
+
+## 📋 Environment Variables
+
+Create a `.env.local` file in the client root directory:
+
+```env
+# Backend API Base URL
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+
+# Stripe Publishable Key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51UbcZ3LP7zqBYcCwv9LuM8WHjIFP3FY0jirU6beIXvgvIzXZ1flZiwFC1qzr3j83Ezi3jdX0prtFgwWpgsjFp4fo00ISetO1KK
+
+# App URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Installation & Local Run Guide
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js (v18.17 or later)
+- Running backend server at `http://localhost:5000` (see `wedplan-server`)
 
-## Learn More
+### Step 1: Install Dependencies
+```bash
+git clone https://github.com/rakib/wedplan-client.git
+cd wedplan-client
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Step 2: Configure Environment
+Copy `.env.example` to `.env.local` and ensure `NEXT_PUBLIC_API_URL` points to your backend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Step 3: Run the Development Server
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔑 Demo Credentials for Examiner Evaluation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Quick-fill buttons are provided on the `/signin` page for convenience:
+
+| Role | Email | Password | Access Level |
+|---|---|---|---|
+| **Administrator** | `admin@wedplan.com` | `Admin@123456` | Full Admin Console (`/dashboard/admin`) |
+| **Vendor (Premium)** | `vendor@wedplan.com` | `Vendor@123456` | Vendor Studio (`/dashboard/vendor`) |
+| **Customer** | `customer@wedplan.com` | `Customer@123456` | Customer Portal (`/dashboard/customer`) |
+
+---
+
+## 🛡 Security & Route Protection
+- Client-side `RoleGuard` prevents manual URL manipulation.
+- Server-side JWT token verification ensures unauthorized or blocked users cannot perform mutations.
+- Public routes remain fully accessible without session lockouts or production 404/504 errors on page reload.
