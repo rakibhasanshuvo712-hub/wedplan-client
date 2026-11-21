@@ -18,12 +18,14 @@ import {
   XCircle,
   Building2,
   Search,
+  CreditCard,
 } from 'lucide-react';
 
 export default function MyBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [payingId, setPayingId] = useState<string | null>(null);
 
   const fetchBookings = async () => {
     try {
@@ -40,6 +42,25 @@ export default function MyBookingsPage() {
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  const handlePayBooking = async (bookingId: string) => {
+    setPayingId(bookingId);
+    try {
+      const res = await api.post('/payments/create-booking-checkout-session', { bookingId });
+      const checkoutUrl = res?.url || res?.data?.url;
+      if (checkoutUrl) {
+        toast.success('Redirecting to Stripe Checkout...');
+        window.location.href = checkoutUrl;
+      } else {
+        toast.error('Failed to initiate Stripe payment session.');
+        setPayingId(null);
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Payment initiation failed.';
+      toast.error(msg);
+      setPayingId(null);
+    }
+  };
 
   const handleCancelBooking = async (id: string) => {
     if (!confirm('Are you sure you want to cancel this pending booking request?')) return;
@@ -166,6 +187,25 @@ export default function MyBookingsPage() {
                       {booking.serviceId?.price ? formatCurrency(booking.serviceId.price) : ''}
                     </p>
                   </div>
+
+                  {booking.status === 'accepted' && (
+                    (booking as { paymentStatus?: string }).paymentStatus === 'paid' ? (
+                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-semibold">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Paid via Stripe
+                      </span>
+                    ) : (
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-xs"
+                        isLoading={payingId === booking._id}
+                        onClick={() => handlePayBooking(booking._id)}
+                      >
+                        <CreditCard className="w-3.5 h-3.5 mr-1" />
+                        Pay with Stripe
+                      </Button>
+                    )
+                  )}
 
                   {booking.status === 'pending' && (
                     <Button
