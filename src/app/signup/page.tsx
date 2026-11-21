@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import { UserRole } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { GoogleAuthButton } from '@/components/common/GoogleAuthButton';
 import { toast } from 'sonner';
 import { Heart, Lock, Mail, User, Building2, ArrowRight, Check, Sparkles } from 'lucide-react';
 
@@ -28,7 +29,7 @@ function SignUpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialRole = (searchParams.get('role') as UserRole) || 'customer';
-  const { register, googleLogin } = useAuth();
+  const { register } = useAuth();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -226,6 +227,34 @@ function SignUpContent() {
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </form>
+
+          {/* Social Sign Up Divider */}
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-3 text-gray-400 font-semibold">
+                  Or register with
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <GoogleAuthButton
+                role={role}
+                text="signup"
+                onSuccess={(user) => {
+                  if (user.role === 'vendor') {
+                    router.push('/dashboard/vendor');
+                  } else {
+                    router.push('/dashboard/customer');
+                  }
+                }}
+              />
+            </div>
+          </div>
 
           <div className="mt-6 text-center text-xs text-gray-500">
             Already have an account?{' '}

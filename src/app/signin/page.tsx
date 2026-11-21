@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { GoogleAuthButton } from '@/components/common/GoogleAuthButton';
 import { toast } from 'sonner';
 import { Heart, Lock, Mail, ArrowRight, ShieldCheck, UserCheck, Briefcase } from 'lucide-react';
 
@@ -27,7 +28,7 @@ function SignInContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from');
-  const { login, googleLogin } = useAuth();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -76,26 +77,6 @@ function SignInContent() {
     setEmail(demoEmail);
     setPassword(demoPass);
     toast.info(`Filled credentials for ${demoEmail}`);
-  };
-
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      // Demo Google Auth simulation
-      const user = await googleLogin({
-        email: 'sarah.google@example.com',
-        name: 'Sarah (Google Demo)',
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
-        role: 'customer',
-        googleId: 'google_oauth_demo_123',
-      });
-      toast.success('Signed in with Google!');
-      redirectByRole(user.role);
-    } catch (err: any) {
-      toast.error(err.message || 'Google authentication failed.');
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
@@ -192,32 +173,10 @@ function SignInContent() {
             </div>
 
             <div className="mt-4">
-              <button
-                type="button"
-                onClick={handleGoogleSignIn}
-                disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 border border-gray-200 rounded-xl text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 transition-colors cursor-pointer"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24">
-                  <path
-                    fill="#EA4335"
-                    d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"
-                  />
-                  <path
-                    fill="#4285F4"
-                    d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M5.6 14.8c-.3-.8-.4-1.8-.4-2.8 0-1 .1-2 .4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.4C3.7 20.4 7.5 23 12 23z"
-                  />
-                </svg>
-                Continue with Google
-              </button>
+              <GoogleAuthButton
+                text="signin"
+                onSuccess={(user) => redirectByRole(user.role)}
+              />
             </div>
           </div>
 
