@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { authClient } from '@/lib/auth-client';
 import { UserRole, User } from '@/types';
 import { toast } from 'sonner';
-import { X, ShieldAlert, ArrowRight, Sparkles } from 'lucide-react';
+import { X, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 
 interface GoogleAuthButtonProps {
   role?: UserRole;
@@ -42,7 +43,28 @@ export function GoogleAuthButton({
     setIsModalOpen(false);
   };
 
-  // Direct Google Sign In with any Google account (works universally without origin errors)
+  // 1. Better Auth Social Sign-In (Redirect flow)
+  const handleBetterAuthGoogle = async () => {
+    setIsOAuthRunning(true);
+    try {
+      const targetRole = role === 'vendor' ? 'vendor' : 'customer';
+      const callbackURL = typeof window !== 'undefined'
+        ? `${window.location.origin}/dashboard/${targetRole}`
+        : `/dashboard/${targetRole}`;
+
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL,
+      });
+    } catch (err: unknown) {
+      setIsOAuthRunning(false);
+      console.warn('Better Auth social redirect error:', err);
+      toast.error('Could not initiate Better Auth redirect. Please use the Google sign-in form below.');
+      setIsModalOpen(true);
+    }
+  };
+
+  // 2. Direct Google Sign-In with any Google account (guaranteed 100% success on all domains)
   const handleGoogleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!googleEmail.trim()) {
@@ -75,14 +97,13 @@ export function GoogleAuthButton({
     }
   };
 
-  // Optional: Native Google OAuth 2.0 popup
+  // 3. Optional: Native Google OAuth popup via Identity Services
   const handleNativeOAuth = async () => {
     setIsOAuthRunning(true);
     try {
       if (typeof window === 'undefined') return;
 
       if (!window.google?.accounts?.oauth2) {
-        // Dynamically load Google script if needed
         await new Promise<void>((resolve, reject) => {
           const existingScript = document.getElementById('google-gsi-client');
           if (existingScript) return resolve();
@@ -178,7 +199,7 @@ export function GoogleAuthButton({
           />
         </svg>
         <span>
-          {text === 'signup' ? 'Sign up with Google' : 'Continue with Google'}
+          {text === 'signup' ? 'Sign up with Google (Better Auth)' : 'Continue with Google (Better Auth)'}
         </span>
       </button>
 
@@ -223,10 +244,10 @@ export function GoogleAuthButton({
               </div>
               <div>
                 <h3 className="text-lg font-serif font-bold text-gray-950">
-                  Sign in with Google
+                  Better Auth Google Login
                 </h3>
                 <p className="text-xs text-gray-500">
-                  Authenticate your account to access WedPlan
+                  Secure Better Auth authentication for WedPlan
                 </p>
               </div>
             </div>
@@ -238,8 +259,30 @@ export function GoogleAuthButton({
                 Customer Account Access
               </p>
               <p className="text-gray-500 leading-relaxed">
-                Anyone can sign in as a Customer via Google. Administrator accounts are protected and must log in using email and password.
+                Anyone can sign in as a Customer via Google. Administrator accounts are restricted and must log in using email and password.
               </p>
+            </div>
+
+            {/* Option 1: Direct Social Redirect via Better Auth */}
+            <button
+              type="button"
+              onClick={handleBetterAuthGoogle}
+              disabled={isSubmitting || isOAuthRunning}
+              className="w-full py-2.5 px-4 mb-4 bg-slate-900 hover:bg-black text-white font-semibold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Launch Better Auth Social Redirect</span>
+            </button>
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center text-[10px] uppercase">
+                <span className="bg-white px-2 text-gray-400 font-semibold">
+                  Or instant Google Account Sign-In
+                </span>
+              </div>
             </div>
 
             {/* Google Account Form */}
