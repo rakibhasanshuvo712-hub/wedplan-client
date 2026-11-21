@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GoogleAuthButton } from '@/components/common/GoogleAuthButton';
 import { toast } from 'sonner';
-import { Heart, Lock, Mail, ArrowRight, Shield } from 'lucide-react';
+import { Heart, Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function SignInPage() {
   return (
@@ -30,10 +30,9 @@ function SignInContent() {
   const from = searchParams.get('from');
   const { login } = useAuth();
 
-  const [isAdminPortalOpen, setIsAdminPortalOpen] = useState(false);
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
-  const [isAdminLoading, setIsAdminLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const redirectByRole = (userRole: string) => {
     if (from) {
@@ -54,28 +53,24 @@ function SignInContent() {
     }
   };
 
-  const handleAdminSignIn = async (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!adminEmail || !adminPassword) {
-      toast.error('Please enter administrator email and password.');
+
+    if (!email.trim() || !password) {
+      toast.error('Please enter both your email address and password.');
       return;
     }
 
-    setIsAdminLoading(true);
+    setIsLoading(true);
     try {
-      const loggedInUser = await login(adminEmail, adminPassword);
-      if (loggedInUser.role !== 'admin') {
-        toast.error('Only administrator accounts can use this portal. Please sign in with Google above.');
-        setIsAdminLoading(false);
-        return;
-      }
-      toast.success(`Welcome back, ${loggedInUser.name}!`);
-      redirectByRole('admin');
+      const user = await login(email.trim(), password);
+      toast.success(`Welcome back, ${user.name}!`);
+      redirectByRole(user.role);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Admin login failed.';
-      toast.error(msg);
+      const message = err instanceof Error ? err.message : 'Sign in failed. Please try again.';
+      toast.error(message);
     } finally {
-      setIsAdminLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -87,90 +82,77 @@ function SignInContent() {
             <Heart className="w-6 h-6 fill-white" />
           </div>
         </Link>
-        <h2 className="mt-4 text-3xl font-serif font-bold text-gray-950">
-          Sign In to WedPlan
-        </h2>
+        <h2 className="mt-4 text-3xl font-serif font-bold text-gray-950">Sign In to WedPlan</h2>
         <p className="mt-1 text-sm text-gray-500">
           Access your wedding services, bookings, and dashboard
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-rose-500/5 sm:rounded-3xl sm:px-10 border border-rose-100 text-center space-y-6">
-          {/* Primary Google Login Section */}
-          <div className="space-y-4">
-            <div className="p-5 bg-gradient-to-br from-rose-50/80 to-pink-50/40 rounded-2xl border border-rose-100/80 text-left space-y-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 bg-rose-100/70 px-2.5 py-0.5 rounded-full">
-                Google Authentication
-              </span>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                WedPlan uses Google Login for instant, secure access. Customers and Vendors can sign in with their Google account in one click.
-              </p>
-            </div>
+        <div className="bg-white py-8 px-6 shadow-xl shadow-rose-500/5 sm:rounded-3xl sm:px-10 border border-rose-100 space-y-6">
+          <GoogleAuthButton
+            text="signin"
+            className="py-3 shadow-sm hover:shadow-md"
+            onSuccess={(user) => redirectByRole(user.role)}
+          />
 
-            <GoogleAuthButton
-              text="signin"
-              className="py-3 text-sm shadow-sm hover:shadow-md"
-              onSuccess={(user) => redirectByRole(user.role)}
-            />
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-white px-3 text-gray-400">or sign in with email</span>
+            </div>
           </div>
 
-          <div className="text-xs text-gray-500 pt-2 border-t border-gray-100">
-            Don't have an account yet?{' '}
+          <form onSubmit={handleSignIn} className="space-y-4">
+            <Input
+              type="email"
+              label="Email Address"
+              required
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              icon={<Mail className="w-4 h-4" />}
+            />
+            <Input
+              type="password"
+              label="Password"
+              required
+              autoComplete="current-password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              icon={<Lock className="w-4 h-4" />}
+            />
+            <Button
+              type="submit"
+              variant="primary"
+              className="w-full"
+              isLoading={isLoading}
+            >
+              Sign In
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </form>
+
+          <div className="flex items-start gap-2 p-3 rounded-xl bg-slate-50 border border-slate-100">
+            <ShieldCheck className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+            <p className="text-[11px] text-gray-500 leading-relaxed">
+              Administrators sign in here with their platform email and password. Customer and
+              vendor accounts can also continue with Google.
+            </p>
+          </div>
+
+          <div className="text-xs text-gray-500 pt-2 border-t border-gray-100 text-center">
+            Don&apos;t have an account yet?{' '}
             <Link
               href="/signup"
               className="font-semibold text-rose-600 hover:text-rose-700 transition-colors underline"
             >
-              Sign up with Google
+              Create one here
             </Link>
-          </div>
-
-          {/* Discreet Admin Portal Toggle */}
-          <div className="pt-2 text-center">
-            <button
-              type="button"
-              onClick={() => setIsAdminPortalOpen(!isAdminPortalOpen)}
-              className="text-[11px] text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center gap-1 mx-auto cursor-pointer"
-            >
-              <Shield className="w-3 h-3 text-gray-400" />
-              <span>{isAdminPortalOpen ? 'Hide Administrator Login' : 'Administrator Login'}</span>
-            </button>
-
-            {isAdminPortalOpen && (
-              <form onSubmit={handleAdminSignIn} className="mt-4 pt-4 border-t border-gray-100 text-left space-y-3 animate-in fade-in duration-200">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
-                  Admin Credentials Portal
-                </span>
-                <Input
-                  type="email"
-                  label="Admin Email"
-                  required
-                  placeholder="admin@wedplan.com"
-                  value={adminEmail}
-                  onChange={(e) => setAdminEmail(e.target.value)}
-                  icon={<Mail className="w-3.5 h-3.5" />}
-                />
-                <Input
-                  type="password"
-                  label="Admin Password"
-                  required
-                  placeholder="••••••••"
-                  value={adminPassword}
-                  onChange={(e) => setAdminPassword(e.target.value)}
-                  icon={<Lock className="w-3.5 h-3.5" />}
-                />
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="sm"
-                  className="w-full text-xs"
-                  isLoading={isAdminLoading}
-                >
-                  Sign In as Administrator
-                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                </Button>
-              </form>
-            )}
           </div>
         </div>
       </div>

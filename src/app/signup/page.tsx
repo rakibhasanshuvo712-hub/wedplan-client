@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GoogleAuthButton } from '@/components/common/GoogleAuthButton';
 import { toast } from 'sonner';
-import { Heart, Lock, Mail, User, Building2, ArrowRight, Sparkles } from 'lucide-react';
+import { Heart, Lock, Mail, User, Building2, ArrowRight, Sparkles, Check } from 'lucide-react';
 
 export default function SignUpPage() {
   return (
@@ -32,7 +32,6 @@ function SignUpContent() {
   const { register } = useAuth();
 
   const [role, setRole] = useState<UserRole>(initialRole === 'vendor' ? 'vendor' : 'customer');
-  const [showEmailForm, setShowEmailForm] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,11 +40,8 @@ function SignUpContent() {
 
   React.useEffect(() => {
     const roleParam = searchParams.get('role');
-    if (roleParam === 'vendor') {
-      setRole('vendor');
-    } else if (roleParam === 'customer') {
-      setRole('customer');
-    }
+    if (roleParam === 'vendor') setRole('vendor');
+    else if (roleParam === 'customer') setRole('customer');
   }, [searchParams]);
 
   const hasMinLen = password.length >= 6;
@@ -55,7 +51,7 @@ function SignUpContent() {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name.trim() || !email.trim() || !password) {
       toast.error('Please fill in all required fields.');
       return;
     }
@@ -68,22 +64,18 @@ function SignUpContent() {
     setIsLoading(true);
     try {
       const newUser = await register({
-        name,
-        email,
+        name: name.trim(),
+        email: email.trim(),
         password,
         role,
-        businessName: role === 'vendor' ? (businessName || name) : undefined,
+        businessName: role === 'vendor' ? businessName.trim() || name.trim() : undefined,
       });
 
       toast.success(`Welcome to WedPlan, ${newUser.name}!`);
-      if (newUser.role === 'vendor') {
-        router.push('/dashboard/vendor');
-      } else {
-        router.push('/dashboard/customer');
-      }
+      router.push(newUser.role === 'vendor' ? '/dashboard/vendor' : '/dashboard/customer');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Registration failed.';
-      toast.error(msg);
+      const message = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -101,16 +93,16 @@ function SignUpContent() {
           Create Your WedPlan Account
         </h2>
         <p className="mt-1 text-sm text-gray-500">
-          Join couples & vendors on the nation's premier wedding platform
+          Join couples &amp; vendors on the nation&apos;s premier wedding platform
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 shadow-xl shadow-rose-500/5 sm:rounded-3xl sm:px-10 border border-rose-100 space-y-6">
-          {/* Role Selection Toggle */}
+          {/* Role selection */}
           <div>
             <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2 text-center">
-              Register as:
+              Register as
             </label>
             <div className="grid grid-cols-2 gap-3 p-1.5 bg-rose-50/60 rounded-2xl border border-rose-100">
               <button
@@ -139,102 +131,105 @@ function SignUpContent() {
           </div>
 
           {role === 'vendor' && (
-            <div className="p-3.5 bg-amber-50/90 rounded-2xl border border-amber-200/90 text-amber-900 text-xs animate-in fade-in duration-200">
-              <div className="font-semibold flex items-center gap-1.5 text-amber-900 mb-1">
+            <div className="p-3.5 bg-amber-50/90 rounded-2xl border border-amber-200/90 text-amber-900 text-xs">
+              <div className="font-semibold flex items-center gap-1.5 mb-1">
                 <Sparkles className="w-4 h-4 text-amber-600 fill-amber-300" />
                 Wedding Vendor Registration
               </div>
               <p className="text-[11px] text-amber-800 leading-relaxed">
-                Publish up to 3 services free, manage bookings, and upgrade to Premium anytime via Stripe!
+                Publish up to 3 services free, manage bookings, and upgrade to Premium anytime via
+                Stripe.
               </p>
             </div>
           )}
 
-          {/* Primary Google Sign Up */}
-          <div className="space-y-3">
-            <GoogleAuthButton
-              role={role}
-              text="signup"
-              className="py-3 text-sm shadow-sm hover:shadow-md"
-              onSuccess={(user) => {
-                if (user.role === 'vendor') {
-                  router.push('/dashboard/vendor');
-                } else {
-                  router.push('/dashboard/customer');
-                }
-              }}
+          {/* Email + password registration */}
+          <form onSubmit={handleSignUp} className="space-y-4">
+            <Input
+              label="Full Name *"
+              required
+              autoComplete="name"
+              placeholder="Eleanor Vance"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            <p className="text-[11px] text-gray-400 text-center">
-              Instant registration powered by Google & Better Auth
-            </p>
+            <Input
+              type="email"
+              label="Email Address *"
+              required
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              icon={<Mail className="w-4 h-4" />}
+            />
+            <Input
+              type="password"
+              label="Password *"
+              required
+              autoComplete="new-password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              icon={<Lock className="w-4 h-4" />}
+            />
+
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
+              {[
+                { ok: hasMinLen, label: '6+ characters' },
+                { ok: hasUpper, label: 'One uppercase letter' },
+                { ok: hasLower, label: 'One lowercase letter' },
+              ].map((rule) => (
+                <span
+                  key={rule.label}
+                  className={`flex items-center gap-1 ${rule.ok ? 'text-emerald-600' : 'text-gray-400'}`}
+                >
+                  <Check className="w-3 h-3" /> {rule.label}
+                </span>
+              ))}
+            </div>
+
+            {role === 'vendor' && (
+              <Input
+                label="Business / Studio Name"
+                placeholder="Grand Elegance Studios"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+              />
+            )}
+
+            <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
+              Create Account
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </form>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-white px-3 text-gray-400">or register with Google</span>
+            </div>
           </div>
 
-          <div className="text-center text-xs text-gray-500 pt-2 border-t border-gray-100">
+          <GoogleAuthButton
+            role={role}
+            text="signup"
+            className="py-3 shadow-sm hover:shadow-md"
+            onSuccess={(user) => {
+              router.push(user.role === 'vendor' ? '/dashboard/vendor' : '/dashboard/customer');
+            }}
+          />
+
+          <div className="text-xs text-gray-500 pt-2 border-t border-gray-100 text-center">
             Already have an account?{' '}
             <Link
               href="/signin"
               className="font-semibold text-rose-600 hover:text-rose-700 transition-colors underline"
             >
-              Sign in with Google
+              Sign in
             </Link>
-          </div>
-
-          {/* Optional manual registration toggle */}
-          <div className="text-center pt-1">
-            <button
-              type="button"
-              onClick={() => setShowEmailForm(!showEmailForm)}
-              className="text-[11px] text-gray-400 hover:text-gray-600 underline cursor-pointer"
-            >
-              {showEmailForm ? 'Hide manual email form' : 'Register with email address instead'}
-            </button>
-
-            {showEmailForm && (
-              <form onSubmit={handleSignUp} className="mt-4 pt-4 border-t border-gray-100 text-left space-y-3 animate-in fade-in duration-200">
-                <Input
-                  label="Full Name *"
-                  required
-                  placeholder="Eleanor Vance"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <Input
-                  type="email"
-                  label="Email Address *"
-                  required
-                  placeholder="you@domain.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  icon={<Mail className="w-4 h-4" />}
-                />
-                <Input
-                  type="password"
-                  label="Password *"
-                  required
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  icon={<Lock className="w-4 h-4" />}
-                />
-                {role === 'vendor' && (
-                  <Input
-                    label="Business / Studio Name"
-                    placeholder="Grand Elegance Studios"
-                    value={businessName}
-                    onChange={(e) => setBusinessName(e.target.value)}
-                  />
-                )}
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="w-full text-xs"
-                  isLoading={isLoading}
-                >
-                  Create Account
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </form>
-            )}
           </div>
         </div>
       </div>

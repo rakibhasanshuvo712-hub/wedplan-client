@@ -20,10 +20,12 @@ interface AuthContextType {
     businessName?: string;
   }) => Promise<User>;
   googleLogin: (payload: {
-    email: string;
-    name: string;
-    image?: string;
     role: UserRole;
+    accessToken?: string;
+    idToken?: string;
+    email?: string;
+    name?: string;
+    image?: string;
     googleId?: string;
   }) => Promise<User>;
   logout: () => void;
@@ -128,10 +130,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const googleLogin = async (payload: {
-    email: string;
-    name: string;
-    image?: string;
     role: UserRole;
+    accessToken?: string;
+    idToken?: string;
+    email?: string;
+    name?: string;
+    image?: string;
     googleId?: string;
   }): Promise<User> => {
     const res = await api.post('/auth/google', payload);
