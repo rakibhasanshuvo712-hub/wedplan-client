@@ -50,12 +50,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const initAuth = async () => {
       try {
         const storedToken = localStorage.getItem('wedplan_token');
+        const storedUser = localStorage.getItem('wedplan_user');
+
         if (!storedToken) {
           setIsLoading(false);
           return;
         }
 
         setToken(storedToken);
+
+        // Preload stored user immediately to prevent flash of unauthenticated state on page reload
+        if (storedUser) {
+          try {
+            setUser(JSON.parse(storedUser));
+          } catch {
+            // Ignore parse error
+          }
+        }
 
         const res = await api.get('/auth/me');
         if (res?.data?.user) {
@@ -64,10 +75,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } else {
           logout();
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Session verification error:', err);
-        // If token expired, clear
-        logout();
+        const isAuthError =
+          (err as { statusCode?: number })?.statusCode === 401 ||
+          (err as { response?: { status?: number } })?.response?.status === 401;
+
+        if (isAuthError) {
+          logout();
+        }
       } finally {
         setIsLoading(false);
       }
