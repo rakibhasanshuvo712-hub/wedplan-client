@@ -19,15 +19,17 @@ export default function VendorSubscriptionPage() {
     setIsRedirecting(true);
     try {
       const res = await api.post('/payments/create-checkout-session');
-      if (res?.data?.url) {
-        // Redirect directly to Stripe Checkout hosted page
-        window.location.href = res.data.url;
+      const checkoutUrl = res?.url || res?.data?.url;
+      if (checkoutUrl) {
+        toast.success('Redirecting to Stripe Checkout...');
+        window.location.href = checkoutUrl;
       } else {
-        toast.error('Failed to initiate checkout session.');
+        toast.error(res?.error || res?.message || 'Failed to initiate checkout session.');
         setIsRedirecting(false);
       }
-    } catch (err: any) {
-      toast.error(err.message || 'Payment initiation failed.');
+    } catch (err: unknown) {
+      const msg = (err as { message?: string })?.message || 'Payment initiation failed.';
+      toast.error(msg);
       setIsRedirecting(false);
     }
   };
