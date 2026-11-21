@@ -34,7 +34,7 @@ A modern, role-based wedding planning platform and vendor marketplace built with
 - **Financial Audit Ledger**: Read-only Stripe transaction records verified via webhooks.
 
 ### 4. Authentication & Security
-- **Email/Password & Google OAuth**: Standard credential login + Google OAuth login and registration via Google Identity Services (GSI).
+- **Email/Password & Google OAuth**: Full credential registration and sign-in (name, email, password with strength rules, role selection) plus real Google Sign-In through Google Identity Services. The Google access token is verified by the backend against Google before any account is created.
 - **Session Resilience**: Token stored with Lax cookies & localStorage; session preloaded on page refresh without UI flicker or 401 logouts.
 - **Role Verification**: Client-side `RoleGuard` + server-side JWT verification for `admin`, `vendor`, and `customer`.
 
@@ -67,9 +67,13 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51UbcZ3LP7zqBYcCwv9LuM8WHjIFP3FY0jirU
 # App URL
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# Google OAuth Client ID
+# Google OAuth Client ID (public value — safe to expose in the browser)
 NEXT_PUBLIC_GOOGLE_CLIENT_ID=521916340203-6eaman0rp3k0o68tbj8dmvk1qbr9eohu.apps.googleusercontent.com
 ```
+
+> The matching `GOOGLE_CLIENT_ID` must also be set on the **server** project so the API can
+> verify that the token was issued for this application. No Google client secret is required.
+> Authorize the deployed client domain (and `localhost`) as a JavaScript origin in Google Cloud Console.
 
 ---
 
@@ -108,6 +112,12 @@ Quick-fill buttons are provided on the `/signin` page for one-click testing:
 | **Vendor (Premium)** | `vendor@wedplan.com` | `Vendor@123456` | Vendor Studio (`/dashboard/vendor`) |
 | **Customer** | `customer@wedplan.com` | `Customer@123456` | Customer Portal (`/dashboard/customer`) |
 | **Google User (Demo)** | `sarah.google@example.com` | *(OAuth Verified)* | Customer Portal (`/dashboard/customer`) |
+
+### Testing Google Sign-In
+1. Open `/signin` or `/signup` and choose a role on the sign-up page (Customer or Vendor).
+2. Click **Continue with Google** and select any Google account. The browser opens Google's real OAuth popup.
+3. The returned access token is sent to `POST /api/auth/google`, verified with Google, and a WedPlan JWT session is created.
+4. On success you are redirected to the dashboard matching your role. If the popup is blocked, use the email/password form instead.
 
 ---
 
