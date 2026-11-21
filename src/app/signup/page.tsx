@@ -241,7 +241,7 @@ function SignUpContent() {
               </div>
             </div>
 
-            <div className="mt-4 space-y-2">
+            <div className="mt-4">
               <GoogleAuthButton
                 role={role}
                 text="signup"
@@ -253,9 +253,6 @@ function SignUpContent() {
                   }
                 }}
               />
-              <p className="text-[11px] text-gray-400 text-center leading-tight">
-                Requires domain in Google Cloud Console Authorized JavaScript origins
-              </p>
             </div>
           </div>
 
