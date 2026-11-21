@@ -44,11 +44,6 @@ export function HeroBanner() {
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
-              <Link href="/signup?role=vendor">
-                <Button size="lg" variant="outline" className="px-6">
-                  List Your Business
-                </Button>
-              </Link>
             </div>
 
             {/* Trust points */}

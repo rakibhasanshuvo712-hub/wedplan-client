@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { User, UserRole } from '@/types';
 import { api, ApiError } from '@/lib/api';
@@ -28,12 +28,6 @@ interface AuthContextType {
   }) => Promise<User>;
   logout: () => void;
   updateUserProfile: (data: Partial<User>) => Promise<User>;
-  becomeVendor: (payload: {
-    businessName: string;
-    bio?: string;
-    phone?: string;
-    address?: string;
-  }) => Promise<User>;
   refreshUser: () => Promise<void>;
 }
 
@@ -44,6 +38,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
+  const logout = useCallback(() => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('wedplan_token');
+    localStorage.removeItem('wedplan_user');
+    document.cookie = 'wedplan_token=; path=/; max-age=0';
+    document.cookie = 'wedplan_role=; path=/; max-age=0';
+    router.push('/signin');
+  }, [router]);
+
+  const saveAuthSession = (authToken: string, authUser: User) => {
+    setToken(authToken);
+    setUser(authUser);
+    localStorage.setItem('wedplan_token', authToken);
+    localStorage.setItem('wedplan_user', JSON.stringify(authUser));
+    // Also set document cookie for middleware or SSR checking
+    document.cookie = `wedplan_token=${authToken}; path=/; max-age=604800; SameSite=Lax`;
+    document.cookie = `wedplan_role=${authUser.role}; path=/; max-age=604800; SameSite=Lax`;
+  };
 
   // Load user from storage and verify with backend
   useEffect(() => {
@@ -90,17 +104,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     initAuth();
-  }, []);
-
-  const saveAuthSession = (authToken: string, authUser: User) => {
-    setToken(authToken);
-    setUser(authUser);
-    localStorage.setItem('wedplan_token', authToken);
-    localStorage.setItem('wedplan_user', JSON.stringify(authUser));
-    // Also set document cookie for middleware or SSR checking
-    document.cookie = `wedplan_token=${authToken}; path=/; max-age=604800; SameSite=Lax`;
-    document.cookie = `wedplan_role=${authUser.role}; path=/; max-age=604800; SameSite=Lax`;
-  };
+  }, [logout]);
 
   const login = async (email: string, password: string): Promise<User> => {
     const res = await api.post('/auth/login', { email, password });
@@ -136,34 +140,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return receivedUser;
   };
 
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem('wedplan_token');
-    localStorage.removeItem('wedplan_user');
-    document.cookie = 'wedplan_token=; path=/; max-age=0';
-    document.cookie = 'wedplan_role=; path=/; max-age=0';
-    router.push('/signin');
-  };
-
   const updateUserProfile = async (data: Partial<User>): Promise<User> => {
     const res = await api.put('/auth/profile', data);
     const updatedUser = res.data.user;
     setUser(updatedUser);
     localStorage.setItem('wedplan_user', JSON.stringify(updatedUser));
     return updatedUser;
-  };
-
-  const becomeVendor = async (payload: {
-    businessName: string;
-    bio?: string;
-    phone?: string;
-    address?: string;
-  }): Promise<User> => {
-    const res = await api.post('/auth/become-vendor', payload);
-    const { token: receivedToken, user: receivedUser } = res.data;
-    saveAuthSession(receivedToken, receivedUser);
-    return receivedUser;
   };
 
   const refreshUser = async () => {
@@ -190,7 +172,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         googleLogin,
         logout,
         updateUserProfile,
-        becomeVendor,
         refreshUser,
       }}
     >
