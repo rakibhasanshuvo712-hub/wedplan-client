@@ -80,13 +80,22 @@ export default function VendorOverviewPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link href="/dashboard/vendor/add-service">
-              <Button variant="outline" className="bg-white text-rose-700 hover:bg-rose-50 border-none shadow-sm font-semibold">
-                <PlusCircle className="w-4 h-4 mr-1.5" />
-                Add New Service
-              </Button>
-            </Link>
-            {!isPremium && (
+            {!isPremium && activeServices >= 3 ? (
+              <Link href="/dashboard/vendor/subscription">
+                <Button className="bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold shadow-md">
+                  <Sparkles className="w-4 h-4 mr-1.5 fill-current" />
+                  Upgrade to Add More Services
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/dashboard/vendor/add-service">
+                <Button variant="outline" className="bg-white text-rose-700 hover:bg-rose-50 border-none shadow-sm font-semibold">
+                  <PlusCircle className="w-4 h-4 mr-1.5" />
+                  Add New Service
+                </Button>
+              </Link>
+            )}
+            {!isPremium && activeServices < 3 && (
               <Link href="/dashboard/vendor/subscription">
                 <Button className="bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-md">
                   <Sparkles className="w-4 h-4 mr-1.5" />
@@ -96,6 +105,31 @@ export default function VendorOverviewPage() {
             )}
           </div>
         </div>
+
+        {/* Limit Warning Banner if 3/3 reached */}
+        {!isPremium && !loading && activeServices >= 3 && (
+          <div className="p-5 rounded-3xl bg-amber-50 border-2 border-amber-300 text-amber-950 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm animate-in fade-in duration-200">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-600">
+                <Sparkles className="w-6 h-6 fill-amber-400" />
+              </div>
+              <div>
+                <h4 className="font-bold text-sm text-amber-950">
+                  Free Starter Limit Reached (3 of 3 Active Services)
+                </h4>
+                <p className="text-xs text-amber-800 mt-0.5 max-w-xl">
+                  You are currently using all 3 service slots allowed on the Free Plan. Upgrade to WedPlan Premium for $49/year to publish unlimited services, get verified, and receive priority placement.
+                </p>
+              </div>
+            </div>
+            <Link href="/dashboard/vendor/subscription" className="shrink-0 w-full sm:w-auto">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold text-xs shadow-md shadow-rose-500/10 px-6 py-2.5">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5 fill-current" />
+                Upgrade to Premium ($49/yr)
+              </Button>
+            </Link>
+          </div>
+        )}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">

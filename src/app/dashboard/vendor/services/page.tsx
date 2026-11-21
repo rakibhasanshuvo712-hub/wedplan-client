@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import { RoleGuard } from '@/components/common/RoleGuard';
 import { Service } from '@/types';
 import { api } from '@/lib/api';
@@ -21,12 +23,19 @@ import {
   CheckCircle2,
   Clock,
   XCircle,
+  Sparkles,
 } from 'lucide-react';
 
 export default function MyServicesPage() {
+  const router = useRouter();
+  const { user } = useAuth();
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionId, setActionId] = useState<string | null>(null);
+
+  const isPremium = user?.subscriptionPlan === 'premium';
+  const activeCount = services.filter((s) => s.isActive !== false && s.status !== 'rejected').length;
+  const isLimitReached = !isPremium && activeCount >= 3;
 
   const fetchMyServices = async () => {
     try {
@@ -45,6 +54,16 @@ export default function MyServicesPage() {
   }, []);
 
   const handleToggleActive = async (service: Service) => {
+    if (!isPremium && !service.isActive && activeCount >= 3) {
+      toast.error('Free plan limit reached (maximum 3 active services). Please upgrade to Premium to activate more services.', {
+        action: {
+          label: 'Upgrade to Premium',
+          onClick: () => router.push('/dashboard/vendor/subscription'),
+        },
+      });
+      return;
+    }
+
     setActionId(service._id);
     try {
       const res = await api.put(`/services/${service._id}`, {
@@ -88,13 +107,56 @@ export default function MyServicesPage() {
               Manage your published listings, toggle active visibility, and monitor admin approval.
             </p>
           </div>
-          <Link href="/dashboard/vendor/add-service">
-            <Button variant="primary" size="sm">
-              <PlusCircle className="w-4 h-4 mr-1.5" />
-              Add New Service
-            </Button>
-          </Link>
+          {isLimitReached ? (
+            <Link href="/dashboard/vendor/subscription">
+              <Button className="bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold text-xs shadow-md shadow-rose-500/15" size="sm">
+                <Sparkles className="w-4 h-4 mr-1.5 fill-current" />
+                Upgrade to Add More
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/dashboard/vendor/add-service">
+              <Button variant="primary" size="sm">
+                <PlusCircle className="w-4 h-4 mr-1.5" />
+                Add New Service
+              </Button>
+            </Link>
+          )}
         </div>
+
+        {/* Free Plan Limit Usage Indicator */}
+        {!isPremium && !loading && (
+          <div className={`p-4 rounded-2xl border text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+            activeCount >= 3
+              ? 'bg-amber-50 border-amber-200 text-amber-950'
+              : 'bg-rose-50/60 border-rose-200/60 text-gray-800'
+          }`}>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+              <div>
+                <span className="font-bold">Free Plan Limit:</span>{' '}
+                <span>
+                  <strong>{activeCount} of 3</strong> active services published.
+                  {activeCount >= 3
+                    ? ' You have reached the maximum allowed active services on the Free Plan.'
+                    : ` You can publish ${3 - activeCount} more service${3 - activeCount > 1 ? 's' : ''} on this plan.`}
+                </span>
+              </div>
+            </div>
+            {activeCount >= 3 ? (
+              <Link href="/dashboard/vendor/subscription">
+                <Button size="sm" className="bg-gradient-to-r from-amber-600 to-rose-600 text-white font-bold text-xs shrink-0 shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 mr-1 fill-current" />
+                  Upgrade to Premium ($49/yr)
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/dashboard/vendor/subscription" className="text-amber-800 hover:text-amber-950 font-semibold underline text-xs">
+                Unlock Unlimited with Premium
+              </Link>
+            )}
+          </div>
+        )}
 
         {loading ? (
           <div className="space-y-4">
