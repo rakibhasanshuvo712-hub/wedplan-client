@@ -25,17 +25,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       default:
-        'bg-rose-600 text-white hover:bg-rose-700 shadow-sm hover:shadow-md focus:ring-rose-500',
+        'bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:from-rose-700 hover:to-pink-700 shadow-sm hover:shadow-md hover:shadow-rose-500/25 focus:ring-rose-500',
       primary:
-        'bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:from-rose-700 hover:to-pink-700 shadow-md hover:shadow-lg focus:ring-rose-500',
+        'bg-gradient-to-r from-rose-600 via-fuchsia-600 to-pink-600 text-white hover:from-rose-700 hover:via-fuchsia-700 hover:to-pink-700 shadow-md shadow-rose-500/25 hover:shadow-lg hover:shadow-fuchsia-500/30 focus:ring-rose-500',
       outline:
-        'border border-rose-200 bg-white text-rose-950 hover:bg-rose-50 hover:border-rose-300 focus:ring-rose-400',
+        'border border-rose-200 bg-white text-rose-950 hover:bg-gradient-to-r hover:from-rose-50 hover:to-fuchsia-50 hover:border-fuchsia-300 focus:ring-fuchsia-400',
       secondary:
-        'bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 focus:ring-rose-400',
+        'bg-gradient-to-r from-rose-50 to-fuchsia-50 text-rose-700 hover:from-rose-100 hover:to-fuchsia-100 hover:text-fuchsia-800 focus:ring-fuchsia-400',
       ghost:
-        'text-gray-700 hover:bg-rose-50 hover:text-rose-600 focus:ring-rose-400',
+        'text-slate-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-fuchsia-50 hover:text-fuchsia-700 focus:ring-fuchsia-400',
       danger:
-        'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm',
+        'bg-gradient-to-r from-red-600 to-rose-600 text-white hover:from-red-700 hover:to-rose-700 focus:ring-red-500 shadow-sm shadow-red-500/20',
     };
 
     const sizes = {

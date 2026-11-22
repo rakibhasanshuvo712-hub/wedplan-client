@@ -12,12 +12,12 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variants = {
-    default: 'bg-rose-100 text-rose-800 border-rose-200',
-    success: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-    warning: 'bg-amber-100 text-amber-800 border-amber-200',
-    danger: 'bg-red-100 text-red-800 border-red-200',
-    purple: 'bg-purple-100 text-purple-800 border-purple-200',
-    outline: 'border border-gray-300 text-gray-700 bg-white',
+    default: 'bg-gradient-to-r from-rose-100 to-pink-100 text-rose-800 border-rose-200',
+    success: 'bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 border-emerald-200',
+    warning: 'bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 border-amber-200',
+    danger: 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border-red-200',
+    purple: 'bg-gradient-to-r from-violet-100 to-fuchsia-100 text-purple-800 border-purple-200',
+    outline: 'border border-rose-200 text-rose-700 bg-gradient-to-r from-white to-rose-50/50',
   };
 
   return (

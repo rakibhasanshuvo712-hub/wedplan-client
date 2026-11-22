@@ -70,34 +70,47 @@ export default function ManageUsersPage() {
 
   return (
     <RoleGuard allowedRoles={['admin']}>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-950">
-            Manage Registered Users
-          </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Search couples and vendors, inspect roles, and restrict platform access for compromised accounts.
-          </p>
+      <div className="relative space-y-6">
+        {/* Gradient Page Header */}
+        <div className="relative overflow-hidden rounded-3xl border border-rose-100 bg-gradient-to-br from-rose-50 via-fuchsia-50 to-violet-50 p-5 sm:p-6 shadow-[0_18px_45px_-20px_rgba(190,24,93,0.45)]">
+          <div className="aurora-orb absolute -top-16 -right-12 h-56 w-56 bg-fuchsia-300/40" />
+          <div className="aurora-orb aurora-orb--slow absolute -bottom-24 left-1/4 h-48 w-48 bg-amber-300/30" />
+          <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-rose-600 via-fuchsia-600 to-violet-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-fuchsia-500/30">
+                <ShieldCheck className="h-3.5 w-3.5" /> Admin Control
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
+                Manage Registered Users
+              </h1>
+              <p className="text-xs sm:text-sm text-rose-900/60 mt-1">
+                Search couples and vendors, inspect roles, and restrict platform access for compromised accounts.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="bg-white rounded-3xl p-5 border border-gray-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="glass-card rounded-3xl p-5 border border-white/70 shadow-[0_12px_35px_-18px_rgba(217,70,239,0.5)] flex flex-col md:flex-row items-center justify-between gap-4">
           <form onSubmit={handleSearchSubmit} className="flex-1 w-full max-w-md">
             <Input
               placeholder="Search user by name or email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              icon={<Search className="w-4 h-4 text-gray-400" />}
+              icon={<Search className="w-4 h-4 text-fuchsia-400" />}
+              className="bg-white/90 border-fuchsia-200 shadow-sm shadow-fuchsia-100 focus:border-fuchsia-400 focus:ring-fuchsia-400/30"
             />
           </form>
 
           <div className="flex items-center gap-2 w-full md:w-auto">
-            <Filter className="w-4 h-4 text-gray-400" />
-            <span className="text-xs text-gray-500 font-medium">Filter Role:</span>
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-md shadow-violet-400/30">
+              <Filter className="w-4 h-4" />
+            </div>
+            <span className="text-xs text-violet-700 font-semibold">Filter Role:</span>
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="text-xs font-semibold text-gray-700 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 focus:outline-none"
+              className="text-xs font-semibold text-violet-900 bg-white/90 border border-violet-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400/30 focus:border-violet-400 shadow-sm"
             >
               <option value="all">All Roles</option>
               <option value="customer">Customers</option>
@@ -108,11 +121,11 @@ export default function ManageUsersPage() {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-3xl border border-gray-200 shadow-xs overflow-hidden">
+        <div className="glass-card rounded-3xl border border-white/70 shadow-[0_18px_50px_-24px_rgba(190,24,93,0.35)] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-gray-100 bg-gray-50/70 text-gray-500 uppercase tracking-wider font-semibold">
+                <tr className="border-b border-rose-100 bg-gradient-to-r from-rose-50/80 via-fuchsia-50/70 to-violet-50/80 text-rose-900/70 uppercase tracking-wider font-semibold">
                   <th className="p-4 pl-6">User / Business</th>
                   <th className="p-4">Email</th>
                   <th className="p-4">Role</th>
@@ -122,7 +135,7 @@ export default function ManageUsersPage() {
                   <th className="p-4 pr-6 text-right">Moderation</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-gray-700">
+              <tbody className="divide-y divide-rose-50 text-gray-700">
                 {loading ? (
                   <tr>
                     <td colSpan={7} className="p-8 text-center">
@@ -135,13 +148,24 @@ export default function ManageUsersPage() {
                   </tr>
                 ) : users.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="p-12 text-center text-gray-500">
-                      No registered users found matching the filter.
+                    <td colSpan={7} className="p-12 text-center">
+                      <div className="mx-auto flex max-w-sm flex-col items-center gap-2">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100 text-fuchsia-500 shadow-inner">
+                          <Search className="h-6 w-6" />
+                        </div>
+                        <p className="text-sm font-serif font-bold text-gradient-rose">No users found</p>
+                        <p className="text-xs text-gray-500">
+                          No registered users found matching the filter.
+                        </p>
+                      </div>
                     </td>
                   </tr>
                 ) : (
                   users.map((u) => (
-                    <tr key={u._id} className="hover:bg-rose-50/20 transition-colors">
+                    <tr
+                      key={u._id}
+                      className="hover:bg-gradient-to-r hover:from-rose-50/60 hover:via-fuchsia-50/40 hover:to-violet-50/50 transition-colors"
+                    >
                       <td className="p-4 pl-6">
                         <div className="flex items-center gap-3">
                           {u.image ? (
@@ -151,14 +175,14 @@ export default function ManageUsersPage() {
                               className="w-8 h-8 rounded-full object-cover border border-rose-200"
                             />
                           ) : (
-                            <div className="w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-rose-500 to-fuchsia-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-fuchsia-300/50">
                               {u.name.charAt(0).toUpperCase()}
                             </div>
                           )}
                           <div>
                             <p className="font-semibold text-gray-900">{u.name}</p>
                             {u.businessName && (
-                              <p className="text-[10px] text-gray-500 font-medium">
+                              <p className="text-[10px] text-violet-500 font-medium">
                                 {u.businessName}
                               </p>
                             )}
@@ -167,7 +191,15 @@ export default function ManageUsersPage() {
                       </td>
                       <td className="p-4 text-gray-600 font-mono text-[11px]">{u.email}</td>
                       <td className="p-4">
-                        <span className="px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] bg-gray-100 text-gray-700">
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] ring-1 ${
+                            u.role === 'admin'
+                              ? 'bg-violet-100 text-violet-700 ring-violet-200'
+                              : u.role === 'vendor'
+                              ? 'bg-amber-100 text-amber-800 ring-amber-200'
+                              : 'bg-sky-100 text-sky-700 ring-sky-200'
+                          }`}
+                        >
                           {u.role}
                         </span>
                       </td>
@@ -176,7 +208,7 @@ export default function ManageUsersPage() {
                           <span
                             className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
                               u.subscriptionPlan === 'premium'
-                                ? 'bg-amber-100 text-amber-800'
+                                ? 'bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 ring-1 ring-amber-200'
                                 : 'bg-gray-100 text-gray-600'
                             }`}
                           >
@@ -188,11 +220,11 @@ export default function ManageUsersPage() {
                       </td>
                       <td className="p-4">
                         {u.isBlocked ? (
-                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-red-100 text-red-700">
+                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-gradient-to-r from-rose-100 to-red-100 text-red-700 ring-1 ring-red-200">
                             Blocked
                           </span>
                         ) : (
-                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-700">
+                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200">
                             Active
                           </span>
                         )}
@@ -205,7 +237,11 @@ export default function ManageUsersPage() {
                             variant={u.isBlocked ? 'secondary' : 'danger'}
                             isLoading={actionUserId === u._id}
                             onClick={() => handleToggleBlock(u)}
-                            className="text-[11px] h-8"
+                            className={
+                              u.isBlocked
+                                ? 'text-[11px] h-8 border-0 bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md shadow-emerald-500/30 hover:from-emerald-600 hover:to-teal-600'
+                                : 'text-[11px] h-8 border-0 bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-md shadow-red-500/30 hover:from-rose-700 hover:to-red-700'
+                            }
                           >
                             {u.isBlocked ? (
                               <>
@@ -218,7 +254,7 @@ export default function ManageUsersPage() {
                             )}
                           </Button>
                         ) : (
-                          <span className="text-[10px] text-gray-400 italic">Self</span>
+                          <span className="text-[10px] text-violet-400 italic font-semibold">Self</span>
                         )}
                       </td>
                     </tr>

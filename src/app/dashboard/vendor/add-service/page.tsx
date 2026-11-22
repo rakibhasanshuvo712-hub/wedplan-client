@@ -133,38 +133,45 @@ export default function AddServicePage() {
 
   return (
     <RoleGuard allowedRoles={['vendor']}>
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="relative max-w-3xl mx-auto space-y-6">
+        <div className="aurora-orb absolute -top-24 -left-28 w-72 h-72 bg-amber-300/25" />
+        <div className="aurora-orb aurora-orb--slow absolute top-1/3 -right-28 w-72 h-72 bg-fuchsia-300/25" />
         <div>
           <Link
             href="/dashboard/vendor/services"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-rose-600 transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-600 hover:text-fuchsia-700 transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Services
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-950">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-fuchsia-700 bg-gradient-to-r from-fuchsia-100 to-rose-100 border border-fuchsia-200/70 px-3 py-1 rounded-full shadow-sm shadow-fuchsia-500/10 mb-3">
+            <Sparkles className="w-3 h-3 fill-fuchsia-400" /> New Listing
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
             Publish a Wedding Service
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Fill out your service specifications, pricing, and showcase photos. New listings are reviewed by admin.
           </p>
         </div>
 
         {/* Loading state for limits */}
         {isCheckingLimits ? (
-          <Skeleton className="h-16 w-full rounded-2xl" />
+          <Skeleton className="h-16 w-full rounded-2xl ring-1 ring-amber-100/80" />
         ) : isLimitReached ? (
           /* Hard Lock Card When 3/3 Limit Reached */
-          <div className="bg-white rounded-3xl p-8 border-2 border-amber-300 shadow-xl text-center space-y-6 animate-in fade-in duration-200">
-            <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-600 mx-auto flex items-center justify-center">
-              <Lock className="w-8 h-8 text-amber-600" />
+          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-3xl p-8 border-2 border-amber-300/80 shadow-xl shadow-amber-500/15 text-center space-y-6 animate-in fade-in duration-200">
+            <div className="aurora-orb absolute -top-16 -left-16 w-56 h-56 bg-amber-300/30" />
+            <div className="aurora-orb aurora-orb--slow absolute -bottom-20 -right-16 w-56 h-56 bg-rose-300/25" />
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-rose-500 text-white mx-auto flex items-center justify-center shadow-lg shadow-amber-500/30">
+              <Lock className="w-8 h-8" />
             </div>
 
-            <div className="space-y-2">
-              <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
+            <div className="relative z-10 space-y-2">
+              <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-amber-500/25">
                 Free Plan Limit Reached (3 of 3 Active Services)
               </span>
-              <h2 className="text-2xl font-serif font-bold text-gray-950 pt-1">
+              <h2 className="text-2xl font-serif font-bold text-gradient-gold pt-1">
                 Upgrade to Publish Unlimited Wedding Services
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
@@ -172,9 +179,9 @@ export default function AddServicePage() {
               </p>
             </div>
 
-            <div className="p-4 bg-amber-50/70 rounded-2xl border border-amber-200 max-w-md mx-auto text-left text-xs text-amber-900 space-y-2">
-              <p className="font-bold flex items-center gap-1.5 text-amber-950">
-                <Sparkles className="w-4 h-4 text-amber-600 fill-amber-400" />
+            <div className="relative z-10 p-4 bg-gradient-to-br from-white/90 to-amber-50/90 rounded-2xl border border-amber-200/80 max-w-md mx-auto text-left text-xs text-amber-900 space-y-2 shadow-sm shadow-amber-500/10">
+              <p className="font-bold flex items-center gap-1.5 text-gradient-gold">
+                <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400" />
                 WedPlan Premium Vendor ($49 / year):
               </p>
               <ul className="space-y-1.5 text-amber-800 text-[11px] pl-5 list-disc">
@@ -185,7 +192,7 @@ export default function AddServicePage() {
               </ul>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="relative z-10 pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/dashboard/vendor/subscription" className="w-full sm:w-auto">
                 <Button className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold shadow-md shadow-rose-500/20 px-8 py-3 cursor-pointer">
                   <Sparkles className="w-4 h-4 mr-2 fill-current" />
@@ -202,8 +209,10 @@ export default function AddServicePage() {
         ) : (
           /* Active Limits Notice */
           !isPremium && (
-            <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="p-4 bg-gradient-to-r from-amber-50 via-orange-50 to-rose-50 rounded-2xl border border-amber-200/80 text-xs text-amber-900 flex items-start gap-3 shadow-sm shadow-amber-500/10">
+              <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-500/25">
+                <AlertCircle className="w-4 h-4" />
+              </span>
               <div>
                 <p className="font-bold">
                   Free Starter Plan:{' '}
@@ -223,7 +232,7 @@ export default function AddServicePage() {
 
         {/* Form only shown if limit is not reached */}
         {!isLimitReached && !isCheckingLimits && (
-          <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-6 sm:p-8 border border-rose-100 shadow-xs space-y-5">
+          <form onSubmit={handleSubmit} className="relative overflow-hidden bg-gradient-to-br from-white via-rose-50/30 to-violet-50/30 rounded-3xl p-6 sm:p-8 border border-rose-200/70 shadow-lg shadow-rose-500/10 space-y-5">
             <Input
               label="Service Title / Package Name *"
               required
@@ -240,7 +249,7 @@ export default function AddServicePage() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 font-medium"
+                  className="w-full px-4 py-2.5 text-sm bg-white border border-rose-200/80 hover:border-rose-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 font-medium"
                 >
                   {CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
@@ -280,13 +289,15 @@ export default function AddServicePage() {
                 placeholder="Detail what is included in this wedding package: hours of coverage, equipment, guest limits, setup & breakdown..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-4 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
+                className="w-full px-4 py-2.5 text-sm bg-white border border-rose-200/80 hover:border-rose-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
               />
             </div>
 
-            <div className="space-y-3 pt-2 border-t border-gray-100">
-              <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-wider flex items-center gap-1.5">
-                <ImagePlus className="w-4 h-4 text-rose-500" /> Service Images (ImgBB / Web URL)
+            <div className="space-y-3 pt-2 border-t border-rose-200/70">
+              <h4 className="text-xs font-bold text-gradient-rose uppercase tracking-wider flex items-center gap-2">
+                <span className="w-6 h-6 rounded-lg bg-gradient-to-br from-rose-500 to-fuchsia-600 text-white flex items-center justify-center shadow-sm shadow-rose-500/25">
+                  <ImagePlus className="w-3.5 h-3.5" />
+                </span> Service Images (ImgBB / Web URL)
               </h4>
 
               <Input
@@ -305,18 +316,18 @@ export default function AddServicePage() {
                   placeholder="https://i.ibb.co/photo2.jpg&#10;https://i.ibb.co/photo3.jpg"
                   value={additionalImages}
                   onChange={(e) => setAdditionalImages(e.target.value)}
-                  className="w-full px-4 py-2 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-mono"
+                  className="w-full px-4 py-2 text-xs bg-white border border-rose-200/80 hover:border-rose-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 font-mono"
                 />
               </div>
             </div>
 
-            <div className="pt-4 flex items-center justify-end gap-3 border-t border-gray-100">
+            <div className="pt-4 flex items-center justify-end gap-3 border-t border-rose-200/70">
               <Link href="/dashboard/vendor/services">
-                <Button type="button" variant="outline">
+                <Button type="button" variant="outline" className="border-rose-200 text-rose-700 hover:bg-rose-50 font-semibold">
                   Cancel
                 </Button>
               </Link>
-              <Button type="submit" variant="primary" isLoading={isSubmitting}>
+              <Button type="submit" variant="primary" className="bg-gradient-to-r from-rose-600 via-fuchsia-600 to-pink-600 hover:from-rose-700 hover:via-fuchsia-700 hover:to-pink-700 text-white font-bold shadow-lg shadow-rose-500/25" isLoading={isSubmitting}>
                 Submit for Approval
               </Button>
             </div>

@@ -36,12 +36,14 @@ export default function VendorSubscriptionPage() {
 
   return (
     <RoleGuard allowedRoles={['vendor']}>
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200/50">
+      <div className="relative max-w-4xl mx-auto space-y-8">
+        <div className="aurora-orb absolute -top-24 -left-24 w-72 h-72 bg-amber-300/25" />
+        <div className="aurora-orb aurora-orb--slow absolute -top-16 -right-24 w-72 h-72 bg-fuchsia-300/25" />
+        <div className="relative text-center max-w-2xl mx-auto">
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-rose-700 bg-gradient-to-r from-rose-100 via-fuchsia-100 to-violet-100 px-3 py-1 rounded-full border border-rose-200/70 shadow-sm shadow-rose-500/10">
             Vendor Growth Plans
           </span>
-          <h1 className="text-3xl font-serif font-bold text-gray-950 mt-3">
+          <h1 className="text-3xl font-serif font-bold text-gradient-rose mt-3">
             Choose Your WedPlan Plan
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-2">
@@ -52,49 +54,57 @@ export default function VendorSubscriptionPage() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Free Tier */}
-          <div className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xs flex flex-col justify-between">
-            <div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-3xl p-8 border border-amber-200/80 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
+            <div className="aurora-orb absolute -top-16 -left-16 w-56 h-56 bg-amber-300/25" />
+            <div className="aurora-orb aurora-orb--slow absolute -bottom-20 -right-16 w-48 h-48 bg-orange-300/20" />
+            <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-1 rounded-full shadow-md shadow-amber-500/25">
                   Free Starter
                 </span>
                 {!isPremium && (
-                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  <span className="text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 px-2.5 py-0.5 rounded-full border border-emerald-300/70 shadow-sm shadow-emerald-500/25">
                     Current Plan
                   </span>
                 )}
               </div>
 
               <div className="mb-6">
-                <span className="text-4xl font-serif font-bold text-gray-900">$0</span>
-                <span className="text-xs text-gray-500 ml-1">/ month</span>
+                <span className="text-4xl font-serif font-bold text-gradient-gold">$0</span>
+                <span className="text-xs text-amber-800/80 ml-1">/ month</span>
               </div>
 
-              <ul className="space-y-3.5 text-xs text-gray-600">
+              <ul className="space-y-3.5 text-xs text-amber-900/80">
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Maximum <strong>3 Active Services</strong></span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Standard Vendor Dashboard</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Customer Booking Request Management</span>
                 </li>
-                <li className="flex items-center gap-2.5 text-gray-400">
-                  <span className="w-4 h-4 text-center">—</span>
+                <li className="flex items-center gap-2.5 text-amber-700/60">
+                  <span className="w-5 h-5 rounded-full bg-amber-200/70 text-amber-700/70 flex items-center justify-center shrink-0 text-center">—</span>
                   <span>No Verified Premium Badge</span>
                 </li>
-                <li className="flex items-center gap-2.5 text-gray-400">
-                  <span className="w-4 h-4 text-center">—</span>
+                <li className="flex items-center gap-2.5 text-amber-700/60">
+                  <span className="w-5 h-5 rounded-full bg-amber-200/70 text-amber-700/70 flex items-center justify-center shrink-0 text-center">—</span>
                   <span>Standard Directory Ranking</span>
                 </li>
               </ul>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-gray-100">
+            <div className="relative z-10 mt-8 pt-6 border-t border-amber-200/70">
               <Button variant="outline" className="w-full" disabled={!isPremium}>
                 {!isPremium ? 'Active Plan' : 'Free Tier'}
               </Button>
@@ -102,55 +112,67 @@ export default function VendorSubscriptionPage() {
           </div>
 
           {/* Premium Tier */}
-          <div className="relative bg-gradient-to-b from-rose-950 via-gray-950 to-black text-white rounded-3xl p-8 shadow-2xl border-2 border-rose-500/40 flex flex-col justify-between overflow-hidden">
-            <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950 text-[10px] font-extrabold uppercase px-4 py-1 rounded-bl-xl shadow-md">
+          <div className="relative bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950 text-white rounded-3xl p-8 shadow-2xl shadow-fuchsia-500/20 border-2 border-fuchsia-500/50 flex flex-col justify-between overflow-hidden">
+            <div className="aurora-orb absolute -top-16 -right-16 w-56 h-56 bg-fuchsia-500/25" />
+            <div className="aurora-orb aurora-orb--slow absolute -bottom-20 -left-12 w-56 h-56 bg-violet-500/25" />
+            <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950 text-[10px] font-extrabold uppercase px-4 py-1 rounded-bl-xl shadow-md z-20">
               Most Popular
             </div>
 
-            <div>
+            <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-rose-300 bg-rose-900/60 px-3 py-1 rounded-full border border-rose-700/60">
+                <span className="text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-1 rounded-full border border-fuchsia-400/50 shadow-md shadow-fuchsia-500/25">
                   Premium Vendor
                 </span>
                 {isPremium && (
-                  <span className="text-xs font-bold text-amber-400 bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-400/40">
+                  <span className="text-xs font-bold text-amber-950 bg-gradient-to-r from-amber-300 to-amber-400 px-2.5 py-0.5 rounded-full border border-amber-200/70 shadow-sm">
                     Active Subscription
                   </span>
                 )}
               </div>
 
               <div className="mb-6">
-                <span className="text-4xl font-serif font-bold text-white">$49</span>
+                <span className="text-4xl font-serif font-bold bg-gradient-to-r from-amber-200 via-white to-rose-200 bg-clip-text text-transparent drop-shadow-sm">$49</span>
                 <span className="text-xs text-rose-200 ml-1">/ year (one-time test checkout)</span>
               </div>
 
-              <ul className="space-y-3.5 text-xs text-gray-200">
+              <ul className="space-y-3.5 text-xs text-rose-100/90">
                 <li className="flex items-center gap-2.5 font-semibold text-white">
-                  <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/30">
+                    <Sparkles className="w-3 h-3" />
+                  </span>
                   <span><strong>Unlimited Active Wedding Services</strong></span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-fuchsia-500 to-rose-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-fuchsia-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Gold <strong>Verified Premium Badge</strong></span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-violet-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Priority Placement on Homepage & Browse Directory</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-sky-500 to-violet-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-sky-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Advanced Analytics & Booking Inquiries</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-emerald-500/30">
+                    <Check className="w-3 h-3" />
+                  </span>
                   <span>Verified Stripe Checkout & Webhook Security</span>
                 </li>
               </ul>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-gray-800">
+            <div className="relative z-10 mt-8 pt-6 border-t border-fuchsia-500/30">
               {isPremium ? (
-                <div className="p-3 bg-white/10 rounded-xl text-center text-xs font-semibold text-amber-300 flex items-center justify-center gap-1.5">
+                <div className="p-3 bg-gradient-to-r from-amber-400/15 via-rose-400/15 to-fuchsia-400/15 border border-amber-300/30 rounded-xl text-center text-xs font-semibold text-amber-200 flex items-center justify-center gap-1.5">
                   <ShieldCheck className="w-4 h-4" /> You are an active Premium Vendor!
                 </div>
               ) : (

@@ -87,36 +87,45 @@ function SignUpContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/70 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
+    <div className="relative overflow-hidden min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-br from-rose-50 via-fuchsia-50/60 to-orange-50/70">
+      {/* Decorative wedding-glow orbs */}
+      <div className="aurora-orb absolute -top-28 -right-24 w-96 h-96 bg-fuchsia-300/45" aria-hidden="true" />
+      <div className="aurora-orb aurora-orb--slow absolute top-1/3 -left-32 w-[420px] h-[420px] bg-violet-300/35" aria-hidden="true" />
+      <div className="aurora-orb absolute -bottom-28 right-1/4 w-80 h-80 bg-amber-300/45" aria-hidden="true" />
+
+      <div className="relative z-10 sm:mx-auto sm:w-full sm:max-w-md text-center">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full bg-white/70 border border-amber-200/70 text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700 shadow-sm shadow-amber-500/10 backdrop-blur-md">
+          <Sparkles className="w-3 h-3 text-rose-500 fill-rose-300" /> Let&apos;s Plan Together
+        </div>
         <Link href="/" className="inline-flex items-center gap-2 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-rose-500/20 group-hover:scale-105 transition-transform">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 via-fuchsia-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-fuchsia-500/30 ring-4 ring-white/60 group-hover:scale-105 transition-transform">
             <Heart className="w-6 h-6 fill-white" />
           </div>
         </Link>
-        <h2 className="mt-4 text-3xl font-serif font-bold text-gray-950">
+        <h2 className="mt-4 text-3xl font-serif font-bold text-gradient-aurora shimmer-text">
           Create Your WedPlan Account
         </h2>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-slate-600">
           Join couples &amp; vendors on the nation&apos;s premier wedding platform
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-rose-500/5 sm:rounded-3xl sm:px-10 border border-rose-100 space-y-6">
+      <div className="relative z-10 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="glass-card relative py-8 px-6 shadow-2xl shadow-fuchsia-500/10 sm:rounded-3xl sm:px-10 border border-white/80 ring-1 ring-rose-100/70 space-y-6">
+          <div className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-rose-500 via-fuchsia-500 to-amber-400" aria-hidden="true" />
           {/* Role selection */}
           <div>
-            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2 text-center">
+            <label className="block text-xs font-bold text-fuchsia-700 uppercase tracking-[0.18em] mb-2 text-center">
               Register as
             </label>
-            <div className="grid grid-cols-2 gap-3 p-1.5 bg-rose-50/60 rounded-2xl border border-rose-100">
+            <div className="grid grid-cols-2 gap-3 p-1.5 bg-gradient-to-r from-rose-50/90 via-fuchsia-50/70 to-amber-50/90 rounded-2xl border border-white/80 shadow-inner shadow-rose-500/5">
               <button
                 type="button"
                 onClick={() => setRole('customer')}
                 className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   role === 'customer'
-                    ? 'bg-white text-rose-600 shadow-sm border border-rose-200'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-500 text-white shadow-md shadow-rose-500/30 border border-transparent ring-2 ring-white/70'
+                    : 'text-rose-500 hover:text-rose-700 hover:bg-white/70'
                 }`}
               >
                 <User className="w-3.5 h-3.5" /> Couple / Customer
@@ -126,8 +135,8 @@ function SignUpContent() {
                 onClick={() => setRole('vendor')}
                 className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   role === 'vendor'
-                    ? 'bg-white text-rose-600 shadow-sm border border-rose-200'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white shadow-md shadow-amber-500/30 border border-transparent ring-2 ring-white/70'
+                    : 'text-amber-600 hover:text-amber-800 hover:bg-white/70'
                 }`}
               >
                 <Building2 className="w-3.5 h-3.5" /> Wedding Vendor
@@ -136,7 +145,7 @@ function SignUpContent() {
           </div>
 
           {role === 'vendor' && (
-            <div className="p-3.5 bg-amber-50/90 rounded-2xl border border-amber-200/90 text-amber-900 text-xs">
+            <div className="p-3.5 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-2xl border border-amber-200/80 text-amber-900 text-xs shadow-sm shadow-amber-500/10">
               <div className="font-semibold flex items-center gap-1.5 mb-1">
                 <Sparkles className="w-4 h-4 text-amber-600 fill-amber-300" />
                 Wedding Vendor Registration
@@ -157,6 +166,7 @@ function SignUpContent() {
               placeholder="Eleanor Vance"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="hover:border-rose-300 focus:border-fuchsia-500 focus:ring-fuchsia-400/30"
             />
             <Input
               type="email"
@@ -166,7 +176,8 @@ function SignUpContent() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              icon={<Mail className="w-4 h-4" />}
+              icon={<Mail className="w-4 h-4 text-rose-500" />}
+              className="hover:border-rose-300 focus:border-fuchsia-500 focus:ring-fuchsia-400/30"
             />
             <Input
               type="password"
@@ -176,7 +187,8 @@ function SignUpContent() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              icon={<Lock className="w-4 h-4" />}
+              icon={<Lock className="w-4 h-4 text-fuchsia-500" />}
+              className="hover:border-rose-300 focus:border-fuchsia-500 focus:ring-fuchsia-400/30"
             />
 
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
@@ -187,7 +199,7 @@ function SignUpContent() {
               ].map((rule) => (
                 <span
                   key={rule.label}
-                  className={`flex items-center gap-1 ${rule.ok ? 'text-emerald-600' : 'text-gray-400'}`}
+                  className={`flex items-center gap-1 rounded-full px-2 py-0.5 font-medium ${rule.ok ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-50 text-slate-400'}`}
                 >
                   <Check className="w-3 h-3" /> {rule.label}
                 </span>
@@ -200,10 +212,11 @@ function SignUpContent() {
                 placeholder="Grand Elegance Studios"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
+                className="hover:border-amber-300 focus:border-amber-500 focus:ring-amber-400/30"
               />
             )}
 
-            <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
+            <Button type="submit" variant="primary" className="w-full shadow-lg shadow-rose-500/25 hover:shadow-xl hover:shadow-fuchsia-500/25" isLoading={isLoading}>
               Create Account
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
@@ -211,20 +224,20 @@ function SignUpContent() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+              <div className="w-full border-t border-rose-100" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="bg-white px-3 text-gray-400">or register with Google</span>
+              <span className="bg-white px-3 text-rose-400 font-medium">or register with Google</span>
             </div>
           </div>
 
-          <GoogleAuthButton role={role} text="signup" className="py-3 shadow-sm hover:shadow-md" />
+          <GoogleAuthButton role={role} text="signup" className="py-3 shadow-sm hover:shadow-md hover:shadow-rose-500/10" />
 
-          <div className="text-xs text-gray-500 pt-2 border-t border-gray-100 text-center">
+          <div className="text-xs text-slate-500 pt-3 border-t border-rose-100 text-center">
             Already have an account?{' '}
             <Link
               href="/signin"
-              className="font-semibold text-rose-600 hover:text-rose-700 transition-colors underline"
+              className="font-semibold text-rose-600 hover:text-fuchsia-600 transition-colors underline decoration-rose-300 underline-offset-2"
             >
               Sign in
             </Link>
