@@ -47,7 +47,7 @@ export function RoleGuard({
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3">
-        <div className="w-10 h-10 border-4 border-rose-200 border-t-rose-600 rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-red-200 border-t-red-600 rounded-full animate-spin"></div>
         <p className="text-sm font-medium text-gray-500">Verifying security credentials...</p>
       </div>
     );

@@ -11,11 +11,11 @@ const reviews = [
     rating: 5,
     text: 'Finding our wedding venue and photographer on WedPlan was the easiest part of our entire wedding. We locked our date and the vendor response came in within 3 hours!',
     image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-    card: 'from-rose-50/90 via-pink-50/50 to-white',
-    bar: 'from-rose-500 via-pink-500 to-fuchsia-500',
-    quote: 'text-rose-200',
-    ring: 'from-rose-400 to-pink-500',
-    roleText: 'text-rose-600',
+    card: 'from-red-50/90 via-red-50/50 to-white',
+    bar: 'from-red-500 via-red-500 to-red-500',
+    quote: 'text-red-200',
+    ring: 'from-red-400 to-red-500',
+    roleText: 'text-red-600',
   },
   {
     name: 'Jessica & Marcus Taylor',
@@ -45,12 +45,12 @@ const reviews = [
 
 export function Testimonials() {
   return (
-    <section className="relative py-24 overflow-hidden border-t border-rose-100/60 bg-gradient-to-b from-white via-fuchsia-50/25 to-rose-50/30">
+    <section className="relative py-24 overflow-hidden border-t border-red-100/60 bg-gradient-to-b from-white via-red-50/25 to-red-50/30">
       <div className="aurora-orb absolute left-1/3 bottom-0 w-80 h-80 bg-amber-200/35" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-500 via-rose-500 to-fuchsia-500 px-4 py-1.5 rounded-full shadow-md shadow-amber-500/20">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-amber-500 via-red-500 to-red-500 px-4 py-1.5 rounded-full shadow-md shadow-amber-500/20">
             Real Stories, Real Celebrations
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-950 mt-4">

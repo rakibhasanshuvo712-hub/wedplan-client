@@ -40,20 +40,20 @@ const reasons = [
     title: 'Premium Quality Standards',
     description:
       'Top-tier vendors can achieve Premium verified status with verified reviews, insured contracts, and premium badges.',
-    iconBg: 'from-fuchsia-500 to-purple-600',
-    cardBg: 'from-fuchsia-50/80 to-white',
-    glow: 'bg-fuchsia-300/40',
-    number: 'text-fuchsia-100',
+    iconBg: 'from-red-500 to-purple-600',
+    cardBg: 'from-red-50/80 to-white',
+    glow: 'bg-red-300/40',
+    number: 'text-red-100',
   },
   {
     icon: HeartHandshake,
     title: 'Direct Vendor Collaboration',
     description:
       'Communicate special requests, event themes, and guest counts directly with the professionals who make it happen.',
-    iconBg: 'from-rose-500 to-pink-600',
-    cardBg: 'from-rose-50/80 to-white',
-    glow: 'bg-rose-300/40',
-    number: 'text-rose-100',
+    iconBg: 'from-red-500 to-red-600',
+    cardBg: 'from-red-50/80 to-white',
+    glow: 'bg-red-300/40',
+    number: 'text-red-100',
   },
   {
     icon: Headphones,
@@ -70,7 +70,7 @@ const reasons = [
 export function WhyChooseUs() {
   return (
     <section className="relative py-24 overflow-hidden bg-white">
-      <div className="aurora-orb absolute top-1/4 -left-48 w-96 h-96 bg-rose-200/35" />
+      <div className="aurora-orb absolute top-1/4 -left-48 w-96 h-96 bg-red-200/35" />
       <div className="aurora-orb aurora-orb--slow absolute bottom-0 -right-40 w-96 h-96 bg-violet-200/35" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

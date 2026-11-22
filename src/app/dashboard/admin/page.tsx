@@ -47,11 +47,11 @@ export default function AdminOverviewPage() {
     <RoleGuard allowedRoles={['admin']}>
       <div className="space-y-8">
         {/* Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-rose-950 to-slate-950 rounded-3xl p-8 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="aurora-orb absolute -top-20 right-10 w-72 h-72 bg-fuchsia-500/25" />
+        <div className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-red-950 to-slate-950 rounded-3xl p-8 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="aurora-orb absolute -top-20 right-10 w-72 h-72 bg-red-500/25" />
           <div className="aurora-orb aurora-orb--slow absolute -bottom-24 left-1/3 w-72 h-72 bg-amber-500/20" />
           <div className="relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-rose-300 bg-rose-900/60 px-3 py-1 rounded-full border border-rose-700/60">
+            <span className="text-xs font-semibold uppercase tracking-wider text-red-300 bg-red-900/60 px-3 py-1 rounded-full border border-red-700/60">
               Platform Administration
             </span>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold mt-2">
@@ -64,7 +64,7 @@ export default function AdminOverviewPage() {
 
           <div className="flex items-center gap-3">
             <Link href="/dashboard/admin/services">
-              <Button className="bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-sm">
+              <Button className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm">
                 <FileCheck2 className="w-4 h-4 mr-1.5" />
                 Review Pending Services
               </Button>
@@ -79,10 +79,10 @@ export default function AdminOverviewPage() {
             value={stats?.totalUsers || 0}
             icon={Users}
             iconGradient="from-violet-500 to-purple-600"
-            cardGradient="from-violet-50 to-fuchsia-50/50"
+            cardGradient="from-violet-50 to-red-50/50"
             border="border-violet-200/70"
             text="text-violet-700"
-            bar="from-violet-500 via-purple-500 to-fuchsia-500"
+            bar="from-violet-500 via-purple-500 to-red-500"
             subtext={`${stats?.totalVendors || 0} Vendors • ${stats?.totalCustomers || 0} Couples`}
             loading={loading}
           />
@@ -130,12 +130,12 @@ export default function AdminOverviewPage() {
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-xs">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-serif font-bold text-gray-900 flex items-center gap-2">
-                <UserCheck className="w-4 h-4 text-rose-600" />
+                <UserCheck className="w-4 h-4 text-red-600" />
                 Recent User Registrations
               </h2>
               <Link
                 href="/dashboard/admin/users"
-                className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1"
+                className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1"
               >
                 Manage All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -175,12 +175,12 @@ export default function AdminOverviewPage() {
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-xs">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-serif font-bold text-gray-900 flex items-center gap-2">
-                <FileCheck2 className="w-4 h-4 text-rose-600" />
+                <FileCheck2 className="w-4 h-4 text-red-600" />
                 Recent Service Submissions
               </h2>
               <Link
                 href="/dashboard/admin/services"
-                className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1"
+                className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1"
               >
                 Review All <ArrowRight className="w-3.5 h-3.5" />
               </Link>

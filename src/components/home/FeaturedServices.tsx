@@ -32,13 +32,13 @@ export function FeaturedServices() {
   }, []);
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white via-rose-50/25 to-white">
-      <div className="aurora-orb absolute -left-40 top-10 w-80 h-80 bg-pink-200/35" />
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white via-red-50/25 to-white">
+      <div className="aurora-orb absolute -left-40 top-10 w-80 h-80 bg-red-200/35" />
       <div className="aurora-orb aurora-orb--slow absolute -right-40 bottom-0 w-80 h-80 bg-violet-200/35" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-rose-600 to-fuchsia-500 text-white text-xs font-semibold mb-2 shadow-md shadow-rose-500/20">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-xs font-semibold mb-2 shadow-md shadow-red-500/20">
               <Sparkles className="w-3.5 h-3.5" />
               Handpicked Excellence
             </div>
@@ -75,7 +75,7 @@ export function FeaturedServices() {
             ))}
           </div>
         ) : services.length === 0 ? (
-          <div className="text-center py-16 bg-gradient-to-br from-rose-50 via-fuchsia-50 to-amber-50 rounded-3xl border border-rose-100">
+          <div className="text-center py-16 bg-gradient-to-br from-red-50 via-red-50 to-amber-50 rounded-3xl border border-red-100">
             <p className="text-gray-500">No approved wedding services available yet.</p>
           </div>
         ) : (
@@ -87,18 +87,18 @@ export function FeaturedServices() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group bg-white rounded-3xl border border-rose-100/80 shadow-sm hover:shadow-2xl hover:shadow-rose-500/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
+                className="group bg-white rounded-3xl border border-red-100/80 shadow-sm hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Image Frame */}
-                <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100">
+                <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-red-100 via-red-100 to-amber-100">
                   <img
                     src={service.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'}
                     alt={service.serviceName}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-rose-950/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-red-950/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <Badge variant="default" className="bg-white/95 text-rose-800 shadow-sm backdrop-blur-xs font-semibold">
+                    <Badge variant="default" className="bg-white/95 text-red-800 shadow-sm backdrop-blur-xs font-semibold">
                       {service.category}
                     </Badge>
                   </div>
@@ -116,12 +116,12 @@ export function FeaturedServices() {
                   <div>
                     {/* Location */}
                     <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-2">
-                      <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-red-500 shrink-0" />
                       <span className="truncate">{service.location}</span>
                     </div>
 
                     {/* Service Name */}
-                    <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-rose-600 transition-colors line-clamp-1">
+                    <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-1">
                       {service.serviceName}
                     </h3>
 
@@ -136,10 +136,10 @@ export function FeaturedServices() {
                         <img
                           src={service.vendorId.image}
                           alt={service.vendorId.name}
-                          className="w-7 h-7 rounded-full object-cover border border-rose-200"
+                          className="w-7 h-7 rounded-full object-cover border border-red-200"
                         />
                       ) : (
-                        <div className="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold">
+                        <div className="w-7 h-7 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">
                           <Building2 className="w-3.5 h-3.5" />
                         </div>
                       )}

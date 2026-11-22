@@ -31,7 +31,7 @@ export default function DashboardLayout({
     <React.Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-fuchsia-200 border-t-fuchsia-600 rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-4 border-red-200 border-t-red-600 rounded-full animate-spin"></div>
         </div>
       }
     >
@@ -84,21 +84,21 @@ function DashboardLayoutContent({
 
   // Decorative per-section colour schemes for active navigation items
   const activeNavStyles = [
-    'from-rose-600 to-pink-600 shadow-rose-500/30',
-    'from-fuchsia-600 to-violet-600 shadow-fuchsia-500/30',
+    'from-red-600 to-red-600 shadow-red-500/30',
+    'from-red-600 to-violet-600 shadow-red-500/30',
     'from-amber-500 to-orange-500 shadow-amber-500/30',
-    'from-violet-600 to-fuchsia-600 shadow-violet-500/30',
+    'from-violet-600 to-red-600 shadow-violet-500/30',
     'from-emerald-500 to-teal-600 shadow-emerald-500/30',
-    'from-pink-600 to-rose-600 shadow-pink-500/30',
+    'from-red-600 to-red-600 shadow-red-500/30',
   ];
 
   return (
     <RoleGuard>
-      <div className="min-h-screen bg-gradient-to-br from-rose-50/60 via-white to-violet-50/50 flex flex-col md:flex-row">
+      <div className="min-h-screen bg-gradient-to-br from-red-50/60 via-white to-violet-50/50 flex flex-col md:flex-row">
         {/* Mobile Header Bar for Dashboard */}
-        <div className="md:hidden bg-gradient-to-r from-rose-50 via-pink-50/80 to-violet-50 border-b border-rose-200/70 px-4 py-3 flex items-center justify-between">
+        <div className="md:hidden bg-gradient-to-r from-red-50 via-red-50/80 to-violet-50 border-b border-red-200/70 px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-rose-500 via-fuchsia-600 to-violet-600 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-fuchsia-500/30">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-red-500 via-red-600 to-violet-600 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-red-500/30">
               WP
             </div>
             <span className="font-serif font-bold text-gradient-rose capitalize">
@@ -107,7 +107,7 @@ function DashboardLayoutContent({
           </div>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-xl text-white bg-gradient-to-br from-rose-500 to-fuchsia-600 shadow-md shadow-fuchsia-400/30 hover:from-rose-600 hover:to-violet-600 transition-colors"
+            className="p-2 rounded-xl text-white bg-gradient-to-br from-red-500 to-red-600 shadow-md shadow-red-400/30 hover:from-red-600 hover:to-violet-600 transition-colors"
           >
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -115,28 +115,28 @@ function DashboardLayoutContent({
 
         {/* Dashboard Sidebar */}
         <aside
-          className={`fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-rose-50/70 via-white to-violet-50/60 border-r border-rose-200/60 p-5 flex flex-col justify-between transition-transform duration-200 md:static md:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-red-50/70 via-white to-violet-50/60 border-r border-red-200/60 p-5 flex flex-col justify-between transition-transform duration-200 md:static md:translate-x-0 ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
           <div className="space-y-6">
             {/* User Profile Mini Badge */}
-            <div className="p-4 rounded-2xl bg-gradient-to-br from-rose-100/80 via-pink-50/80 to-fuchsia-100/70 border border-rose-200/70 shadow-sm shadow-rose-200/50 flex items-center gap-3">
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-red-100/80 via-red-50/80 to-red-100/70 border border-red-200/70 shadow-sm shadow-red-200/50 flex items-center gap-3">
               {user.image ? (
                 <img
                   src={user.image}
                   alt={user.name}
-                  className="w-10 h-10 rounded-full object-cover border-2 border-rose-300 shadow-md shadow-rose-300/40 shrink-0"
+                  className="w-10 h-10 rounded-full object-cover border-2 border-red-300 shadow-md shadow-red-300/40 shrink-0"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 via-fuchsia-600 to-violet-600 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-fuchsia-500/30 shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 via-red-600 to-violet-600 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-red-500/30 shrink-0">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
               )}
               <div className="overflow-hidden">
                 <p className="text-xs font-bold text-gray-900 truncate">{user.name}</p>
                 <div className="flex items-center gap-1 mt-0.5">
-                  <span className="text-[10px] uppercase font-bold text-white bg-gradient-to-r from-rose-500 to-pink-500 px-2 py-0.5 rounded-full shadow-sm shadow-rose-400/30">
+                  <span className="text-[10px] uppercase font-bold text-white bg-gradient-to-r from-red-500 to-red-500 px-2 py-0.5 rounded-full shadow-sm shadow-red-400/30">
                     {user.role}
                   </span>
                   {user.role === 'vendor' && user.subscriptionPlan === 'premium' && (
@@ -162,7 +162,7 @@ function DashboardLayoutContent({
                     className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                       isActive
                         ? `bg-gradient-to-r ${activeNavStyles[index % activeNavStyles.length]} text-white shadow-md`
-                        : 'text-gray-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-fuchsia-50 hover:text-fuchsia-700'
+                        : 'text-gray-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-red-50 hover:text-red-700'
                     }`}
                   >
                     <Icon className="w-4 h-4 shrink-0" />
@@ -174,20 +174,20 @@ function DashboardLayoutContent({
           </div>
 
           {/* Bottom Logout */}
-          <div className="pt-4 border-t border-rose-100 space-y-2">
+          <div className="pt-4 border-t border-red-100 space-y-2">
             <p className="px-3.5 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-gradient-gold">
               Support
             </p>
             <Link
               href="/"
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium text-gray-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-amber-50 hover:text-rose-700"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium text-gray-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-amber-50 hover:text-red-700"
             >
-              <Heart className="w-4 h-4 text-rose-500" />
+              <Heart className="w-4 h-4 text-red-500" />
               <span>Back to Public Site</span>
             </Link>
             <button
               onClick={() => logout()}
-              className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-red-50 hover:text-red-600 transition-colors cursor-pointer text-left"
+              className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-red-50 hover:text-red-600 transition-colors cursor-pointer text-left"
             >
               <LogOut className="w-4 h-4 text-red-500" />
               <span>Log Out</span>

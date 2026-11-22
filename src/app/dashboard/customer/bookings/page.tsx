@@ -80,11 +80,11 @@ export default function MyBookingsPage() {
   return (
     <RoleGuard allowedRoles={['customer']}>
       <div className="relative space-y-6">
-        <div className="aurora-orb absolute -top-24 -left-28 w-80 h-80 bg-pink-300/30" />
+        <div className="aurora-orb absolute -top-24 -left-28 w-80 h-80 bg-red-300/30" />
         <div className="aurora-orb aurora-orb--slow absolute top-1/3 -right-28 w-72 h-72 bg-amber-300/25" />
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-rose-700 bg-gradient-to-r from-rose-100 via-pink-100 to-amber-100 border border-rose-200/70 px-3 py-1 rounded-full shadow-sm shadow-rose-500/10 mb-3">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-red-700 bg-gradient-to-r from-red-100 via-red-100 to-amber-100 border border-red-200/70 px-3 py-1 rounded-full shadow-sm shadow-red-500/10 mb-3">
               <Calendar className="w-3 h-3" /> Your Celebrations
             </span>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
@@ -95,7 +95,7 @@ export default function MyBookingsPage() {
             </p>
           </div>
           <Link href="/services">
-            <Button variant="outline" size="sm" className="border-rose-200 text-rose-700 hover:text-white hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-600 hover:border-transparent font-bold transition-all">
+            <Button variant="outline" size="sm" className="border-red-200 text-red-700 hover:text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-red-600 hover:border-transparent font-bold transition-all">
               <Search className="w-3.5 h-3.5 mr-1.5" />
               Browse More Services
             </Button>
@@ -105,14 +105,14 @@ export default function MyBookingsPage() {
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-36 w-full rounded-3xl ring-1 ring-rose-100/70" />
+              <Skeleton key={i} className="h-36 w-full rounded-3xl ring-1 ring-red-100/70" />
             ))}
           </div>
         ) : bookings.length === 0 ? (
-          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-rose-50/70 to-amber-50/70 rounded-3xl border border-rose-200/70 p-8 max-w-md mx-auto shadow-lg shadow-rose-500/10">
-            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-rose-300/30" />
+          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-red-50/70 to-amber-50/70 rounded-3xl border border-red-200/70 p-8 max-w-md mx-auto shadow-lg shadow-red-500/10">
+            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-red-300/30" />
             <div className="aurora-orb aurora-orb--slow absolute -bottom-16 -right-16 w-48 h-48 bg-amber-300/30" />
-            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500 via-pink-500 to-amber-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-pink-500/25">
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 via-red-500 to-amber-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-red-500/25">
               <Calendar className="w-8 h-8" />
             </div>
             <h3 className="relative z-10 text-lg font-serif font-bold text-gradient-rose mb-1">
@@ -122,7 +122,7 @@ export default function MyBookingsPage() {
               You haven't requested any wedding services. Explore venues, photographers, and caterers to begin!
             </p>
             <Link href="/services">
-              <Button className="relative z-10 bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-700 hover:via-pink-700 hover:to-amber-600 text-white font-bold shadow-lg shadow-rose-500/25">Explore Wedding Services</Button>
+              <Button className="relative z-10 bg-gradient-to-r from-red-600 via-red-600 to-amber-500 hover:from-red-700 hover:via-red-700 hover:to-amber-600 text-white font-bold shadow-lg shadow-red-500/25">Explore Wedding Services</Button>
             </Link>
           </div>
         ) : (
@@ -130,20 +130,20 @@ export default function MyBookingsPage() {
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="group relative overflow-hidden bg-white rounded-3xl p-6 border border-rose-100/80 shadow-sm shadow-rose-500/5 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6"
+                className="group relative overflow-hidden bg-white rounded-3xl p-6 border border-red-100/80 shadow-sm shadow-red-500/5 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-500 via-pink-500 to-amber-400" />
-                <div className="aurora-orb absolute -bottom-20 -right-16 w-56 h-56 bg-amber-200/20 group-hover:bg-rose-200/30 transition-colors" />
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-500 via-red-500 to-amber-400" />
+                <div className="aurora-orb absolute -bottom-20 -right-16 w-56 h-56 bg-amber-200/20 group-hover:bg-red-200/30 transition-colors" />
                 {/* Service Details */}
                 <div className="relative z-10 flex items-start sm:items-center gap-4">
                   <img
                     src={booking.serviceId?.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80'}
                     alt={booking.serviceId?.serviceName}
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-rose-200/80 shadow-md shadow-rose-500/10 shrink-0 bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-red-200/80 shadow-md shadow-red-500/10 shrink-0 bg-gradient-to-br from-red-100 via-red-100 to-amber-100"
                   />
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-rose-500 to-pink-600 px-2 py-0.5 rounded-full shadow-sm shadow-rose-500/20">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-red-500 to-red-600 px-2 py-0.5 rounded-full shadow-sm shadow-red-500/20">
                         {booking.serviceId?.category}
                       </span>
                       <span className="text-xs text-gray-400">
@@ -151,30 +151,30 @@ export default function MyBookingsPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-bold text-base sm:text-lg text-gray-950 group-hover:text-rose-700 transition-colors">
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-gray-950 group-hover:text-red-700 transition-colors">
                       {booking.serviceId?.serviceName}
                     </h3>
 
                     <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
-                      <span className="flex items-center gap-1 font-semibold text-rose-600">
-                        <Calendar className="w-3.5 h-3.5 text-rose-500" />
+                      <span className="flex items-center gap-1 font-semibold text-red-600">
+                        <Calendar className="w-3.5 h-3.5 text-red-500" />
                         Event Date: {formatDate(booking.eventDate)}
                       </span>
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-fuchsia-400" />
+                        <MapPin className="w-3.5 h-3.5 text-red-400" />
                         {booking.eventLocation}
                       </span>
                     </div>
 
                     <p className="text-xs text-gray-500 flex items-center gap-1">
                       <Building2 className="w-3.5 h-3.5 text-amber-500" />
-                      Vendor: <strong className="text-rose-700">{booking.vendorId?.businessName || booking.vendorId?.name}</strong>
+                      Vendor: <strong className="text-red-700">{booking.vendorId?.businessName || booking.vendorId?.name}</strong>
                     </p>
                   </div>
                 </div>
 
                 {/* Status and Action */}
-                <div className="relative z-10 flex md:flex-col items-center md:items-end justify-between pt-4 md:pt-0 border-t md:border-t-0 border-rose-100/70 gap-3 shrink-0">
+                <div className="relative z-10 flex md:flex-col items-center md:items-end justify-between pt-4 md:pt-0 border-t md:border-t-0 border-red-100/70 gap-3 shrink-0">
                   <div className="text-right">
                     <span
                       className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border shadow-sm ${
@@ -183,7 +183,7 @@ export default function MyBookingsPage() {
                           : booking.status === 'pending'
                           ? 'bg-amber-100 text-amber-800 border-amber-200/80 shadow-amber-500/10'
                           : booking.status === 'rejected'
-                          ? 'bg-rose-100 text-rose-800 border-rose-200/80 shadow-rose-500/10'
+                          ? 'bg-red-100 text-red-800 border-red-200/80 shadow-red-500/10'
                           : 'bg-gray-100 text-gray-600 border-gray-200'
                       }`}
                     >
@@ -220,7 +220,7 @@ export default function MyBookingsPage() {
                     <Button
                       variant="danger"
                       size="sm"
-                      className="bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:via-pink-600 hover:to-rose-700 text-white font-bold text-xs border border-transparent shadow-md shadow-rose-500/25"
+                      className="bg-gradient-to-r from-red-500 via-red-500 to-red-600 hover:from-red-600 hover:via-red-600 hover:to-red-700 text-white font-bold text-xs border border-transparent shadow-md shadow-red-500/25"
                       isLoading={cancellingId === booking._id}
                       onClick={() => handleCancelBooking(booking._id)}
                     >

@@ -59,11 +59,11 @@ export default function VendorOverviewPage() {
     <RoleGuard allowedRoles={['vendor']}>
       <div className="space-y-8">
         {/* Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-rose-700 via-fuchsia-600 to-pink-600 rounded-3xl p-8 text-white shadow-xl shadow-rose-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="relative overflow-hidden bg-gradient-to-r from-red-700 via-red-600 to-red-600 rounded-3xl p-8 text-white shadow-xl shadow-red-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="aurora-orb absolute -top-20 right-16 w-64 h-64 bg-amber-300/25" />
           <div className="relative">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-rose-100 bg-white/20 px-3 py-1 rounded-full">
+              <span className="text-xs font-semibold uppercase tracking-wider text-red-100 bg-white/20 px-3 py-1 rounded-full">
                 Vendor Studio
               </span>
               {isPremium && (
@@ -75,7 +75,7 @@ export default function VendorOverviewPage() {
             <h1 className="text-2xl sm:text-3xl font-serif font-bold mt-2">
               {user?.businessName || user?.name}
             </h1>
-            <p className="text-xs sm:text-sm text-rose-100 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-red-100 mt-1 max-w-xl">
               Manage your wedding service portfolio, review customer event dates, and track your business growth.
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function VendorOverviewPage() {
               </Link>
             ) : (
               <Link href="/dashboard/vendor/add-service">
-                <Button variant="outline" className="bg-white text-rose-700 hover:bg-rose-50 border-none shadow-sm font-semibold">
+                <Button variant="outline" className="bg-white text-red-700 hover:bg-red-50 border-none shadow-sm font-semibold">
                   <PlusCircle className="w-4 h-4 mr-1.5" />
                   Add New Service
                 </Button>
@@ -124,7 +124,7 @@ export default function VendorOverviewPage() {
               </div>
             </div>
             <Link href="/dashboard/vendor/subscription" className="shrink-0 w-full sm:w-auto">
-              <Button className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold text-xs shadow-md shadow-rose-500/10 px-6 py-2.5">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white font-bold text-xs shadow-md shadow-red-500/10 px-6 py-2.5">
                 <Sparkles className="w-3.5 h-3.5 mr-1.5 fill-current" />
                 Upgrade to Premium ($49/yr)
               </Button>
@@ -138,11 +138,11 @@ export default function VendorOverviewPage() {
             label="Total Listings"
             value={totalServices}
             icon={Building2}
-            iconGradient="from-rose-500 to-pink-600"
-            cardGradient="from-rose-50 to-pink-50/50"
-            border="border-rose-200/70"
-            text="text-rose-700"
-            bar="from-rose-500 via-pink-500 to-fuchsia-500"
+            iconGradient="from-red-500 to-red-600"
+            cardGradient="from-red-50 to-red-50/50"
+            border="border-red-200/70"
+            text="text-red-700"
+            bar="from-red-500 via-red-500 to-red-500"
             loading={loading}
           />
           <StatCard
@@ -182,11 +182,11 @@ export default function VendorOverviewPage() {
             label="Plan Status"
             value={isPremium ? '★ Premium' : 'Free Tier'}
             icon={CreditCard}
-            iconGradient="from-violet-500 to-fuchsia-600"
-            cardGradient="from-violet-50 to-fuchsia-50/50"
+            iconGradient="from-violet-500 to-red-600"
+            cardGradient="from-violet-50 to-red-50/50"
             border="border-violet-200/70"
             text="text-violet-700"
-            bar="from-violet-500 via-fuchsia-500 to-pink-500"
+            bar="from-violet-500 via-red-500 to-red-500"
             subtext={isPremium ? 'Unlimited services' : 'Max 3 active services'}
             loading={loading}
           />
@@ -208,14 +208,14 @@ export default function VendorOverviewPage() {
         )}
 
         {/* Quick Sections: Recent Booking Requests */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-rose-100 shadow-xs">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-red-100 shadow-xs">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-serif font-bold text-gray-900">
               Recent Booking Inquiries
             </h2>
             <Link
               href="/dashboard/vendor/bookings"
-              className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1"
+              className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1"
             >
               Manage Inquiries <ArrowRight className="w-3.5 h-3.5" />
             </Link>

@@ -42,7 +42,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col text-gray-900">
         <AuthProvider>
           <ToastProvider />
-          <Suspense fallback={<div className="h-16 sm:h-20 bg-white border-b border-rose-100" />}>
+          <Suspense fallback={<div className="h-16 sm:h-20 bg-white border-b border-red-100" />}>
             <Navbar />
           </Suspense>
           <main className="flex-1">{children}</main>

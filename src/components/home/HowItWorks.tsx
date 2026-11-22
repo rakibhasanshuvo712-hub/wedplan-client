@@ -24,10 +24,10 @@ const steps = [
     title: 'Request Booking',
     description:
       'Select your wedding date, submit event details, and send a booking request. Our anti-double-booking system locks your date.',
-    bar: 'from-rose-500 via-pink-500 to-fuchsia-500',
-    iconBg: 'from-rose-500 to-pink-600',
+    bar: 'from-red-500 via-red-500 to-red-500',
+    iconBg: 'from-red-500 to-red-600',
     numberText: 'text-gradient-rose',
-    tint: 'from-rose-50/70 via-white to-pink-50/50',
+    tint: 'from-red-50/70 via-white to-red-50/50',
   },
   {
     number: '03',
@@ -44,13 +44,13 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-rose-50/40 via-white to-amber-50/40">
+    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-red-50/40 via-white to-amber-50/40">
       <div className="aurora-orb absolute -left-40 top-1/3 w-80 h-80 bg-violet-200/40" />
       <div className="aurora-orb aurora-orb--slow absolute -right-40 top-0 w-80 h-80 bg-emerald-200/35" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 via-fuchsia-500 to-rose-500 px-4 py-1.5 rounded-full shadow-md shadow-violet-500/20">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 via-red-500 to-red-500 px-4 py-1.5 rounded-full shadow-md shadow-violet-500/20">
             Simple 3-Step Process
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-950 mt-4">
@@ -96,7 +96,7 @@ export function HowItWorks() {
 
         <div className="mt-14 text-center">
           <Link href="/services">
-            <Button size="lg" variant="primary" className="px-8 shadow-lg shadow-rose-500/25">
+            <Button size="lg" variant="primary" className="px-8 shadow-lg shadow-red-500/25">
               Start Planning Now
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>

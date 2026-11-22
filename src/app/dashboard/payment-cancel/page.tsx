@@ -12,7 +12,7 @@ export default function PaymentCancelPage() {
       <div className="absolute bottom-14 right-10 w-56 h-56 aurora-orb bg-violet-200/60 aurora-orb--slow" />
 
       <div className="relative max-w-md w-full bg-gradient-to-b from-white via-white to-amber-50/40 rounded-3xl p-8 border border-amber-200/70 shadow-xl shadow-amber-200/40 text-center space-y-6 overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400" />
+        <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-amber-400 via-orange-400 to-red-400" />
 
         <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white mx-auto flex items-center justify-center shadow-lg shadow-amber-400/40 ring-4 ring-amber-100">
           <AlertCircle className="w-10 h-10" />
@@ -28,7 +28,7 @@ export default function PaymentCancelPage() {
         </div>
 
         {/* Gentle reassurance status card */}
-        <div className="rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50 to-rose-50 border border-amber-100 p-4 shadow-sm shadow-amber-100/60">
+        <div className="rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 border border-amber-100 p-4 shadow-sm shadow-amber-100/60">
           <p className="text-xs font-bold text-amber-900 flex items-center justify-center gap-1.5">
             <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
             No payment was processed

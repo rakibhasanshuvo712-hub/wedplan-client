@@ -37,7 +37,7 @@ export default function BrowseServicesPage() {
     <React.Suspense
       fallback={
         <div className="min-h-[70vh] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-rose-200 border-t-rose-600 rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-4 border-red-200 border-t-red-600 rounded-full animate-spin"></div>
         </div>
       }
     >
@@ -120,7 +120,7 @@ function BrowseServicesContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-600 via-fuchsia-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-rose-500/20">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-red-600 via-red-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-red-500/20">
             Marketplace Directory
           </span>
           <h1 className="text-3xl sm:text-5xl font-serif font-bold text-gray-950 mt-3">
@@ -132,7 +132,7 @@ function BrowseServicesContent() {
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="bg-white rounded-3xl p-6 border border-rose-100 shadow-md shadow-rose-500/5 mb-10 space-y-5">
+        <div className="bg-white rounded-3xl p-6 border border-red-100 shadow-md shadow-red-500/5 mb-10 space-y-5">
           <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-12 gap-3.5">
             <div className="md:col-span-5">
               <Input
@@ -182,8 +182,8 @@ function BrowseServicesContent() {
                   }}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all shrink-0 cursor-pointer ${
                     category === cat
-                      ? 'bg-gradient-to-r from-rose-600 to-fuchsia-600 text-white shadow-md shadow-rose-500/20 font-semibold'
-                      : 'bg-white border border-rose-100 text-gray-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-fuchsia-50 hover:text-rose-700'
+                      ? 'bg-gradient-to-r from-red-600 to-red-600 text-white shadow-md shadow-red-500/20 font-semibold'
+                      : 'bg-white border border-red-100 text-gray-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-red-50 hover:text-red-700'
                   }`}
                 >
                   {cat}
@@ -201,7 +201,7 @@ function BrowseServicesContent() {
                   setSortBy(e.target.value);
                   setPage(1);
                 }}
-                className="text-xs font-semibold text-gray-700 bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-500/20"
+                className="text-xs font-semibold text-gray-700 bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-red-500/20"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -219,7 +219,7 @@ function BrowseServicesContent() {
             <strong className="text-gray-900">{totalCount}</strong> services
           </span>
           {!isAuthenticated && (
-            <span className="text-rose-600 font-medium bg-rose-50 px-2.5 py-1 rounded-full border border-rose-100">
+            <span className="text-red-600 font-medium bg-red-50 px-2.5 py-1 rounded-full border border-red-100">
               Note: Sign in required to view details & book
             </span>
           )}
@@ -243,8 +243,8 @@ function BrowseServicesContent() {
           </div>
         ) : services.length === 0 ? (
           /* Empty State */
-          <div className="text-center py-20 bg-gradient-to-br from-rose-50 via-fuchsia-50 to-amber-50 rounded-3xl border border-rose-100 p-8 shadow-sm max-w-lg mx-auto">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-fuchsia-500 text-white mx-auto flex items-center justify-center mb-4 shadow-md shadow-rose-500/25">
+          <div className="text-center py-20 bg-gradient-to-br from-red-50 via-red-50 to-amber-50 rounded-3xl border border-red-100 p-8 shadow-sm max-w-lg mx-auto">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-red-500 text-white mx-auto flex items-center justify-center mb-4 shadow-md shadow-red-500/25">
               <Search className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">
@@ -262,17 +262,17 @@ function BrowseServicesContent() {
             {services.map((service) => (
               <div
                 key={service._id}
-                className="group bg-white rounded-3xl border border-rose-100/80 shadow-sm hover:shadow-2xl hover:shadow-rose-500/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
+                className="group bg-white rounded-3xl border border-red-100/80 shadow-sm hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Image */}
-                <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100">
+                <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-red-100 via-red-100 to-amber-100">
                   <img
                     src={service.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'}
                     alt={service.serviceName}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
-                    <Badge variant="default" className="bg-white/95 text-rose-900 shadow-sm backdrop-blur-xs font-semibold">
+                    <Badge variant="default" className="bg-white/95 text-red-900 shadow-sm backdrop-blur-xs font-semibold">
                       {service.category}
                     </Badge>
                   </div>
@@ -289,11 +289,11 @@ function BrowseServicesContent() {
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-2">
-                      <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-red-500 shrink-0" />
                       <span className="truncate">{service.location}</span>
                     </div>
 
-                    <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-rose-600 transition-colors line-clamp-1">
+                    <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-1">
                       {service.serviceName}
                     </h3>
 
@@ -307,10 +307,10 @@ function BrowseServicesContent() {
                         <img
                           src={service.vendorId.image}
                           alt={service.vendorId.name}
-                          className="w-7 h-7 rounded-full object-cover border border-rose-200"
+                          className="w-7 h-7 rounded-full object-cover border border-red-200"
                         />
                       ) : (
-                        <div className="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-bold">
+                        <div className="w-7 h-7 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">
                           <Building2 className="w-3.5 h-3.5" />
                         </div>
                       )}
@@ -334,7 +334,7 @@ function BrowseServicesContent() {
 
                     <button
                       onClick={() => handleCardClick(service._id)}
-                      className="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-600 text-white hover:bg-rose-700 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xl text-xs font-semibold bg-red-600 text-white hover:bg-red-700 shadow-sm hover:shadow-md transition-all cursor-pointer"
                     >
                       View Details
                     </button>

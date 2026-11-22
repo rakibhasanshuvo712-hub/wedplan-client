@@ -42,21 +42,21 @@ export default function CustomerOverviewPage() {
     <RoleGuard allowedRoles={['customer']}>
       <div className="space-y-8">
         {/* Welcome Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 rounded-3xl p-8 text-white shadow-lg shadow-rose-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="relative overflow-hidden bg-gradient-to-r from-red-600 via-red-600 to-red-600 rounded-3xl p-8 text-white shadow-lg shadow-red-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="aurora-orb absolute -top-20 right-12 w-64 h-64 bg-amber-300/25" />
           <div className="relative">
-            <span className="text-xs font-semibold uppercase tracking-wider text-rose-100 bg-white/20 px-3 py-1 rounded-full">
+            <span className="text-xs font-semibold uppercase tracking-wider text-red-100 bg-white/20 px-3 py-1 rounded-full">
               Customer Portal
             </span>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold mt-2">
               Hello, {user?.name}!
             </h1>
-            <p className="text-xs sm:text-sm text-rose-100 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-red-100 mt-1 max-w-xl">
               Track your wedding service inquiries, communicate with verified vendors, and manage your celebration timeline.
             </p>
           </div>
           <Link href="/services">
-            <Button variant="outline" className="bg-white text-rose-700 hover:bg-rose-50 border-none shrink-0 shadow-sm">
+            <Button variant="outline" className="bg-white text-red-700 hover:bg-red-50 border-none shrink-0 shadow-sm">
               <Search className="w-4 h-4 mr-1.5" />
               Explore More Services
             </Button>
@@ -69,11 +69,11 @@ export default function CustomerOverviewPage() {
             label="Total Inquiries"
             value={total}
             icon={CalendarCheck}
-            iconGradient="from-rose-500 to-pink-600"
-            cardGradient="from-rose-50 to-pink-50/50"
-            border="border-rose-200/70"
-            text="text-rose-700"
-            bar="from-rose-500 via-pink-500 to-fuchsia-500"
+            iconGradient="from-red-500 to-red-600"
+            cardGradient="from-red-50 to-red-50/50"
+            border="border-red-200/70"
+            text="text-red-700"
+            bar="from-red-500 via-red-500 to-red-500"
             loading={loading}
           />
           <StatCard
@@ -102,24 +102,24 @@ export default function CustomerOverviewPage() {
             label="Rejected / Cancelled"
             value={rejected}
             icon={XCircle}
-            iconGradient="from-rose-500 to-red-600"
-            cardGradient="from-red-50 to-rose-50/50"
+            iconGradient="from-red-500 to-red-600"
+            cardGradient="from-red-50 to-red-50/50"
             border="border-red-200/70"
             text="text-red-700"
-            bar="from-red-500 via-rose-500 to-pink-500"
+            bar="from-red-500 via-red-500 to-red-500"
             loading={loading}
           />
         </div>
 
         {/* Recent Activity / Next Step */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-rose-100 shadow-xs">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-red-100 shadow-xs">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-serif font-bold text-gray-900">
               Recent Booking Inquiries
             </h2>
             <Link
               href="/dashboard/customer/bookings"
-              className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1"
+              className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1"
             >
               View All <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -146,7 +146,7 @@ export default function CustomerOverviewPage() {
                     <img
                       src={b.serviceId?.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=150&q=80'}
                       alt={b.serviceId?.serviceName}
-                      className="w-14 h-14 rounded-2xl object-cover border border-rose-100 shrink-0"
+                      className="w-14 h-14 rounded-2xl object-cover border border-red-100 shrink-0"
                     />
                     <div>
                       <h4 className="font-semibold text-sm text-gray-900">{b.serviceId?.serviceName}</h4>

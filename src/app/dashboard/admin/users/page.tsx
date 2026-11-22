@@ -72,18 +72,18 @@ export default function ManageUsersPage() {
     <RoleGuard allowedRoles={['admin']}>
       <div className="relative space-y-6">
         {/* Gradient Page Header */}
-        <div className="relative overflow-hidden rounded-3xl border border-rose-100 bg-gradient-to-br from-rose-50 via-fuchsia-50 to-violet-50 p-5 sm:p-6 shadow-[0_18px_45px_-20px_rgba(190,24,93,0.45)]">
-          <div className="aurora-orb absolute -top-16 -right-12 h-56 w-56 bg-fuchsia-300/40" />
+        <div className="relative overflow-hidden rounded-3xl border border-red-100 bg-gradient-to-br from-red-50 via-red-50 to-violet-50 p-5 sm:p-6 shadow-[0_18px_45px_-20px_rgba(190,24,93,0.45)]">
+          <div className="aurora-orb absolute -top-16 -right-12 h-56 w-56 bg-red-300/40" />
           <div className="aurora-orb aurora-orb--slow absolute -bottom-24 left-1/4 h-48 w-48 bg-amber-300/30" />
           <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-rose-600 via-fuchsia-600 to-violet-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-fuchsia-500/30">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-red-600 via-red-600 to-violet-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-red-500/30">
                 <ShieldCheck className="h-3.5 w-3.5" /> Admin Control
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
                 Manage Registered Users
               </h1>
-              <p className="text-xs sm:text-sm text-rose-900/60 mt-1">
+              <p className="text-xs sm:text-sm text-red-900/60 mt-1">
                 Search couples and vendors, inspect roles, and restrict platform access for compromised accounts.
               </p>
             </div>
@@ -97,13 +97,13 @@ export default function ManageUsersPage() {
               placeholder="Search user by name or email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              icon={<Search className="w-4 h-4 text-fuchsia-400" />}
-              className="bg-white/90 border-fuchsia-200 shadow-sm shadow-fuchsia-100 focus:border-fuchsia-400 focus:ring-fuchsia-400/30"
+              icon={<Search className="w-4 h-4 text-red-400" />}
+              className="bg-white/90 border-red-200 shadow-sm shadow-red-100 focus:border-red-400 focus:ring-red-400/30"
             />
           </form>
 
           <div className="flex items-center gap-2 w-full md:w-auto">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-md shadow-violet-400/30">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-red-500 text-white shadow-md shadow-violet-400/30">
               <Filter className="w-4 h-4" />
             </div>
             <span className="text-xs text-violet-700 font-semibold">Filter Role:</span>
@@ -125,7 +125,7 @@ export default function ManageUsersPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-rose-100 bg-gradient-to-r from-rose-50/80 via-fuchsia-50/70 to-violet-50/80 text-rose-900/70 uppercase tracking-wider font-semibold">
+                <tr className="border-b border-red-100 bg-gradient-to-r from-red-50/80 via-red-50/70 to-violet-50/80 text-red-900/70 uppercase tracking-wider font-semibold">
                   <th className="p-4 pl-6">User / Business</th>
                   <th className="p-4">Email</th>
                   <th className="p-4">Role</th>
@@ -135,7 +135,7 @@ export default function ManageUsersPage() {
                   <th className="p-4 pr-6 text-right">Moderation</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-rose-50 text-gray-700">
+              <tbody className="divide-y divide-red-50 text-gray-700">
                 {loading ? (
                   <tr>
                     <td colSpan={7} className="p-8 text-center">
@@ -150,7 +150,7 @@ export default function ManageUsersPage() {
                   <tr>
                     <td colSpan={7} className="p-12 text-center">
                       <div className="mx-auto flex max-w-sm flex-col items-center gap-2">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100 text-fuchsia-500 shadow-inner">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-red-100 via-red-100 to-amber-100 text-red-500 shadow-inner">
                           <Search className="h-6 w-6" />
                         </div>
                         <p className="text-sm font-serif font-bold text-gradient-rose">No users found</p>
@@ -164,7 +164,7 @@ export default function ManageUsersPage() {
                   users.map((u) => (
                     <tr
                       key={u._id}
-                      className="hover:bg-gradient-to-r hover:from-rose-50/60 hover:via-fuchsia-50/40 hover:to-violet-50/50 transition-colors"
+                      className="hover:bg-gradient-to-r hover:from-red-50/60 hover:via-red-50/40 hover:to-violet-50/50 transition-colors"
                     >
                       <td className="p-4 pl-6">
                         <div className="flex items-center gap-3">
@@ -172,10 +172,10 @@ export default function ManageUsersPage() {
                             <img
                               src={u.image}
                               alt=""
-                              className="w-8 h-8 rounded-full object-cover border border-rose-200"
+                              className="w-8 h-8 rounded-full object-cover border border-red-200"
                             />
                           ) : (
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-rose-500 to-fuchsia-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-fuchsia-300/50">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-red-300/50">
                               {u.name.charAt(0).toUpperCase()}
                             </div>
                           )}
@@ -220,7 +220,7 @@ export default function ManageUsersPage() {
                       </td>
                       <td className="p-4">
                         {u.isBlocked ? (
-                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-gradient-to-r from-rose-100 to-red-100 text-red-700 ring-1 ring-red-200">
+                          <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-gradient-to-r from-red-100 to-red-100 text-red-700 ring-1 ring-red-200">
                             Blocked
                           </span>
                         ) : (
@@ -240,7 +240,7 @@ export default function ManageUsersPage() {
                             className={
                               u.isBlocked
                                 ? 'text-[11px] h-8 border-0 bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md shadow-emerald-500/30 hover:from-emerald-600 hover:to-teal-600'
-                                : 'text-[11px] h-8 border-0 bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-md shadow-red-500/30 hover:from-rose-700 hover:to-red-700'
+                                : 'text-[11px] h-8 border-0 bg-gradient-to-r from-red-600 to-red-600 text-white shadow-md shadow-red-500/30 hover:from-red-700 hover:to-red-700'
                             }
                           >
                             {u.isBlocked ? (

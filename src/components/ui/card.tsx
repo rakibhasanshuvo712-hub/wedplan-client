@@ -9,7 +9,7 @@ export function Card({
   return (
     <div
       className={cn(
-        'bg-gradient-to-br from-white via-white to-rose-50/40 rounded-2xl border border-rose-100/80 shadow-sm hover:shadow-lg hover:shadow-rose-500/10 transition-all duration-200 overflow-hidden',
+        'bg-gradient-to-br from-white via-white to-red-50/40 rounded-2xl border border-red-100/80 shadow-sm hover:shadow-lg hover:shadow-red-500/10 transition-all duration-200 overflow-hidden',
         className
       )}
       {...props}

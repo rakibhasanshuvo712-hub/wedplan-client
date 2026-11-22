@@ -56,10 +56,10 @@ export default function VendorBookingRequestsPage() {
   return (
     <RoleGuard allowedRoles={['vendor']}>
       <div className="relative space-y-6">
-        <div className="aurora-orb absolute -top-24 -left-28 w-80 h-80 bg-rose-300/30" />
+        <div className="aurora-orb absolute -top-24 -left-28 w-80 h-80 bg-red-300/30" />
         <div className="aurora-orb aurora-orb--slow absolute top-1/4 -right-28 w-72 h-72 bg-sky-300/25" />
         <div>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-rose-700 bg-gradient-to-r from-rose-100 via-fuchsia-100 to-violet-100 border border-rose-200/70 px-3 py-1 rounded-full shadow-sm shadow-rose-500/10 mb-3">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-red-700 bg-gradient-to-r from-red-100 via-red-100 to-violet-100 border border-red-200/70 px-3 py-1 rounded-full shadow-sm shadow-red-500/10 mb-3">
             <Calendar className="w-3 h-3" /> Inquiry Inbox
           </span>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
@@ -73,14 +73,14 @@ export default function VendorBookingRequestsPage() {
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-40 w-full rounded-3xl ring-1 ring-rose-100/70" />
+              <Skeleton key={i} className="h-40 w-full rounded-3xl ring-1 ring-red-100/70" />
             ))}
           </div>
         ) : bookings.length === 0 ? (
-          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-rose-50/70 to-sky-50/70 rounded-3xl border border-rose-200/70 p-8 max-w-md mx-auto shadow-lg shadow-rose-500/10">
-            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-rose-300/30" />
+          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-red-50/70 to-sky-50/70 rounded-3xl border border-red-200/70 p-8 max-w-md mx-auto shadow-lg shadow-red-500/10">
+            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-red-300/30" />
             <div className="aurora-orb aurora-orb--slow absolute -bottom-16 -right-16 w-48 h-48 bg-sky-300/30" />
-            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500 via-fuchsia-500 to-sky-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-fuchsia-500/25">
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 via-red-500 to-sky-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-red-500/25">
               <Clock className="w-8 h-8" />
             </div>
             <h3 className="relative z-10 text-lg font-serif font-bold text-gradient-rose mb-1">
@@ -95,14 +95,14 @@ export default function VendorBookingRequestsPage() {
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="group relative overflow-hidden bg-white rounded-3xl p-6 sm:p-7 border border-rose-100/80 shadow-sm shadow-rose-500/5 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+                className="group relative overflow-hidden bg-white rounded-3xl p-6 sm:p-7 border border-red-100/80 shadow-sm shadow-red-500/5 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-500 via-fuchsia-500 to-sky-400" />
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-500 via-red-500 to-sky-400" />
                 <div className="aurora-orb absolute -bottom-20 -right-16 w-56 h-56 bg-violet-200/20 group-hover:bg-sky-200/30 transition-colors" />
                 {/* Details */}
                 <div className="relative z-10 space-y-3 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-rose-500 to-fuchsia-600 px-2.5 py-0.5 rounded-full shadow-sm shadow-rose-500/20">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-red-500 to-red-600 px-2.5 py-0.5 rounded-full shadow-sm shadow-red-500/20">
                       {booking.serviceId?.serviceName}
                     </span>
                     <span className="text-xs text-gray-400">
@@ -116,10 +116,10 @@ export default function VendorBookingRequestsPage() {
                       <img
                         src={booking.customerId.image}
                         alt=""
-                        className="w-10 h-10 rounded-full object-cover border-2 border-rose-200/80 shadow-sm shadow-rose-500/15"
+                        className="w-10 h-10 rounded-full object-cover border-2 border-red-200/80 shadow-sm shadow-red-500/15"
                       />
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 via-fuchsia-500 to-violet-500 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-fuchsia-500/20">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-400 via-red-500 to-violet-500 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-red-500/20">
                         <User className="w-5 h-5" />
                       </div>
                     )}
@@ -128,26 +128,26 @@ export default function VendorBookingRequestsPage() {
                         {booking.customerId?.name}
                       </h4>
                       <p className="text-xs text-gray-500 flex items-center gap-1">
-                        <Mail className="w-3 h-3 text-fuchsia-400" />
+                        <Mail className="w-3 h-3 text-red-400" />
                         {booking.customerId?.email}
                       </p>
                     </div>
                   </div>
 
                   {/* Event Specifics */}
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600 bg-gradient-to-r from-rose-50/80 via-fuchsia-50/60 to-violet-50/60 p-3 rounded-2xl border border-rose-100/80">
-                    <span className="flex items-center gap-1.5 font-semibold text-rose-700">
-                      <Calendar className="w-4 h-4 text-rose-600" />
+                  <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600 bg-gradient-to-r from-red-50/80 via-red-50/60 to-violet-50/60 p-3 rounded-2xl border border-red-100/80">
+                    <span className="flex items-center gap-1.5 font-semibold text-red-700">
+                      <Calendar className="w-4 h-4 text-red-600" />
                       Event Date: {formatDate(booking.eventDate)}
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4 text-fuchsia-500" />
+                      <MapPin className="w-4 h-4 text-red-500" />
                       Location: {booking.eventLocation}
                     </span>
                   </div>
 
                   {booking.message && (
-                    <div className="text-xs text-gray-600 flex items-start gap-2 bg-gradient-to-r from-amber-50/60 to-rose-50/40 p-3 rounded-2xl border border-amber-100/70">
+                    <div className="text-xs text-gray-600 flex items-start gap-2 bg-gradient-to-r from-amber-50/60 to-red-50/40 p-3 rounded-2xl border border-amber-100/70">
                       <MessageSquare className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                       <p className="italic leading-relaxed">"{booking.message}"</p>
                     </div>
@@ -155,7 +155,7 @@ export default function VendorBookingRequestsPage() {
                 </div>
 
                 {/* Status & Actions */}
-                <div className="relative z-10 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-rose-100/70 gap-3 shrink-0">
+                <div className="relative z-10 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-red-100/70 gap-3 shrink-0">
                   <span
                     className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border shadow-sm ${
                       booking.status === 'accepted'
@@ -163,7 +163,7 @@ export default function VendorBookingRequestsPage() {
                         : booking.status === 'pending'
                         ? 'bg-amber-100 text-amber-800 border-amber-200/80 shadow-amber-500/10'
                         : booking.status === 'rejected'
-                        ? 'bg-rose-100 text-rose-800 border-rose-200/80 shadow-rose-500/10'
+                        ? 'bg-red-100 text-red-800 border-red-200/80 shadow-red-500/10'
                         : 'bg-gray-100 text-gray-600 border-gray-200'
                     }`}
                   >
@@ -187,7 +187,7 @@ export default function VendorBookingRequestsPage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-rose-300 text-rose-700 hover:text-white hover:bg-gradient-to-r hover:from-rose-500 hover:to-pink-600 hover:border-transparent font-bold transition-all"
+                        className="border-red-300 text-red-700 hover:text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-red-600 hover:border-transparent font-bold transition-all"
                         isLoading={processingId === booking._id}
                         onClick={() => handleRespond(booking._id, 'reject')}
                       >

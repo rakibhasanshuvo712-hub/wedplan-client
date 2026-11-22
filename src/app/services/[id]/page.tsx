@@ -29,7 +29,7 @@ export default function ServiceDetailsPage() {
     <React.Suspense
       fallback={
         <div className="min-h-[70vh] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-rose-200 border-t-rose-600 rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-4 border-red-200 border-t-red-600 rounded-full animate-spin"></div>
         </div>
       }
     >
@@ -153,8 +153,8 @@ function ServiceDetailsContent() {
   if (error || !service) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4">
-        <div className="text-center max-w-md bg-white p-8 rounded-3xl border border-rose-100 shadow-sm">
-          <AlertCircle className="w-12 h-12 text-rose-500 mx-auto mb-4" />
+        <div className="text-center max-w-md bg-white p-8 rounded-3xl border border-red-100 shadow-sm">
+          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">
             Service Unavailable
           </h2>
@@ -178,7 +178,7 @@ function ServiceDetailsContent() {
         <div className="mb-6">
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-rose-600 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-red-600 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Directory
@@ -189,14 +189,14 @@ function ServiceDetailsContent() {
           {/* Left Column: Visual Gallery & Detailed Description */}
           <div className="lg:col-span-7 space-y-8">
             {/* Main Stage Image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-md border border-rose-100 bg-black aspect-[4/3]">
+            <div className="relative rounded-3xl overflow-hidden shadow-md border border-red-100 bg-black aspect-[4/3]">
               <img
                 src={selectedImage || service.images?.[0]}
                 alt={service.serviceName}
                 className="w-full h-full object-cover transition-all duration-300"
               />
               <div className="absolute top-4 left-4">
-                <Badge variant="default" className="bg-white/95 text-rose-900 font-bold shadow-md">
+                <Badge variant="default" className="bg-white/95 text-red-900 font-bold shadow-md">
                   {service.category}
                 </Badge>
               </div>
@@ -211,7 +211,7 @@ function ServiceDetailsContent() {
                     onClick={() => setSelectedImage(img)}
                     className={`relative w-24 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition-all cursor-pointer ${
                       selectedImage === img
-                        ? 'border-rose-600 shadow-md scale-95'
+                        ? 'border-red-600 shadow-md scale-95'
                         : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -222,13 +222,13 @@ function ServiceDetailsContent() {
             )}
 
             {/* Service Overview */}
-            <div className="bg-white rounded-3xl p-8 border border-rose-100/80 shadow-xs space-y-6">
+            <div className="bg-white rounded-3xl p-8 border border-red-100/80 shadow-xs space-y-6">
               <div>
                 <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-950">
                   {service.serviceName}
                 </h1>
                 <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
-                  <MapPin className="w-4 h-4 text-rose-500 shrink-0" />
+                  <MapPin className="w-4 h-4 text-red-500 shrink-0" />
                   <span>{service.location}</span>
                 </div>
               </div>
@@ -245,16 +245,16 @@ function ServiceDetailsContent() {
                 <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
                   Provided by
                 </h4>
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-rose-50/40 border border-rose-100/80">
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-red-50/40 border border-red-100/80">
                   <div className="flex items-center gap-3">
                     {service.vendorId?.image ? (
                       <img
                         src={service.vendorId.image}
                         alt={service.vendorId.name}
-                        className="w-12 h-12 rounded-full object-cover border-2 border-rose-200"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-red-200"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-base">
+                      <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-base">
                         {service.vendorId?.name?.charAt(0) || 'V'}
                       </div>
                     )}
@@ -279,13 +279,13 @@ function ServiceDetailsContent() {
 
           {/* Right Column: Pricing & Booking Request Form */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-3xl p-8 border border-rose-100/80 shadow-md shadow-rose-500/5 sticky top-24">
+            <div className="bg-white rounded-3xl p-8 border border-red-100/80 shadow-md shadow-red-500/5 sticky top-24">
               <div className="pb-6 border-b border-gray-100 flex items-baseline justify-between">
                 <div>
                   <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">
                     Package Price
                   </span>
-                  <p className="text-3xl font-serif font-bold text-rose-600 mt-1">
+                  <p className="text-3xl font-serif font-bold text-red-600 mt-1">
                     {formatCurrency(service.price)}
                   </p>
                 </div>
@@ -333,7 +333,7 @@ function ServiceDetailsContent() {
                 </div>
               ) : isAdmin ? (
                 <div className="py-8 text-center space-y-3">
-                  <ShieldCheck className="w-10 h-10 text-rose-600 mx-auto" />
+                  <ShieldCheck className="w-10 h-10 text-red-600 mx-auto" />
                   <h4 className="font-serif font-bold text-gray-900">Administrator Preview</h4>
                   <p className="text-xs text-gray-500">
                     You are viewing this listing as an Administrator. Customer bookings cannot be submitted from admin accounts.
@@ -386,7 +386,7 @@ function ServiceDetailsContent() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Share estimated guest count, theme, timeline, or questions..."
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 placeholder:text-gray-400"
+                      className="w-full px-4 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 placeholder:text-gray-400"
                     />
                   </div>
 

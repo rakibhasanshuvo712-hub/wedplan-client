@@ -98,12 +98,12 @@ export default function MyServicesPage() {
   return (
     <RoleGuard allowedRoles={['vendor']}>
       <div className="relative space-y-6">
-        <div className="aurora-orb absolute -top-24 -left-32 w-80 h-80 bg-rose-300/30" />
+        <div className="aurora-orb absolute -top-24 -left-32 w-80 h-80 bg-red-300/30" />
         <div className="aurora-orb aurora-orb--slow absolute top-1/3 -right-28 w-72 h-72 bg-violet-300/25" />
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-rose-700 bg-gradient-to-r from-rose-100 to-fuchsia-100 border border-rose-200/70 px-3 py-1 rounded-full shadow-sm shadow-rose-500/10 mb-3">
-              <Sparkles className="w-3 h-3 fill-rose-400" /> Vendor Portfolio
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-red-700 bg-gradient-to-r from-red-100 to-red-100 border border-red-200/70 px-3 py-1 rounded-full shadow-sm shadow-red-500/10 mb-3">
+              <Sparkles className="w-3 h-3 fill-red-400" /> Vendor Portfolio
             </span>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gradient-rose">
               My Wedding Services
@@ -114,14 +114,14 @@ export default function MyServicesPage() {
           </div>
           {isLimitReached ? (
             <Link href="/dashboard/vendor/subscription">
-              <Button className="bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-bold text-xs shadow-md shadow-rose-500/15" size="sm">
+              <Button className="bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white font-bold text-xs shadow-md shadow-red-500/15" size="sm">
                 <Sparkles className="w-4 h-4 mr-1.5 fill-current" />
                 Upgrade to Add More
               </Button>
             </Link>
           ) : (
             <Link href="/dashboard/vendor/add-service">
-              <Button variant="primary" size="sm" className="bg-gradient-to-r from-rose-600 via-fuchsia-600 to-pink-600 hover:from-rose-700 hover:via-fuchsia-700 hover:to-pink-700 text-white font-bold shadow-lg shadow-rose-500/25">
+              <Button variant="primary" size="sm" className="bg-gradient-to-r from-red-600 via-red-600 to-red-600 hover:from-red-700 hover:via-red-700 hover:to-red-700 text-white font-bold shadow-lg shadow-red-500/25">
                 <PlusCircle className="w-4 h-4 mr-1.5" />
                 Add New Service
               </Button>
@@ -133,11 +133,11 @@ export default function MyServicesPage() {
         {!isPremium && !loading && (
           <div className={`relative overflow-hidden p-4 rounded-2xl border text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm ${
             activeCount >= 3
-              ? 'bg-gradient-to-r from-amber-50 via-orange-50 to-rose-50 border-amber-300/80 text-amber-950 shadow-amber-500/10'
-              : 'bg-gradient-to-r from-rose-50/80 via-fuchsia-50/80 to-violet-50/80 border-rose-200/70 text-gray-800 shadow-rose-500/10'
+              ? 'bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 border-amber-300/80 text-amber-950 shadow-amber-500/10'
+              : 'bg-gradient-to-r from-red-50/80 via-red-50/80 to-violet-50/80 border-red-200/70 text-gray-800 shadow-red-500/10'
           }`}>
             <div className="relative z-10 flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-500/25">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-red-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-500/25">
                 <Sparkles className="w-4 h-4 fill-white" />
               </div>
               <div>
@@ -152,7 +152,7 @@ export default function MyServicesPage() {
             </div>
             {activeCount >= 3 ? (
               <Link href="/dashboard/vendor/subscription">
-                <Button size="sm" className="bg-gradient-to-r from-amber-600 to-rose-600 text-white font-bold text-xs shrink-0 shadow-xs">
+                <Button size="sm" className="bg-gradient-to-r from-amber-600 to-red-600 text-white font-bold text-xs shrink-0 shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 mr-1 fill-current" />
                   Upgrade to Premium ($49/yr)
                 </Button>
@@ -168,14 +168,14 @@ export default function MyServicesPage() {
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-32 w-full rounded-3xl ring-1 ring-rose-100/70" />
+              <Skeleton key={i} className="h-32 w-full rounded-3xl ring-1 ring-red-100/70" />
             ))}
           </div>
         ) : services.length === 0 ? (
-          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-rose-50/70 to-fuchsia-50/70 rounded-3xl border border-rose-200/70 p-8 max-w-md mx-auto shadow-lg shadow-rose-500/10">
-            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-rose-300/30" />
+          <div className="relative overflow-hidden text-center py-20 bg-gradient-to-br from-white via-red-50/70 to-red-50/70 rounded-3xl border border-red-200/70 p-8 max-w-md mx-auto shadow-lg shadow-red-500/10">
+            <div className="aurora-orb absolute -top-16 -left-16 w-48 h-48 bg-red-300/30" />
             <div className="aurora-orb aurora-orb--slow absolute -bottom-16 -right-16 w-48 h-48 bg-violet-300/30" />
-            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500 via-fuchsia-500 to-pink-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-fuchsia-500/25">
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 via-red-500 to-red-500 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-red-500/25">
               <Building2 className="w-8 h-8" />
             </div>
             <h3 className="relative z-10 text-lg font-serif font-bold text-gradient-rose mb-1">
@@ -185,7 +185,7 @@ export default function MyServicesPage() {
               Create your first wedding service listing to start receiving booking inquiries from engaged couples.
             </p>
             <Link href="/dashboard/vendor/add-service" className="relative z-10">
-              <Button className="bg-gradient-to-r from-rose-600 via-fuchsia-600 to-pink-600 hover:from-rose-700 hover:via-fuchsia-700 hover:to-pink-700 text-white font-bold shadow-lg shadow-rose-500/25">Create Your First Listing</Button>
+              <Button className="bg-gradient-to-r from-red-600 via-red-600 to-red-600 hover:from-red-700 hover:via-red-700 hover:to-red-700 text-white font-bold shadow-lg shadow-red-500/25">Create Your First Listing</Button>
             </Link>
           </div>
         ) : (
@@ -193,20 +193,20 @@ export default function MyServicesPage() {
             {services.map((service) => (
               <div
                 key={service._id}
-                className="group relative overflow-hidden bg-white rounded-3xl p-6 border border-rose-100/80 shadow-sm shadow-rose-500/5 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6"
+                className="group relative overflow-hidden bg-white rounded-3xl p-6 border border-red-100/80 shadow-sm shadow-red-500/5 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-500 via-fuchsia-500 to-amber-400" />
-                <div className="aurora-orb absolute -bottom-20 -right-16 w-56 h-56 bg-violet-200/20 group-hover:bg-fuchsia-200/30 transition-colors" />
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-500 via-red-500 to-amber-400" />
+                <div className="aurora-orb absolute -bottom-20 -right-16 w-56 h-56 bg-violet-200/20 group-hover:bg-red-200/30 transition-colors" />
                 {/* Details */}
                 <div className="relative z-10 flex items-start sm:items-center gap-4">
                   <img
                     src={service.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80'}
                     alt={service.serviceName}
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-rose-200/80 shadow-md shadow-rose-500/10 shrink-0 bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-red-200/80 shadow-md shadow-red-500/10 shrink-0 bg-gradient-to-br from-red-100 via-red-100 to-amber-100"
                   />
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-rose-500 to-fuchsia-600 px-2 py-0.5 rounded-full shadow-sm shadow-rose-500/20">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r from-red-500 to-red-600 px-2 py-0.5 rounded-full shadow-sm shadow-red-500/20">
                         {service.category}
                       </span>
 
@@ -217,7 +217,7 @@ export default function MyServicesPage() {
                             ? 'bg-emerald-100 text-emerald-800 border-emerald-200/80 shadow-emerald-500/10'
                             : service.status === 'pending'
                             ? 'bg-amber-100 text-amber-800 border-amber-200/80 shadow-amber-500/10'
-                            : 'bg-rose-100 text-rose-800 border-rose-200/80 shadow-rose-500/10'
+                            : 'bg-red-100 text-red-800 border-red-200/80 shadow-red-500/10'
                         }`}
                       >
                         {service.status === 'approved' && <CheckCircle2 className="w-3 h-3" />}
@@ -227,13 +227,13 @@ export default function MyServicesPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-bold text-base sm:text-lg text-gray-950 group-hover:text-rose-700 transition-colors">
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-gray-950 group-hover:text-red-700 transition-colors">
                       {service.serviceName}
                     </h3>
 
                     <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-fuchsia-400" />
+                        <MapPin className="w-3.5 h-3.5 text-red-400" />
                         {service.location}
                       </span>
                       <span>•</span>
@@ -247,7 +247,7 @@ export default function MyServicesPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="relative z-10 flex md:flex-col items-center md:items-end justify-between pt-4 md:pt-0 border-t md:border-t-0 border-rose-100/70 gap-3 shrink-0">
+                <div className="relative z-10 flex md:flex-col items-center md:items-end justify-between pt-4 md:pt-0 border-t md:border-t-0 border-red-100/70 gap-3 shrink-0">
                   <div className="flex items-center gap-2">
                     {/* Active Toggle */}
                     <button
@@ -277,7 +277,7 @@ export default function MyServicesPage() {
                       <Link
                         href={`/services/${service._id}`}
                         target="_blank"
-                        className="p-2 rounded-xl text-gray-500 hover:text-white hover:bg-gradient-to-br hover:from-rose-500 hover:to-fuchsia-600 hover:border-transparent border border-gray-200 shadow-sm transition-all"
+                        className="p-2 rounded-xl text-gray-500 hover:text-white hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:border-transparent border border-gray-200 shadow-sm transition-all"
                         title="View Public Page"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -288,7 +288,7 @@ export default function MyServicesPage() {
                     <button
                       onClick={() => handleDeleteService(service._id)}
                       disabled={actionId === service._id}
-                      className="p-2 rounded-xl text-gray-500 hover:text-white hover:bg-gradient-to-br hover:from-rose-500 hover:to-red-600 hover:border-transparent border border-gray-200 shadow-sm cursor-pointer transition-all"
+                      className="p-2 rounded-xl text-gray-500 hover:text-white hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:border-transparent border border-gray-200 shadow-sm cursor-pointer transition-all"
                       title="Delete Service"
                     >
                       <Trash2 className="w-4 h-4" />

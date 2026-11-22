@@ -34,11 +34,11 @@ const categories = [
     description: 'Enchanting castles, coastal pavilions, vineyard estates, and luxury grand ballrooms.',
     icon: Castle,
     accent: {
-      card: 'from-rose-50 via-pink-50 to-fuchsia-50',
-      icon: 'from-rose-500 to-pink-600',
-      chip: 'bg-rose-600/90 text-white border-rose-300',
-      title: 'group-hover:text-rose-700',
-      accentText: 'text-rose-600',
+      card: 'from-red-50 via-red-50 to-red-50',
+      icon: 'from-red-500 to-red-600',
+      chip: 'bg-red-600/90 text-white border-red-300',
+      title: 'group-hover:text-red-700',
+      accentText: 'text-red-600',
     },
     count: '120+ Venues',
     href: '/services?category=Wedding+Venues',
@@ -79,8 +79,8 @@ const categories = [
     description: 'HD airbrush glamour, luxury bridal hairstyles, trial sessions, and wedding party pampering.',
     icon: Sparkles,
     accent: {
-      card: 'from-purple-50 via-fuchsia-50 to-pink-50',
-      icon: 'from-purple-500 to-fuchsia-600',
+      card: 'from-purple-50 via-red-50 to-red-50',
+      icon: 'from-purple-500 to-red-600',
       chip: 'bg-purple-600/90 text-white border-purple-300',
       title: 'group-hover:text-purple-700',
       accentText: 'text-purple-600',
@@ -94,11 +94,11 @@ const categories = [
     description: 'Handcrafted haute couture wedding gowns, Italian wool tuxedos, and bespoke accessories.',
     icon: Shirt,
     accent: {
-      card: 'from-pink-50 via-rose-50 to-red-50',
-      icon: 'from-pink-500 to-rose-600',
-      chip: 'bg-pink-600/90 text-white border-pink-300',
-      title: 'group-hover:text-pink-700',
-      accentText: 'text-pink-600',
+      card: 'from-red-50 via-red-50 to-red-50',
+      icon: 'from-red-500 to-red-600',
+      chip: 'bg-red-600/90 text-white border-red-300',
+      title: 'group-hover:text-red-700',
+      accentText: 'text-red-600',
     },
     count: '55+ Designers',
     href: '/services?category=Wedding+Fashion',
@@ -108,13 +108,13 @@ const categories = [
 
 export function CategoriesSection() {
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-amber-50/40 via-white to-rose-50/30 border-y border-rose-100/60">
-      <div className="aurora-orb absolute top-10 -left-40 w-80 h-80 bg-fuchsia-200/40" />
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-amber-50/40 via-white to-red-50/30 border-y border-red-100/60">
+      <div className="aurora-orb absolute top-10 -left-40 w-80 h-80 bg-red-200/40" />
       <div className="aurora-orb aurora-orb--slow absolute bottom-0 -right-32 w-96 h-96 bg-sky-200/40" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-fuchsia-600 via-rose-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-rose-500/20">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-red-600 via-red-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-red-500/20">
             Everything for Your Big Day
           </span>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-950 mt-4">

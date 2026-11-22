@@ -38,9 +38,9 @@ export default function VendorSubscriptionPage() {
     <RoleGuard allowedRoles={['vendor']}>
       <div className="relative max-w-4xl mx-auto space-y-8">
         <div className="aurora-orb absolute -top-24 -left-24 w-72 h-72 bg-amber-300/25" />
-        <div className="aurora-orb aurora-orb--slow absolute -top-16 -right-24 w-72 h-72 bg-fuchsia-300/25" />
+        <div className="aurora-orb aurora-orb--slow absolute -top-16 -right-24 w-72 h-72 bg-red-300/25" />
         <div className="relative text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-rose-700 bg-gradient-to-r from-rose-100 via-fuchsia-100 to-violet-100 px-3 py-1 rounded-full border border-rose-200/70 shadow-sm shadow-rose-500/10">
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-red-700 bg-gradient-to-r from-red-100 via-red-100 to-violet-100 px-3 py-1 rounded-full border border-red-200/70 shadow-sm shadow-red-500/10">
             Vendor Growth Plans
           </span>
           <h1 className="text-3xl font-serif font-bold text-gradient-rose mt-3">
@@ -54,7 +54,7 @@ export default function VendorSubscriptionPage() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Free Tier */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-3xl p-8 border border-amber-200/80 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
+          <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 rounded-3xl p-8 border border-amber-200/80 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
             <div className="aurora-orb absolute -top-16 -left-16 w-56 h-56 bg-amber-300/25" />
             <div className="aurora-orb aurora-orb--slow absolute -bottom-20 -right-16 w-48 h-48 bg-orange-300/20" />
             <div className="relative z-10">
@@ -112,8 +112,8 @@ export default function VendorSubscriptionPage() {
           </div>
 
           {/* Premium Tier */}
-          <div className="relative bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950 text-white rounded-3xl p-8 shadow-2xl shadow-fuchsia-500/20 border-2 border-fuchsia-500/50 flex flex-col justify-between overflow-hidden">
-            <div className="aurora-orb absolute -top-16 -right-16 w-56 h-56 bg-fuchsia-500/25" />
+          <div className="relative bg-gradient-to-br from-violet-950 via-red-950 to-red-950 text-white rounded-3xl p-8 shadow-2xl shadow-red-500/20 border-2 border-red-500/50 flex flex-col justify-between overflow-hidden">
+            <div className="aurora-orb absolute -top-16 -right-16 w-56 h-56 bg-red-500/25" />
             <div className="aurora-orb aurora-orb--slow absolute -bottom-20 -left-12 w-56 h-56 bg-violet-500/25" />
             <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-400 to-amber-500 text-amber-950 text-[10px] font-extrabold uppercase px-4 py-1 rounded-bl-xl shadow-md z-20">
               Most Popular
@@ -121,7 +121,7 @@ export default function VendorSubscriptionPage() {
 
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-1 rounded-full border border-fuchsia-400/50 shadow-md shadow-fuchsia-500/25">
+                <span className="text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-violet-600 to-red-600 px-3 py-1 rounded-full border border-red-400/50 shadow-md shadow-red-500/25">
                   Premium Vendor
                 </span>
                 {isPremium && (
@@ -132,11 +132,11 @@ export default function VendorSubscriptionPage() {
               </div>
 
               <div className="mb-6">
-                <span className="text-4xl font-serif font-bold bg-gradient-to-r from-amber-200 via-white to-rose-200 bg-clip-text text-transparent drop-shadow-sm">$49</span>
-                <span className="text-xs text-rose-200 ml-1">/ year (one-time test checkout)</span>
+                <span className="text-4xl font-serif font-bold bg-gradient-to-r from-amber-200 via-white to-red-200 bg-clip-text text-transparent drop-shadow-sm">$49</span>
+                <span className="text-xs text-red-200 ml-1">/ year (one-time test checkout)</span>
               </div>
 
-              <ul className="space-y-3.5 text-xs text-rose-100/90">
+              <ul className="space-y-3.5 text-xs text-red-100/90">
                 <li className="flex items-center gap-2.5 font-semibold text-white">
                   <span className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-amber-500/30">
                     <Sparkles className="w-3 h-3" />
@@ -144,13 +144,13 @@ export default function VendorSubscriptionPage() {
                   <span><strong>Unlimited Active Wedding Services</strong></span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-fuchsia-500 to-rose-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-fuchsia-500/30">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-red-500 to-red-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-red-500/30">
                     <Check className="w-3 h-3" />
                   </span>
                   <span>Gold <strong>Verified Premium Badge</strong></span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-violet-500/30">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-500 to-red-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-violet-500/30">
                     <Check className="w-3 h-3" />
                   </span>
                   <span>Priority Placement on Homepage & Browse Directory</span>
@@ -170,16 +170,16 @@ export default function VendorSubscriptionPage() {
               </ul>
             </div>
 
-            <div className="relative z-10 mt-8 pt-6 border-t border-fuchsia-500/30">
+            <div className="relative z-10 mt-8 pt-6 border-t border-red-500/30">
               {isPremium ? (
-                <div className="p-3 bg-gradient-to-r from-amber-400/15 via-rose-400/15 to-fuchsia-400/15 border border-amber-300/30 rounded-xl text-center text-xs font-semibold text-amber-200 flex items-center justify-center gap-1.5">
+                <div className="p-3 bg-gradient-to-r from-amber-400/15 via-red-400/15 to-red-400/15 border border-amber-300/30 rounded-xl text-center text-xs font-semibold text-amber-200 flex items-center justify-center gap-1.5">
                   <ShieldCheck className="w-4 h-4" /> You are an active Premium Vendor!
                 </div>
               ) : (
                 <Button
                   onClick={handleUpgrade}
                   isLoading={isRedirecting}
-                  className="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-700 hover:to-amber-600 text-white font-bold py-3 text-sm shadow-xl shadow-rose-600/30 cursor-pointer"
+                  className="w-full bg-gradient-to-r from-red-600 via-red-600 to-amber-500 hover:from-red-700 hover:to-amber-600 text-white font-bold py-3 text-sm shadow-xl shadow-red-600/30 cursor-pointer"
                 >
                   <Zap className="w-4 h-4 mr-1.5" />
                   Upgrade to Premium via Stripe
