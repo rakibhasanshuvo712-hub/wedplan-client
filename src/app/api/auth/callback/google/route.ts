@@ -172,6 +172,11 @@ export async function GET(request: NextRequest) {
     response.cookies.set({ ...cookieBase, name: GOOGLE_OAUTH.tokenCookie, value: authData.token });
     response.cookies.set({ ...cookieBase, name: GOOGLE_OAUTH.roleCookie, value: role });
     response.cookies.set({ ...cookieBase, name: GOOGLE_OAUTH.fromCookie, value: from });
+    response.cookies.set({
+      ...cookieBase,
+      name: GOOGLE_OAUTH.userCookie,
+      value: JSON.stringify(authData.user),
+    });
     response.cookies.delete(GOOGLE_OAUTH.stateCookie);
     return response;
   } catch (error) {

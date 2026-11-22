@@ -25,6 +25,7 @@ export default function GoogleCompletePage() {
     const token = readCookie('wedplan_token');
     const role = readCookie('wedplan_role') || 'customer';
     const from = readCookie('wedplan_oauth_from') || `/dashboard/${role}`;
+    const user = readCookie('wedplan_oauth_user');
 
     if (!token) {
       setMessage('We could not complete your Google sign-in. Taking you back to sign in…');
@@ -35,11 +36,15 @@ export default function GoogleCompletePage() {
     }
 
     localStorage.setItem('wedplan_token', token);
+    // Store the fresh user returned by the backend so a stale customer record
+    // from an earlier session can never survive a vendor sign-in.
+    if (user) localStorage.setItem('wedplan_user', user);
 
     // Match the persistent cookies written by AuthContext.saveAuthSession().
     document.cookie = `wedplan_token=${token}; path=/; max-age=604800; SameSite=Lax`;
     document.cookie = `wedplan_role=${role}; path=/; max-age=604800; SameSite=Lax`;
     document.cookie = 'wedplan_oauth_from=; path=/; max-age=0';
+    document.cookie = 'wedplan_oauth_user=; path=/; max-age=0';
 
     const target = from.startsWith('/') && !from.startsWith('//') ? from : `/dashboard/${role}`;
     window.location.replace(target);

@@ -17,6 +17,7 @@ export const GOOGLE_OAUTH = {
   tokenCookie: 'wedplan_token',
   roleCookie: 'wedplan_role',
   fromCookie: 'wedplan_oauth_from',
+  userCookie: 'wedplan_oauth_user',
   callbackPath: '/api/auth/callback/google',
   completePath: '/auth/google/complete',
   signInPath: '/signin',
