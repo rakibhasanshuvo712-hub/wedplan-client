@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { User, UserRole } from '@/types';
-import { api, ApiError } from '@/lib/api';
+import { api } from '@/lib/api';
 
 interface AuthContextType {
   user: User | null;
@@ -18,15 +18,6 @@ interface AuthContextType {
     role: UserRole;
     image?: string;
     businessName?: string;
-  }) => Promise<User>;
-  googleLogin: (payload: {
-    role: UserRole;
-    accessToken?: string;
-    idToken?: string;
-    email?: string;
-    name?: string;
-    image?: string;
-    googleId?: string;
   }) => Promise<User>;
   logout: () => void;
   updateUserProfile: (data: Partial<User>) => Promise<User>;
@@ -129,21 +120,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return receivedUser;
   };
 
-  const googleLogin = async (payload: {
-    role: UserRole;
-    accessToken?: string;
-    idToken?: string;
-    email?: string;
-    name?: string;
-    image?: string;
-    googleId?: string;
-  }): Promise<User> => {
-    const res = await api.post('/auth/google', payload);
-    const { token: receivedToken, user: receivedUser } = res.data;
-    saveAuthSession(receivedToken, receivedUser);
-    return receivedUser;
-  };
-
   const updateUserProfile = async (data: Partial<User>): Promise<User> => {
     const res = await api.put('/auth/profile', data);
     const updatedUser = res.data.user;
@@ -173,7 +149,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated: !!user && !user.isBlocked,
         login,
         register,
-        googleLogin,
         logout,
         updateUserProfile,
         refreshUser,

@@ -29,7 +29,12 @@ function SignUpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialRole = (searchParams.get('role') as UserRole) || 'customer';
+  const googleError = searchParams.get('google_error');
   const { register } = useAuth();
+
+  React.useEffect(() => {
+    if (googleError) toast.error(googleError);
+  }, [googleError]);
 
   const [role, setRole] = useState<UserRole>(initialRole === 'vendor' ? 'vendor' : 'customer');
   const [name, setName] = useState('');
@@ -213,14 +218,7 @@ function SignUpContent() {
             </div>
           </div>
 
-          <GoogleAuthButton
-            role={role}
-            text="signup"
-            className="py-3 shadow-sm hover:shadow-md"
-            onSuccess={(user) => {
-              router.push(user.role === 'vendor' ? '/dashboard/vendor' : '/dashboard/customer');
-            }}
-          />
+          <GoogleAuthButton role={role} text="signup" className="py-3 shadow-sm hover:shadow-md" />
 
           <div className="text-xs text-gray-500 pt-2 border-t border-gray-100 text-center">
             Already have an account?{' '}

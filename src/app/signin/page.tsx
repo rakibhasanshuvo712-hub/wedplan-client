@@ -28,7 +28,12 @@ function SignInContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from');
+  const googleError = searchParams.get('google_error');
   const { login } = useAuth();
+
+  React.useEffect(() => {
+    if (googleError) toast.error(googleError);
+  }, [googleError]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -90,11 +95,7 @@ function SignInContent() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 shadow-xl shadow-rose-500/5 sm:rounded-3xl sm:px-10 border border-rose-100 space-y-6">
-          <GoogleAuthButton
-            text="signin"
-            className="py-3 shadow-sm hover:shadow-md"
-            onSuccess={(user) => redirectByRole(user.role)}
-          />
+          <GoogleAuthButton text="signin" className="py-3 shadow-sm hover:shadow-md" />
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">

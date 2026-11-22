@@ -34,7 +34,7 @@ A modern, role-based wedding planning platform and vendor marketplace built with
 - **Financial Audit Ledger**: Read-only Stripe transaction records verified via webhooks.
 
 ### 4. Authentication & Security
-- **Email/Password & Google OAuth**: Full credential registration and sign-in (name, email, password with strength rules, role selection) plus real Google Sign-In through Google Identity Services. The Google access token is verified by the backend against Google before any account is created.
+- **Email/Password & Google OAuth**: Full credential registration and sign-in (name, email, password with strength rules, role selection) plus real Google Sign-In using the server-side OAuth authorization-code flow. The Google Client ID and Client Secret live only in server environment variables; the code exchange, ID-token verification (audience/issuer/expiry) and session creation all happen in Next.js route handlers. The backend still verifies the Google access token before creating an account.
 - **Session Resilience**: Token stored with Lax cookies & localStorage; session preloaded on page refresh without UI flicker or 401 logouts.
 - **Role Verification**: Client-side `RoleGuard` + server-side JWT verification for `admin`, `vendor`, and `customer`.
 
@@ -67,13 +67,25 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51UbcZ3LP7zqBYcCwv9LuM8WHjIFP3FY0jirU
 # App URL
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# Google OAuth Client ID (public value — safe to expose in the browser)
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=521916340203-6eaman0rp3k0o68tbj8dmvk1qbr9eohu.apps.googleusercontent.com
+# Google OAuth — SERVER-SIDE ONLY (never use a NEXT_PUBLIC_ prefix)
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# Callback URL registered in Google Cloud Console (localhost dev value).
+# Defaults to the current origin + /api/auth/callback/google when omitted.
+GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback/google
 ```
 
-> The matching `GOOGLE_CLIENT_ID` must also be set on the **server** project so the API can
-> verify that the token was issued for this application. No Google client secret is required.
-> Authorize the deployed client domain (and `localhost`) as a JavaScript origin in Google Cloud Console.
+> The Client Secret must stay on the server. It is used only by
+> `/auth/google/start` and `/api/auth/callback/google` to exchange the one-time
+> authorization code for tokens. It is never imported by a Client Component or
+> bundled into browser JavaScript.
+>
+> In Google Cloud Console, add the callback URL as an **Authorized redirect URI**
+> for the same OAuth client (both `http://localhost:3000/api/auth/callback/google`
+> for local development and your deployed URL, e.g.
+> `https://wedplan-frontend-two.vercel.app/api/auth/callback/google`). Redirect URIs
+> are exact string matches, so use `GOOGLE_REDIRECT_URI` if your host differs.
 
 ---
 
@@ -104,20 +116,20 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🔑 Demo Credentials for Examiner Evaluation
 
-Quick-fill buttons are provided on the `/signin` page for one-click testing:
+Sign in with these credentials on `/signin`, or use the Google button:
 
 | Role | Email | Password | Access Level |
 |---|---|---|---|
 | **Administrator** | `admin@wedplan.com` | `Admin@123456` | Full Admin Console (`/dashboard/admin`) |
 | **Vendor (Premium)** | `vendor@wedplan.com` | `Vendor@123456` | Vendor Studio (`/dashboard/vendor`) |
 | **Customer** | `customer@wedplan.com` | `Customer@123456` | Customer Portal (`/dashboard/customer`) |
-| **Google User (Demo)** | `sarah.google@example.com` | *(OAuth Verified)* | Customer Portal (`/dashboard/customer`) |
 
 ### Testing Google Sign-In
-1. Open `/signin` or `/signup` and choose a role on the sign-up page (Customer or Vendor).
-2. Click **Continue with Google** and select any Google account. The browser opens Google's real OAuth popup.
-3. The returned access token is sent to `POST /api/auth/google`, verified with Google, and a WedPlan JWT session is created.
-4. On success you are redirected to the dashboard matching your role. If the popup is blocked, use the email/password form instead.
+1. Make sure the OAuth client's callback URL is registered in Google Cloud Console (see above).
+2. Open `/signin` or `/signup` and choose a role on the sign-up page (Customer or Vendor).
+3. Click **Continue with Google**. You are redirected to Google's real consent screen.
+4. Google redirects back to `/api/auth/callback/google`, which exchanges the code using the client secret, verifies the ID token and asks the backend to create the WedPlan session.
+5. On success you are redirected to the dashboard matching your role. On failure you return to `/signin` with an error message.
 
 ---
 
