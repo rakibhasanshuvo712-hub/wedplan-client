@@ -42,20 +42,20 @@ export function Navbar() {
   ];
 
   return (
-    <header className="relative sticky top-0 z-50 bg-gradient-to-r from-red-50/95 via-white/95 to-red-50/95 backdrop-blur-md border-b border-red-200/70 shadow-sm">
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-red-500 via-red-500 to-amber-400" />
+    <header className="relative sticky top-0 z-50 bg-gradient-to-r from-red-700 via-red-600 to-rose-600 text-white backdrop-blur-md border-b border-red-800/50 shadow-lg shadow-red-500/20">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-300 via-rose-200 to-amber-300" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 via-red-500 to-amber-400 flex items-center justify-center text-white shadow-md shadow-red-500/30 group-hover:scale-105 group-hover:rotate-6 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-white/20 ring-2 ring-white/50 flex items-center justify-center text-white shadow-md group-hover:scale-105 group-hover:rotate-6 transition-transform">
               <Heart className="w-5 h-5 fill-white" />
             </div>
             <div>
-              <span className="text-2xl font-serif font-bold bg-gradient-to-r from-red-700 via-red-600 to-red-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-serif font-bold text-white drop-shadow-sm">
                 WedPlan
               </span>
-              <span className="hidden sm:inline-block ml-1 text-[10px] uppercase tracking-widest text-red-400 font-semibold">
+              <span className="hidden sm:inline-block ml-1 text-[10px] uppercase tracking-widest text-red-100 font-semibold">
                 Weddings
               </span>
             </div>
@@ -71,8 +71,8 @@ export function Navbar() {
                   href={link.href}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                     isActive
-                      ? 'text-gradient-rose bg-gradient-to-r from-red-50 to-red-50 font-semibold'
-                      : 'text-gray-600 hover:text-red-600 hover:bg-gradient-to-r hover:from-red-50/60 hover:to-red-50/60'
+                      ? 'bg-white/20 text-white font-bold ring-1 ring-white/40 shadow-sm'
+                      : 'text-white/85 hover:text-white hover:bg-white/15'
                   }`}
                 >
                   {link.name}
@@ -88,7 +88,7 @@ export function Navbar() {
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   onBlur={() => setTimeout(() => setDropdownOpen(false), 200)}
-                  className="flex items-center gap-2.5 p-1.5 pl-2.5 pr-3 rounded-full border border-red-200/80 bg-red-50/40 hover:bg-red-50 text-gray-800 transition-all cursor-pointer"
+                  className="flex items-center gap-2.5 p-1.5 pl-2.5 pr-3 rounded-full border border-white/40 bg-white/15 hover:bg-white/25 text-white transition-all cursor-pointer"
                 >
                   {user.image ? (
                     <img
@@ -97,22 +97,22 @@ export function Navbar() {
                       className="w-8 h-8 rounded-full object-cover border border-red-200"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-xs shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-white text-red-700 flex items-center justify-center font-semibold text-xs shadow-sm">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
                   )}
                   <div className="text-left hidden lg:block">
-                    <p className="text-xs font-semibold text-gray-900 leading-tight flex items-center gap-1">
+                    <p className="text-xs font-semibold text-white leading-tight flex items-center gap-1">
                       {user.name}
                       {user.subscriptionPlan === 'premium' && (
                         <Sparkles className="w-3 h-3 text-amber-500 fill-amber-400" />
                       )}
                     </p>
-                    <p className="text-[10px] text-red-600 capitalize font-medium">
+                    <p className="text-[10px] text-red-100 capitalize font-medium">
                       {user.role}
                     </p>
                   </div>
-                  <ChevronDown className="w-4 h-4 text-gray-400 ml-0.5" />
+                  <ChevronDown className="w-4 h-4 text-white/80 ml-0.5" />
                 </button>
 
                 {/* Dropdown Menu */}
@@ -178,7 +178,7 @@ export function Navbar() {
             ) : (
               <div className="flex items-center gap-2">
                 <Link href="/signin">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-white/15 hover:text-white">
                     Sign In
                   </Button>
                 </Link>
@@ -195,7 +195,7 @@ export function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-gray-700 hover:bg-red-50 hover:text-red-600 cursor-pointer"
+              className="p-2 rounded-xl text-white hover:bg-white/15 hover:text-white cursor-pointer"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -205,7 +205,7 @@ export function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-red-100 bg-white px-4 pt-2 pb-6 space-y-3">
+        <div className="md:hidden border-b border-red-200 bg-gradient-to-b from-red-100 via-red-50 to-white px-4 pt-2 pb-6 space-y-3">
           <nav className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <Link
