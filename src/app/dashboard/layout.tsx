@@ -94,7 +94,7 @@ function DashboardLayoutContent({
 
   return (
     <RoleGuard>
-      <div className="min-h-screen bg-gradient-to-br from-red-50/60 via-white to-violet-50/50 flex flex-col md:flex-row">
+      <div className="min-h-screen bg-gradient-to-br from-red-100/60 via-red-50/40 to-rose-100/50 flex flex-col md:flex-row">
         {/* Mobile Header Bar for Dashboard */}
         <div className="md:hidden bg-gradient-to-r from-red-50 via-red-50/80 to-violet-50 border-b border-red-200/70 px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">

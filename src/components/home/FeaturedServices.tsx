@@ -32,7 +32,7 @@ export function FeaturedServices() {
   }, []);
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white via-red-50/25 to-white">
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-red-50/45 via-white/80 to-red-50/35">
       <div className="aurora-orb absolute -left-40 top-10 w-80 h-80 bg-red-200/35" />
       <div className="aurora-orb aurora-orb--slow absolute -right-40 bottom-0 w-80 h-80 bg-violet-200/35" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

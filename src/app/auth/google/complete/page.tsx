@@ -51,7 +51,7 @@ export default function GoogleCompletePage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-50">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-red-50 via-rose-50/60 to-red-100/50">
       <Loader2 className="w-8 h-8 animate-spin text-red-500" />
       <p className="text-sm text-gray-600">{message}</p>
     </div>

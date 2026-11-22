@@ -42,7 +42,7 @@ export function Navbar() {
   ];
 
   return (
-    <header className="relative sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-red-100/60 shadow-sm">
+    <header className="relative sticky top-0 z-50 bg-gradient-to-r from-red-50/95 via-white/95 to-red-50/95 backdrop-blur-md border-b border-red-200/70 shadow-sm">
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-red-500 via-red-500 to-amber-400" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">

@@ -116,7 +116,7 @@ function BrowseServicesContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white/40 py-10 lg:py-16">
+    <div className="min-h-screen bg-red-50/50 py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">

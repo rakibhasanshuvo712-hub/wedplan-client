@@ -108,7 +108,7 @@ const categories = [
 
 export function CategoriesSection() {
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-amber-50/40 via-white to-red-50/30 border-y border-red-100/60">
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-red-50/55 via-amber-50/30 to-red-50/45 border-y border-red-100/60">
       <div className="aurora-orb absolute top-10 -left-40 w-80 h-80 bg-red-200/40" />
       <div className="aurora-orb aurora-orb--slow absolute bottom-0 -right-32 w-96 h-96 bg-sky-200/40" />
 

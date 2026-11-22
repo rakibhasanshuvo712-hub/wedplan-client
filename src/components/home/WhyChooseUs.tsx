@@ -69,7 +69,7 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="relative py-24 overflow-hidden bg-white">
+    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-red-50/50 via-white/80 to-red-50/40">
       <div className="aurora-orb absolute top-1/4 -left-48 w-96 h-96 bg-red-200/35" />
       <div className="aurora-orb aurora-orb--slow absolute bottom-0 -right-40 w-96 h-96 bg-violet-200/35" />
 
