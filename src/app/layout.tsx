@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { ToastProvider } from '@/components/common/ToastProvider';
@@ -17,6 +17,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'WedPlan — Wedding Planning Platform & Vendor Marketplace',
   description:
@@ -31,9 +37,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50/50 text-gray-900 selection:bg-rose-500 selection:text-white">
+      <body className="min-h-full flex flex-col text-gray-900">
         <AuthProvider>
           <ToastProvider />
           <Suspense fallback={<div className="h-16 sm:h-20 bg-white border-b border-rose-100" />}>

@@ -18,7 +18,13 @@ const categories = [
     name: 'Photography & Videography',
     description: 'Capture emotional moments with high-definition drone & 4K cinematic storytelling.',
     icon: Camera,
-    color: 'from-blue-500/10 to-indigo-500/10 text-indigo-600 border-indigo-200/60',
+    accent: {
+      card: 'from-blue-50 via-sky-50 to-indigo-50',
+      icon: 'from-blue-500 to-indigo-600',
+      chip: 'bg-blue-600/90 text-white border-blue-300',
+      title: 'group-hover:text-blue-700',
+      accentText: 'text-blue-600',
+    },
     count: '80+ Pros',
     href: '/services?category=Photography+%26+Videography',
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=600&q=80',
@@ -27,7 +33,13 @@ const categories = [
     name: 'Wedding Venues',
     description: 'Enchanting castles, coastal pavilions, vineyard estates, and luxury grand ballrooms.',
     icon: Castle,
-    color: 'from-rose-500/10 to-pink-500/10 text-rose-600 border-rose-200/60',
+    accent: {
+      card: 'from-rose-50 via-pink-50 to-fuchsia-50',
+      icon: 'from-rose-500 to-pink-600',
+      chip: 'bg-rose-600/90 text-white border-rose-300',
+      title: 'group-hover:text-rose-700',
+      accentText: 'text-rose-600',
+    },
     count: '120+ Venues',
     href: '/services?category=Wedding+Venues',
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=600&q=80',
@@ -36,7 +48,13 @@ const categories = [
     name: 'Decoration & Florist',
     description: 'Romantic floral arches, centerpieces, fairy lights, and bespoke botanical backdrops.',
     icon: Flower2,
-    color: 'from-emerald-500/10 to-teal-500/10 text-emerald-600 border-emerald-200/60',
+    accent: {
+      card: 'from-emerald-50 via-teal-50 to-cyan-50',
+      icon: 'from-emerald-500 to-teal-600',
+      chip: 'bg-emerald-600/90 text-white border-emerald-300',
+      title: 'group-hover:text-emerald-700',
+      accentText: 'text-emerald-600',
+    },
     count: '65+ Florists',
     href: '/services?category=Decoration+%26+Florist',
     image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80',
@@ -45,7 +63,13 @@ const categories = [
     name: 'Catering Services',
     description: 'Michelin-inspired plated dinners, gourmet dessert bars, and bespoke wedding cakes.',
     icon: Utensils,
-    color: 'from-amber-500/10 to-orange-500/10 text-amber-600 border-amber-200/60',
+    accent: {
+      card: 'from-amber-50 via-orange-50 to-yellow-50',
+      icon: 'from-amber-500 to-orange-600',
+      chip: 'bg-amber-600/90 text-white border-amber-300',
+      title: 'group-hover:text-amber-700',
+      accentText: 'text-amber-600',
+    },
     count: '45+ Chefs',
     href: '/services?category=Catering+Services',
     image: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80',
@@ -54,7 +78,13 @@ const categories = [
     name: 'Makeup & Styling',
     description: 'HD airbrush glamour, luxury bridal hairstyles, trial sessions, and wedding party pampering.',
     icon: Sparkles,
-    color: 'from-purple-500/10 to-pink-500/10 text-purple-600 border-purple-200/60',
+    accent: {
+      card: 'from-purple-50 via-fuchsia-50 to-pink-50',
+      icon: 'from-purple-500 to-fuchsia-600',
+      chip: 'bg-purple-600/90 text-white border-purple-300',
+      title: 'group-hover:text-purple-700',
+      accentText: 'text-purple-600',
+    },
     count: '90+ Stylists',
     href: '/services?category=Makeup+%26+Styling',
     image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80',
@@ -63,7 +93,13 @@ const categories = [
     name: 'Wedding Fashion',
     description: 'Handcrafted haute couture wedding gowns, Italian wool tuxedos, and bespoke accessories.',
     icon: Shirt,
-    color: 'from-pink-500/10 to-rose-500/10 text-pink-600 border-pink-200/60',
+    accent: {
+      card: 'from-pink-50 via-rose-50 to-red-50',
+      icon: 'from-pink-500 to-rose-600',
+      chip: 'bg-pink-600/90 text-white border-pink-300',
+      title: 'group-hover:text-pink-700',
+      accentText: 'text-pink-600',
+    },
     count: '55+ Designers',
     href: '/services?category=Wedding+Fashion',
     image: 'https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=600&q=80',
@@ -72,14 +108,17 @@ const categories = [
 
 export function CategoriesSection() {
   return (
-    <section className="py-20 bg-slate-50/60 border-y border-rose-100/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-amber-50/40 via-white to-rose-50/30 border-y border-rose-100/60">
+      <div className="aurora-orb absolute top-10 -left-40 w-80 h-80 bg-fuchsia-200/40" />
+      <div className="aurora-orb aurora-orb--slow absolute bottom-0 -right-32 w-96 h-96 bg-sky-200/40" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-semibold uppercase tracking-wider text-rose-600 bg-rose-100/70 px-3 py-1 rounded-full border border-rose-200/50">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-fuchsia-600 via-rose-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-rose-500/20">
             Everything for Your Big Day
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-950 mt-3">
-            Wedding Service Categories
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-950 mt-4">
+            Wedding Service <span className="text-gradient-rose">Categories</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 mt-2">
             Explore vetted artisans across every discipline to design a cohesive, unforgettable celebration.
@@ -99,29 +138,38 @@ export function CategoriesSection() {
               >
                 <Link
                   href={cat.href}
-                  className="group block relative rounded-2xl overflow-hidden bg-white border border-rose-100 shadow-xs hover:shadow-xl transition-all duration-300 p-6 h-full flex flex-col justify-between"
+                  className={`group block relative h-full rounded-3xl overflow-hidden bg-gradient-to-br ${cat.accent.card} border border-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-tr ${cat.color} flex items-center justify-center border shadow-xs group-hover:scale-110 transition-transform`}>
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-xs font-medium text-gray-400 bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">
-                        {cat.count}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-rose-600 transition-colors">
-                      {cat.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                      {cat.description}
-                    </p>
+                  {/* Photo header */}
+                  <div className="relative h-40 overflow-hidden">
+                    <img
+                      src={cat.image}
+                      alt={cat.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
+                    <span className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold border shadow-md ${cat.accent.chip}`}>
+                      {cat.count}
+                    </span>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-rose-600 group-hover:translate-x-1 transition-transform">
-                    <span>Browse {cat.name.split(' ')[0]}</span>
-                    <ArrowRight className="w-4 h-4" />
+                  {/* Overlapping colourful icon */}
+                  <div className={`relative -mt-7 ml-5 w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.accent.icon} flex items-center justify-center text-white shadow-lg ring-4 ring-white group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
+                    <Icon className="w-7 h-7" />
+                  </div>
+
+                  <div className="px-5 pt-3 pb-5">
+                    <h3 className={`text-lg font-serif font-bold text-gray-900 ${cat.accent.title} transition-colors`}>
+                      {cat.name}
+                    </h3>
+                    <p className="text-xs text-gray-600 mt-2 leading-relaxed">
+                      {cat.description}
+                    </p>
+                    <div className={`mt-5 pt-4 border-t border-white/70 flex items-center justify-between text-xs font-bold ${cat.accent.accentText}`}>
+                      <span>Browse {cat.name.split(' ')[0]}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               </motion.div>
