@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { RoleGuard } from '@/components/common/RoleGuard';
 import { api } from '@/lib/api';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
+import { StatCard } from '@/components/common/StatCard';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -47,8 +47,10 @@ export default function AdminOverviewPage() {
     <RoleGuard allowedRoles={['admin']}>
       <div className="space-y-8">
         {/* Banner */}
-        <div className="bg-gradient-to-r from-gray-900 via-rose-950 to-black rounded-3xl p-8 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
+        <div className="relative overflow-hidden bg-gradient-to-r from-violet-950 via-rose-950 to-slate-950 rounded-3xl p-8 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="aurora-orb absolute -top-20 right-10 w-72 h-72 bg-fuchsia-500/25" />
+          <div className="aurora-orb aurora-orb--slow absolute -bottom-24 left-1/3 w-72 h-72 bg-amber-500/20" />
+          <div className="relative">
             <span className="text-xs font-semibold uppercase tracking-wider text-rose-300 bg-rose-900/60 px-3 py-1 rounded-full border border-rose-700/60">
               Platform Administration
             </span>
@@ -72,75 +74,54 @@ export default function AdminOverviewPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="border-gray-200">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Total Registered Users</p>
-                <h3 className="text-2xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-7 w-12" /> : stats?.totalUsers || 0}
-                </h3>
-                <p className="text-[10px] text-gray-400 mt-0.5">
-                  {stats?.totalVendors || 0} Vendors • {stats?.totalCustomers || 0} Couples
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-gray-200">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Published Services</p>
-                <h3 className="text-2xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-7 w-12" /> : stats?.totalServices || 0}
-                </h3>
-                <p className="text-[10px] text-gray-400 mt-0.5">
-                  {stats?.approvedServices || 0} Approved
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-amber-200 bg-amber-50/20">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-amber-800 font-bold uppercase tracking-wider">
-                  Pending Approvals
-                </p>
-                <h3 className="text-2xl font-serif font-bold text-amber-900 mt-0.5">
-                  {loading ? <Skeleton className="h-7 w-12" /> : stats?.pendingServices || 0}
-                </h3>
-                <p className="text-[10px] text-amber-700 mt-0.5">Awaiting admin review</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-emerald-200 bg-emerald-50/20">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                <DollarSign className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-emerald-800 font-bold uppercase tracking-wider">
-                  Platform Revenue
-                </p>
-                <h3 className="text-2xl font-serif font-bold text-emerald-900 mt-0.5">
-                  {loading ? <Skeleton className="h-7 w-20" /> : formatCurrency(stats?.totalRevenue || 0)}
-                </h3>
-                <p className="text-[10px] text-emerald-700 mt-0.5">
-                  {stats?.totalTransactions || 0} Verified Stripe Sessions
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <StatCard
+            label="Total Registered Users"
+            value={stats?.totalUsers || 0}
+            icon={Users}
+            iconGradient="from-violet-500 to-purple-600"
+            cardGradient="from-violet-50 to-fuchsia-50/50"
+            border="border-violet-200/70"
+            text="text-violet-700"
+            bar="from-violet-500 via-purple-500 to-fuchsia-500"
+            subtext={`${stats?.totalVendors || 0} Vendors • ${stats?.totalCustomers || 0} Couples`}
+            loading={loading}
+          />
+          <StatCard
+            label="Published Services"
+            value={stats?.totalServices || 0}
+            icon={Building2}
+            iconGradient="from-sky-500 to-blue-600"
+            cardGradient="from-sky-50 to-indigo-50/50"
+            border="border-sky-200/70"
+            text="text-sky-700"
+            bar="from-sky-500 via-blue-500 to-indigo-500"
+            subtext={`${stats?.approvedServices || 0} Approved`}
+            loading={loading}
+          />
+          <StatCard
+            label="Pending Approvals"
+            value={stats?.pendingServices || 0}
+            icon={Clock}
+            iconGradient="from-amber-500 to-orange-600"
+            cardGradient="from-amber-50 to-yellow-50/50"
+            border="border-amber-200/70"
+            text="text-amber-700"
+            bar="from-amber-500 via-orange-400 to-yellow-400"
+            subtext="Awaiting admin review"
+            loading={loading}
+          />
+          <StatCard
+            label="Platform Revenue"
+            value={formatCurrency(stats?.totalRevenue || 0)}
+            icon={DollarSign}
+            iconGradient="from-emerald-500 to-teal-600"
+            cardGradient="from-emerald-50 to-teal-50/50"
+            border="border-emerald-200/70"
+            text="text-emerald-700"
+            bar="from-emerald-500 via-teal-400 to-cyan-400"
+            subtext={`${stats?.totalTransactions || 0} Verified Stripe Sessions`}
+            loading={loading}
+          />
         </div>
 
         {/* Two-Column Split: Recent Users & Recent Services */}

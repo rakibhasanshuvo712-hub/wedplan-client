@@ -116,15 +116,15 @@ function BrowseServicesContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-10 lg:py-16">
+    <div className="min-h-screen bg-white/40 py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs font-semibold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200/50">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-rose-600 via-fuchsia-500 to-amber-500 px-4 py-1.5 rounded-full shadow-md shadow-rose-500/20">
             Marketplace Directory
           </span>
           <h1 className="text-3xl sm:text-5xl font-serif font-bold text-gray-950 mt-3">
-            Browse Wedding Services
+            Browse Wedding <span className="text-gradient-rose">Services</span>
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-2">
             Search, compare, and connect with top-rated wedding professionals for your special day.
@@ -182,8 +182,8 @@ function BrowseServicesContent() {
                   }}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all shrink-0 cursor-pointer ${
                     category === cat
-                      ? 'bg-rose-600 text-white shadow-xs font-semibold'
-                      : 'bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-700'
+                      ? 'bg-gradient-to-r from-rose-600 to-fuchsia-600 text-white shadow-md shadow-rose-500/20 font-semibold'
+                      : 'bg-white border border-rose-100 text-gray-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-fuchsia-50 hover:text-rose-700'
                   }`}
                 >
                   {cat}
@@ -243,8 +243,8 @@ function BrowseServicesContent() {
           </div>
         ) : services.length === 0 ? (
           /* Empty State */
-          <div className="text-center py-20 bg-white rounded-3xl border border-rose-100 p-8 shadow-xs max-w-lg mx-auto">
-            <div className="w-16 h-16 rounded-full bg-rose-50 text-rose-500 mx-auto flex items-center justify-center mb-4">
+          <div className="text-center py-20 bg-gradient-to-br from-rose-50 via-fuchsia-50 to-amber-50 rounded-3xl border border-rose-100 p-8 shadow-sm max-w-lg mx-auto">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-fuchsia-500 text-white mx-auto flex items-center justify-center mb-4 shadow-md shadow-rose-500/25">
               <Search className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">
@@ -262,10 +262,10 @@ function BrowseServicesContent() {
             {services.map((service) => (
               <div
                 key={service._id}
-                className="group bg-white rounded-3xl border border-rose-100/80 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+                className="group bg-white rounded-3xl border border-rose-100/80 shadow-sm hover:shadow-2xl hover:shadow-rose-500/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Image */}
-                <div className="relative h-60 w-full overflow-hidden bg-gray-100">
+                <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-rose-100 via-fuchsia-100 to-amber-100">
                   <img
                     src={service.images?.[0] || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'}
                     alt={service.serviceName}
@@ -327,7 +327,7 @@ function BrowseServicesContent() {
                   <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
                     <div>
                       <p className="text-[11px] text-gray-400 font-medium">Starting from</p>
-                      <p className="text-xl font-bold font-serif text-rose-600">
+                      <p className="text-xl font-bold font-serif text-gradient-rose">
                         {formatCurrency(service.price)}
                       </p>
                     </div>

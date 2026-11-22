@@ -7,7 +7,7 @@ import { RoleGuard } from '@/components/common/RoleGuard';
 import { Service, Booking } from '@/types';
 import { api } from '@/lib/api';
 import { formatDate } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
+import { StatCard } from '@/components/common/StatCard';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -59,8 +59,9 @@ export default function VendorOverviewPage() {
     <RoleGuard allowedRoles={['vendor']}>
       <div className="space-y-8">
         {/* Banner */}
-        <div className="bg-gradient-to-r from-rose-700 via-rose-600 to-pink-600 rounded-3xl p-8 text-white shadow-xl shadow-rose-500/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
+        <div className="relative overflow-hidden bg-gradient-to-r from-rose-700 via-fuchsia-600 to-pink-600 rounded-3xl p-8 text-white shadow-xl shadow-rose-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="aurora-orb absolute -top-20 right-16 w-64 h-64 bg-amber-300/25" />
+          <div className="relative">
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wider text-rose-100 bg-white/20 px-3 py-1 rounded-full">
                 Vendor Studio
@@ -133,75 +134,62 @@ export default function VendorOverviewPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <Card className="border-rose-100">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Total Listings</p>
-                <h3 className="text-xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-6 w-10" /> : totalServices}
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-emerald-100">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Active & Approved</p>
-                <h3 className="text-xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-6 w-10" /> : activeServices}
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-amber-100">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Pending Inquiries</p>
-                <h3 className="text-xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-6 w-10" /> : pendingRequests}
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-100">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <CalendarCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Accepted Bookings</p>
-                <h3 className="text-xl font-serif font-bold text-gray-900 mt-0.5">
-                  {loading ? <Skeleton className="h-6 w-10" /> : acceptedBookings}
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-100">
-            <CardContent className="p-5 flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                <CreditCard className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-[11px] text-gray-500 font-medium">Plan Status</p>
-                <h3 className="text-sm font-bold capitalize text-purple-700 mt-1">
-                  {isPremium ? '★ Premium Plan' : 'Free Tier (Max 3)'}
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
+          <StatCard
+            label="Total Listings"
+            value={totalServices}
+            icon={Building2}
+            iconGradient="from-rose-500 to-pink-600"
+            cardGradient="from-rose-50 to-pink-50/50"
+            border="border-rose-200/70"
+            text="text-rose-700"
+            bar="from-rose-500 via-pink-500 to-fuchsia-500"
+            loading={loading}
+          />
+          <StatCard
+            label="Active & Approved"
+            value={activeServices}
+            icon={CheckCircle2}
+            iconGradient="from-emerald-500 to-teal-600"
+            cardGradient="from-emerald-50 to-teal-50/50"
+            border="border-emerald-200/70"
+            text="text-emerald-700"
+            bar="from-emerald-500 via-teal-400 to-cyan-400"
+            loading={loading}
+          />
+          <StatCard
+            label="Pending Inquiries"
+            value={pendingRequests}
+            icon={Clock}
+            iconGradient="from-amber-500 to-orange-600"
+            cardGradient="from-amber-50 to-yellow-50/50"
+            border="border-amber-200/70"
+            text="text-amber-700"
+            bar="from-amber-500 via-orange-400 to-yellow-400"
+            loading={loading}
+          />
+          <StatCard
+            label="Accepted Bookings"
+            value={acceptedBookings}
+            icon={CalendarCheck}
+            iconGradient="from-blue-500 to-indigo-600"
+            cardGradient="from-sky-50 to-blue-50/50"
+            border="border-blue-200/70"
+            text="text-blue-700"
+            bar="from-sky-500 via-blue-500 to-indigo-500"
+            loading={loading}
+          />
+          <StatCard
+            label="Plan Status"
+            value={isPremium ? '★ Premium' : 'Free Tier'}
+            icon={CreditCard}
+            iconGradient="from-violet-500 to-fuchsia-600"
+            cardGradient="from-violet-50 to-fuchsia-50/50"
+            border="border-violet-200/70"
+            text="text-violet-700"
+            bar="from-violet-500 via-fuchsia-500 to-pink-500"
+            subtext={isPremium ? 'Unlimited services' : 'Max 3 active services'}
+            loading={loading}
+          />
         </div>
 
         {/* Free Tier Warning Banner if at limit */}
